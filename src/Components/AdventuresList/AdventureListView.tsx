@@ -1,3 +1,4 @@
+import * as React from 'react';
 import List from "@mui/material/List";
 import AdvListItem from "./AdventureListItem";
 import { AdventureItem } from "../../types/provider";
@@ -11,11 +12,20 @@ import { AppBar, Paper, Stack, Toolbar } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+
 export default function AdventureListView({
-  adventures,
+  adventures, onClickBtn, onClickItem, checkedToggle
 }: {
   adventures: AdventureItem[];
+  onClickBtn: Function;
+  onClickItem: Function;
+  checkedToggle: Function;
 }) {
+  
+  const onClickBtnHandler = (event: React.SyntheticEvent, value: any) => {
+    onClickBtn(value);
+  }
+
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body1,
@@ -30,29 +40,39 @@ export default function AdventureListView({
         <Toolbar>
           <Box sx={{ minWidth: "100%" }}>
             <Text {...{ variant: Variant.h4, text: "Приключения" }} />
-            <BottomNavigation showLabels>
-              <BottomNavigationAction label="Добавить" icon={<AddIcon />} />
+            <BottomNavigation showLabels onChange={onClickBtnHandler}>
+              <BottomNavigationAction 
+                label="Добавить" 
+                icon={<AddIcon />}
+                value={'Добавить'} 
+              />
               <BottomNavigationAction
                 label="Опубликовать"
                 icon={<AddTaskIcon />}
+                value={'Опубликовать'} 
               />
               <BottomNavigationAction
                 label="Снять с публикации"
                 icon={<RemoveCircleOutlineIcon />}
+                value={'Снять публикацию'} 
               />
-              <BottomNavigationAction label="Удалить" icon={<DeleteIcon />} />
+              <BottomNavigationAction 
+                label="Удалить" 
+                icon={<DeleteIcon />} 
+                value={'Удалить'}
+              />
             </BottomNavigation>
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ bgcolor: "rgba(0, 0, 0, 0.12)", pt: 12.5 }}>
+      <Box sx={{ bgcolor: "rgba(0, 0, 0, 0.12)" }}>
         <List dense sx={{ width: "100%" }}>
           <Stack spacing={0.6}>
-            {adventures.map((adventure: AdventureItem,index) => {
+            {adventures.map((adventure: AdventureItem, index) => {
               const labelId = `checkbox-list-secondary-label-${adventure.id}`;
               return (
                 <Item key={index} elevation={1}>
-                  <AdvListItem {...{ adventure, labelId }} />
+                  <AdvListItem {...{ adventure, labelId, onClickItem, checkedToggle }} />
                 </Item>
               );
             })}

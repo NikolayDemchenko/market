@@ -1,14 +1,16 @@
 import React from "react";
-import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import { Text, Variant } from "../BaseComponents/DisplayingComponents/Text";
 import SignedCheckBox from "../BaseComponents/Inputs/SignedCheckBox";
 import BasicButton from "../BaseComponents/Buttons/BasicButton";
 import HSlon from "../BaseComponents/StaticContentComponents/HSlon";
 import PasswordInput from "../BaseComponents/Inputs/Password";
 import PhoneInput from "../BaseComponents/Inputs/Phone";
+import Stack from "@mui/material/Stack";
+
 
 export default function Autorization() {
-  const getPassworg = (value: string) => {
+  const getPassword = (value: string) => {
     console.log(value);
   };
   const getCheck = (val: boolean) => {
@@ -17,30 +19,31 @@ export default function Autorization() {
   function getPhoneNumber(value: string) {
     console.log(value);
   }
-  return (
-    <div>
-      <Box sx={{ m: 2, minWidth: "40ch" }}>
-        <HSlon />
-        <Text {...{ variant: Variant.h5, text: "Вход для поставщиков" }} />
-        <PhoneInput
-          {...{
-            label: "Введите номер телефона",
-            defaultValue: "",
-            getPhoneNumber,
-          }}
-        />
-        <PasswordInput {...{ label: "Введите пароль", getPassworg }} />
-        <SignedCheckBox
-          {...{
-            getCheck,
-            checked: false,
-            checkBoxText: "Запомнить меня",
-          }}
-        />
-        <BasicButton {...{ btnText: "Войти", width: "40ch" }} />
-        <BasicButton {...{ btnText: "Зарегистрироваться", width: "40ch" }} />
-        <BasicButton {...{ btnText: "Забыли пароль?", width: "40ch" }} />
-      </Box>
-    </div>
+  return (  
+    <Stack spacing={1}>    
+      <HSlon />
+      <Grid container justifyContent="center">
+
+      <Text {...{ variant: Variant.h5, text: "Вход для поставщиков" }} />
+      </Grid>
+      <PhoneInput
+        {...{
+          label: "Введите номер телефона",
+          defaultValue: "",
+          getPhoneNumber,
+        }}
+      />
+      <PasswordInput {...{ label: "Введите пароль", getPassword }} />
+      <SignedCheckBox
+        {...{
+          getCheck,
+          checked: false,
+          checkBoxText: "Запомнить меня",
+        }}
+      />
+      <BasicButton {...{ btnText: "Войти", width: "40ch" }} />
+      <BasicButton {...{ btnText: "Зарегистрироваться", width: "40ch" }} />
+      <BasicButton {...{ btnText: "Забыли пароль?", width: "40ch" }} />
+    </Stack>
   );
 }

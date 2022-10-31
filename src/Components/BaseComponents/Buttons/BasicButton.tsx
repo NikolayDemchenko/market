@@ -1,14 +1,13 @@
-import Button from '@mui/material/Button';
-import { FormControl } from '@mui/material';
-
-export default function BasicButton({btnText, width }:
-  {
-    btnText: string, 
-    width: string,
+import Button from "@mui/material/Button";
+export default function BasicButton({
+  btnText
+}: {
+  btnText: string;
+  width: string;
 }) {
   return (
-    <FormControl sx={{ marginRight:10, width: {width} }} >
-      <Button variant="contained" size="large">{btnText}</Button>
-    </FormControl>  
+    <Button sx={{ minWidth: "100%" }} variant="contained" size="large">
+      {btnText}
+    </Button>
   );
 }

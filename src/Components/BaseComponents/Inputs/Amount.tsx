@@ -17,9 +17,10 @@ export default function Amount({label,
   const onChange = (event: { target: { value: any; }; }) => {
     getAmount(event.target.value);
   };
-  return (
-    <div>
+  return (   
       <TextField
+      fullWidth 
+      // sx={{minWidth:"100%"}}
         onChange={onChange}
         id="outlined-number"
         label={label}
@@ -33,6 +34,6 @@ export default function Amount({label,
         }}
         // helperText="Укажите количество билетов"
       />
-    </div>
+  
   );
 }

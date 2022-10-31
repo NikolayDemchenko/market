@@ -13,8 +13,7 @@ export default function SignedCheckBox({
     getCheck(event.target.checked);
   };
   return (
-    <FormControlLabel
-      sx={{ marginLeft: 1, width: "40ch" }}
+    <FormControlLabel sx={{pl:1}}     
       control={<Checkbox {...{onChange}}/>}
       label={checkBoxText}
     />

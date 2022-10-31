@@ -7,36 +7,54 @@ import Checkbox from '@mui/material/Checkbox';
 import Box from "@mui/material/Box";
 import { AdventureItem } from '../../types/provider';
 
-export default function AdvListItem({ adventure, labelId }: { 
+export default function AdvListItem({ adventure, labelId, onClickItem, checkedToggle }: { 
     adventure: AdventureItem, 
-    labelId: string 
+    labelId: string,
+    onClickItem: Function,
+    checkedToggle: Function,
 }) {
     const [checked, setChecked] = React.useState(['1']);
 
-    const handleToggle = (value: string) => () => {
-        const currentIndex = checked.indexOf(value);
+    const handleToggle = (value: any) => () => {
+        const currentIndex = checked.indexOf(value.id);
         const newChecked = [...checked];
 
-        if (currentIndex === -1) newChecked.push(value);
+        if (currentIndex === -1) newChecked.push(value.id);
         else newChecked.splice(currentIndex, 1);
 
         setChecked(newChecked);
+
+        if (newChecked.length === 1) {
+            checkedToggle({
+                adventure: value,
+                checked: false
+            });
+        } else {
+            checkedToggle({
+                adventure: value,
+                checked: true
+            }); 
+        }
     };
+
+    const onClickItemHandler = () => {
+        onClickItem();
+    }
 
     return (
         <ListItem
             key={adventure.id}
-            secondaryAction={
+            secondaryAction={    
                 <Checkbox
                     edge="end"
-                    onChange={handleToggle(adventure.id)}
+                    onChange={handleToggle(adventure)}
                     checked={checked.indexOf(adventure.id) !== -1}
                     inputProps={{ 'aria-labelledby': labelId }}
-                />
+                />  
             }   
             disablePadding
         >
-            <ListItemButton>
+            <ListItemButton onClick={onClickItemHandler}>
                 <ListItemAvatar>
                     <Avatar
                         alt={adventure.advName}

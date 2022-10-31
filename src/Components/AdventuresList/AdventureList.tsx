@@ -1,6 +1,7 @@
-
+import * as React from 'react';
 import { AdventureItem } from "../../types/provider";
 import AdventureListView from "./AdventureListView";
+
 // Получаем из бд список приключений (скорее всего, массив объектов);
 let adventures: AdventureItem[] = [
     {
@@ -174,7 +175,28 @@ let adventures: AdventureItem[] = [
 ];
 
 export default function AdventureList() {
+  function getAdventureData() {
+    return adventures;
+  }
+
+  function onClickBtn(value: any) {
+    console.log(value);
+  }
+
+  function onClickItem() {
+    console.log('Нажали на приключение в списке.');
+  }
+
+  function checkedToggle(value: { adventure: object, checked: boolean }) {
+    console.log(value);
+  }
+
   return (
-    <AdventureListView { ...{adventures} } />
+    <AdventureListView { ...{
+        adventures: getAdventureData(), 
+        onClickBtn, 
+        onClickItem,
+        checkedToggle
+    } } />
   );
 }

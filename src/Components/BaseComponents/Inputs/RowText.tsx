@@ -1,20 +1,18 @@
 import TextField from "@mui/material/TextField";
 export default function NameInput({label,
   defaultValue,
-  getName,
+  getText,
 }: {label:string,
   defaultValue: string;
-  getName: Function;
+  getText: Function;
 }) {
   const onChange = (event: { target: { value: any } }) => {
-    getName(event.target.value);
+    getText(event.target.value);
   };
   return (  
       <TextField
-        onChange={onChange}
-        id="outlined-required"
-        label={label}
-        // helperText="Введите имя"
+        onChange={onChange}   
+        label={label}    
         defaultValue={defaultValue}
       />
   );

@@ -1,4 +1,3 @@
-import * as React from "react";
 import PhoneInputView from "./PhoneView";
 
 export default function PhoneInput({label,
