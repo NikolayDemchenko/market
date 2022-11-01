@@ -41,9 +41,9 @@ export default function Autorization() {
           checkBoxText: "Запомнить меня",
         }}
       />
-      <BasicButton {...{ btnText: "Войти", width: "40ch" }} />
-      <BasicButton {...{ btnText: "Зарегистрироваться", width: "40ch" }} />
-      <BasicButton {...{ btnText: "Забыли пароль?", width: "40ch" }} />
+      <BasicButton {...{ btnText: "Войти", onClick:()=>{} }} />
+      <BasicButton {...{ btnText: "Зарегистрироваться", onClick:()=>{} }} />
+      <BasicButton {...{ btnText: "Забыли пароль?", onClick:()=>{} }} />
     </Stack>
   );
 }

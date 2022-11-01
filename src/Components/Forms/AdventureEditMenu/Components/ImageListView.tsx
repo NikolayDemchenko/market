@@ -1,19 +1,13 @@
 import * as React from "react";
-import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { AppBar, Button, Stack } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
-import Grid from "@mui/material/Grid";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import Box from "@mui/material/Box";
-import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CheckIcon from "@mui/icons-material/Check";
+import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
 
-export default function ImageListView({
-  onClickBtn,
-}: {
-  onClickBtn: Function;
-}) {
+export default function ImageListView() {
   const [images, setItemData] = React.useState(itemData);
 
   const addHandler = (event: any) => {
@@ -27,16 +21,15 @@ export default function ImageListView({
   };
 
   const deleteHandler = () => {
-    setItemData((images) => [...images.filter((image) => !image.checked)]);
+    setItemData((images) => images.filter((image) => !image.checked));
   };
 
   const clickImgHandler = (item: any) => {
-    setItemData((images) => [
-      ...images.map(
-        (image) =>
-          image === item ? { ...image, checked: !image.checked } : image
-      ),
-    ]);
+    setItemData((images) =>
+      images.map((image) =>
+        image === item ? { ...image, checked: !image.checked } : image
+      )
+    );
   };
 
   return (
@@ -47,61 +40,61 @@ export default function ImageListView({
           justifyContent="space-between"
           alignItems="stretch"
           spacing={1}
-          sx={{color:"#111"}}
+          sx={{ color: "#111" }}
         >
-          <Button sx={{ color: "#616161"}} component="label" onChange={addHandler} fullWidth>
+          <Button
+            sx={{ color: "#616161" }}
+            component="label"
+            onChange={addHandler}
+            fullWidth
+          >
             <input hidden accept={`image/*`} type="file" />
-            <AddIcon />
+            <AddAPhotoIcon />
           </Button>
-          <Button sx={{ color: "#616161"}} fullWidth component="label" onClick={deleteHandler}>
+          <Button
+            sx={{ color: "#616161" }}
+            fullWidth
+            component="label"
+            onClick={deleteHandler}
+          >
             <DeleteIcon />
           </Button>
         </Stack>
       </AppBar>
-      <TableContainer sx={{ maxHeight: 500 }}>
-        <Grid container justifyContent="center">
-          <ImageList sx={{ width: 500 }} cols={3} rowHeight={164}>
+      <TableContainer sx={{ maxHeight: 360 }}>     
+          <Box
+            sx={{            
+              display: "flex",
+              flexWrap: "wrap",
+              alignContent: "flex-start",        
+              bgcolor: "background.paper",  
+            }}
+          >
             {images.map((item) => (
               <ImageListItem
+                sx={{ m: 0.5, width: 160,maxHeight:160 }}
                 key={item.img}
                 onClick={() => clickImgHandler(item)}
-              >
-                {item.checked && (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      alignContent: "center",
-                      justifyContent: "center",
-                      height: "100%",
-                      width: "100%",
-                      position: "absolute",
-                    }}
-                  >
-                    <CheckIcon sx={{ color: "#8d8d8d" }} />
-                  </Box>
-                )}
+              >      
+                <CheckedComponentWrapper {...{checked:item.checked}}/>
                 {item.img.includes("blob") ? (
-                  <img
-                    style={{ opacity: item.checked ? 0.3 : 1 }}
-                    src={item.img}
-                    srcSet={`${item.img}`}
-                    alt={item.title}
-                    loading="lazy"
+                  <img        
+                  src={item.img}
+                  srcSet={`${item.img}`}
+                  alt={item.title}
+                  loading="lazy"
                   />
                 ) : (
-                  <img
-                    style={{ opacity: item.checked ? 0.3 : 1 }}
-                    src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                    srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                    alt={item.title}
-                    loading="lazy"
+                  <img          
+                  src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                  srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                  alt={item.title}
+                  loading="lazy"
                   />
-                )}
+                  )}               
               </ImageListItem>
             ))}
-          </ImageList>
-        </Grid>
+          </Box>
       </TableContainer>
     </>
   );

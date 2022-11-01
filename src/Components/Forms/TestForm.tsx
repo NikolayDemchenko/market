@@ -71,7 +71,7 @@ export default function TestForm() {
       <MultilineInput     
         {...{defaultValue:"", getText:getMultiText, label: "Введите текст" }}
       />
-      <BasicButton {...{ btnText: "Подтвердить выбор", width: "40ch" }} />
+      <BasicButton {...{ btnText: "Подтвердить выбор", onClick:()=>{} }} />
     </Stack>
   );
 }

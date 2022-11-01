@@ -18,6 +18,7 @@ export default function MultilineText({
       onChange={onChange}
       label={label}     
       defaultValue={defaultValue}
+      fullWidth
       multiline
     />
   );

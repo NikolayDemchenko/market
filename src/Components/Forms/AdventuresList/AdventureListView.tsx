@@ -1,8 +1,8 @@
 import * as React from 'react';
 import List from "@mui/material/List";
 import AdvListItem from "./AdventureListItem";
-import { AdventureItem } from "../../types/provider";
-import { Text, Variant } from "../BaseComponents/DisplayingComponents/Text";
+import { Adventure } from "../../../types/provider";
+import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import AddIcon from "@mui/icons-material/Add";
@@ -16,7 +16,7 @@ import Box from "@mui/material/Box";
 export default function AdventureListView({
   adventures, onClickBtn, onClickItem, checkedToggle
 }: {
-  adventures: AdventureItem[];
+  adventures: Adventure[];
   onClickBtn: Function;
   onClickItem: Function;
   checkedToggle: Function;
@@ -68,7 +68,7 @@ export default function AdventureListView({
       <Box sx={{ bgcolor: "rgba(0, 0, 0, 0.12)" }}>
         <List dense sx={{ width: "100%" }}>
           <Stack spacing={0.6}>
-            {adventures.map((adventure: AdventureItem, index) => {
+            {adventures.map((adventure: Adventure, index) => {
               const labelId = `checkbox-list-secondary-label-${adventure.id}`;
               return (
                 <Item key={index} elevation={1}>

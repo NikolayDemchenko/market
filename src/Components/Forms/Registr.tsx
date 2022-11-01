@@ -34,8 +34,8 @@ export default function Registr() {
       />
       <PasswordInput {...{ label: "Введите пароль", getPassword }} />
       <PasswordInput {...{ label: "Подтвердите пароль", getPassword }} />
-      <BasicButton {...{ btnText: "Зарегистрироваться", width: "40ch" }} />
-      <BasicButton {...{ btnText: "Войти", width: "40ch" }} />
+      <BasicButton {...{ btnText: "Зарегистрироваться", onClick:()=>{} }} />
+      <BasicButton {...{ btnText: "Войти", onClick:()=>{} }} />
     </Stack>
   );
 }

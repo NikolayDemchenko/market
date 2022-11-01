@@ -14,23 +14,27 @@ type Details = {
   inn: string;
 };
 // Приключение
+
 type Adventure = {
-  id: Guid;
-  name: string;
-  characts: Charact[];
-};
-// Приключение в списке приключений;
-type AdventureItem = {
   id: string;
-  advName: string;
+  name: string;
   img: string;
-  status: string;
+  status: boolean;
+  images?: [];
+  videos?: [];
+  lots?: AdventureLot[];
 };
 // Характеристика
-type Charact = {
-  id: Guid;
-  text: string;
+type AdventureLot = {
+  name: string;
+  description: string;
+  personAmount: number;
+  options: Option[];
+};
+type Option = {
+  name: string;
+  description: string;
   duration: string;
   price: number;
 };
-export type { Provider, Details, Adventure, AdventureItem, Charact };
+export type { Provider, Details, Adventure, Option,AdventureLot };

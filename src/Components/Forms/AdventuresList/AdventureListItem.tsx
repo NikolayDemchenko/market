@@ -5,10 +5,10 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Checkbox from '@mui/material/Checkbox';
 import Box from "@mui/material/Box";
-import { AdventureItem } from '../../types/provider';
+import { Adventure } from '../../../types/provider';
 
 export default function AdvListItem({ adventure, labelId, onClickItem, checkedToggle }: { 
-    adventure: AdventureItem, 
+    adventure: Adventure, 
     labelId: string,
     onClickItem: Function,
     checkedToggle: Function,
@@ -57,7 +57,7 @@ export default function AdvListItem({ adventure, labelId, onClickItem, checkedTo
             <ListItemButton onClick={onClickItemHandler}>
                 <ListItemAvatar>
                     <Avatar
-                        alt={adventure.advName}
+                        alt={adventure.name}
                         src={adventure.img}
                         variant="square"
                         sx={{ width: 100, height:"100%" }}
@@ -69,7 +69,7 @@ export default function AdvListItem({ adventure, labelId, onClickItem, checkedTo
                     noValidate
                     autoComplete="off"
                 >
-                  {adventure.advName}             
+                  {adventure.name}             
                 </Box>
             </ListItemButton>
         </ListItem>

@@ -8,9 +8,9 @@ export default function Amount({label,
   getAmount,
 }: {
   label:string;
-  max: number;
-  min: number;
-  defaultValue: number;
+  max?: number;
+  min?: number;
+  defaultValue?: number;
   getAmount: Function;
 }) {
 
