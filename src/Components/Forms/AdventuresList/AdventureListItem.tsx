@@ -5,10 +5,12 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Checkbox from '@mui/material/Checkbox';
 import Box from "@mui/material/Box";
-import { Adventure } from '../../../types/provider';
+import { TAdventure } from '../../../types/provider';
+import { styled } from '@mui/material';
+import Paper from '@mui/material/Paper';
 
 export default function AdvListItem({ adventure, labelId, onClickItem, checkedToggle }: { 
-    adventure: Adventure, 
+    adventure: TAdventure, 
     labelId: string,
     onClickItem: Function,
     checkedToggle: Function,
@@ -41,7 +43,16 @@ export default function AdvListItem({ adventure, labelId, onClickItem, checkedTo
         onClickItem();
     }
 
+
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+        ...theme.typography.body1,
+        padding: theme.spacing(0.5),
+        textAlign: "center",
+        color: theme.palette.text.primary,
+      }));
     return (
+        <Item  elevation={1}>
         <ListItem
             key={adventure.id}
             secondaryAction={    
@@ -73,5 +84,6 @@ export default function AdvListItem({ adventure, labelId, onClickItem, checkedTo
                 </Box>
             </ListItemButton>
         </ListItem>
+        </Item>
     )
 }

@@ -12,10 +12,12 @@ import Grid from "@mui/material/Grid";
 import MultilineInput from "../../../BaseComponents/Inputs/MultilineText";
 import TimeWithMinute from "../../../BaseComponents/Inputs/TimeWithMinute";
 import SignedCheckBox from "../../../BaseComponents/Inputs/SignedCheckBox";
-// Запрос к бд -> Получить и передать массив данных;
-let options = ["5 минут", "10 минут", "15 минут", "20 минут"];
+import { TDescription } from "../../../../types/provider";
+import Box from "@mui/material/Box";
+import Tooltip from "../../../BaseComponents/Inputs/Tooltip";
 
-export default function Adventure() {
+
+export default function Description({description, setDescription}:{description?:TDescription,setDescription:Function}) {
   function getSelect(value: string) {
     console.log(value);
   }
@@ -41,18 +43,21 @@ export default function Adventure() {
   return (
     <Stack spacing={1}>
       {/* <Grid container justifyContent="center"> */}
-        <Text {...{ variant: Variant.h5, text: "Редактирование приключения" }} />
-      {/* </Grid> */}
-      {/* <Grid container justifyContent="center"> */}
         <Text {...{ variant: Variant.body1, text: "Описание" }} />
       {/* </Grid> */}
-      <RowText {...{ label: "Название", defaultValue: "", getText }} />
-      <MultilineInput
-        {...{ defaultValue: "", getText: getMultiText, label: "Программа" }}
-      />
-      <MultilineInput
-        {...{ defaultValue: "", getText: getMultiText, label: "Важная информация" }}
-      />
+    
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <MultilineInput
+          {...{ defaultValue: "", getText: getMultiText, label: "Программа" }}
+        />
+        <Tooltip title="Программа приключения"></Tooltip>
+      </Box>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <MultilineInput
+          {...{ defaultValue: "", getText: getMultiText, label: "Важная информация" }}
+        />
+        <Tooltip title="Важная информация о приключении" />
+      </Box>
         <SignedCheckBox
         {...{
           getCheck:()=>{console.log("Предварительная запись");},

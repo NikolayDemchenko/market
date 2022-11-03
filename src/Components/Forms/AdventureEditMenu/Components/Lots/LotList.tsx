@@ -16,11 +16,11 @@ import MultilineInput from "../../../../BaseComponents/Inputs/MultilineText";
 import TimeWithMinute from "../../../../BaseComponents/Inputs/TimeWithMinute";
 import { Box } from "@mui/system";
 import { List, Paper, styled } from "@mui/material";
-import { AdventureLot } from "../../../../../types/provider";
+import {TAdventureLot } from "../../../../../types/provider";
 // Запрос к бд -> Получить и передать массив данных;
 let options = ["5 минут", "10 минут", "15 минут", "20 минут"];
 
-export default function LotList({ lots }: { lots?: AdventureLot[] }) {
+export default function LotList({ lots }: { lots?: TAdventureLot[] }) {
   function getSelect(value: string) {
     console.log(value);
   }
@@ -54,7 +54,7 @@ export default function LotList({ lots }: { lots?: AdventureLot[] }) {
       <List dense sx={{ width: "100%" }}>
         <Stack spacing={0.6}>
           {lots &&
-            lots.map((lot: AdventureLot, index: number) => {
+            lots.map((lot: TAdventureLot, index: number) => {
               return (
                 <Item key={index} elevation={1}>
                   <Stack spacing={1}>                    

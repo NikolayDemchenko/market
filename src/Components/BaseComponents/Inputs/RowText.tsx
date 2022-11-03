@@ -14,6 +14,7 @@ export default function NameInput({label,
         onChange={onChange}   
         label={label}    
         defaultValue={defaultValue}
+        fullWidth
       />
   );
 }

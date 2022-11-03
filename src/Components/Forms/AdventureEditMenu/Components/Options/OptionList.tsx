@@ -20,12 +20,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Avatar from "@mui/material/Avatar";
 import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
-import { Adventure, Option } from "../../../../../types/provider";
+import { TOption } from "../../../../../types/provider";
 import { List, Paper, styled } from "@mui/material";
 
 // Запрос к бд -> Получить и передать массив данных;
 
-export default function TestForm({options}:{options?:Option[]}) {
+export default function TestForm({options}:{options?:TOption[]}) {
   function getSelect(value: string) {
     console.log(value);
   }
@@ -58,7 +58,7 @@ export default function TestForm({options}:{options?:Option[]}) {
     <Box sx={{ bgcolor: "rgba(0, 0, 0, 0.12)" }}>
       <List dense sx={{ width: "100%" }}>
         <Stack spacing={0.6}>
-          {options&&options.map((option: Option, index:number) => {     
+          {options&&options.map((option: TOption, index:number) => {     
             return (
               <Item key={index} elevation={1}>
                 {/* <ListItem key={adventure.id} disablePadding> */}

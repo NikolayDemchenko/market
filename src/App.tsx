@@ -1,7 +1,7 @@
 import React from "react";
 import AdventureEditMenu from "./Components/Forms/AdventureEditMenu/AdventureEditMenu";
 import AdventureList from "./Components/Forms/AdventuresList/AdventureList";
-import ImageListView from "./Components/Forms/AdventureEditMenu/Components/ImageListView";
+import ImageListView from "./Components/Forms/AdventureEditMenu/Components/ImageList";
 import Forms from "./Components/Forms/Forms";
 
 function App() {
