@@ -21,6 +21,7 @@ import {
 } from "../../../types/provider";
 import Description from "./Components/Description";
 import Characteristics from "./Components/Characteristics";
+import { Toolbar } from "@mui/material";
 
 export default function AdventureEditMenu() {
   const [adventure, setAdventure] = React.useState<TAdventure>({
@@ -58,7 +59,11 @@ export default function AdventureEditMenu() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       {/* <Grid container spacing={2}> */}
-      <Text {...{ variant: Variant.h5, text: "Редактирование приключения" }} />
+      <Toolbar>
+        <Text
+          {...{ variant: Variant.h5, text: "Редактирование приключения" }}
+        />
+      </Toolbar>
       <RowText
         {...{
           label: "Название",
@@ -92,7 +97,7 @@ export default function AdventureEditMenu() {
         {...{
           characteristics: adventure.characteristics,
           setCharacteristics: (characteristics: TCharacteristic[]) => {
-            console.log('characteristics :>> ', characteristics);
+            console.log("characteristics :>> ", characteristics);
             setAdventure((adventure) => ({ ...adventure, characteristics }));
           },
         }}

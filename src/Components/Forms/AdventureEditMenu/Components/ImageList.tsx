@@ -1,12 +1,21 @@
 import * as React from "react";
 import ImageListItem from "@mui/material/ImageListItem";
-import { AppBar, Button, Stack } from "@mui/material";
+import {
+  AppBar,
+  BottomNavigation,
+  BottomNavigationAction,
+  Toolbar,
+} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
 import Box from "@mui/material/Box";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
 import { TAdventureImage } from "../../../../types/provider";
+import {
+  Text,
+  Variant,
+} from "../../../BaseComponents/DisplayingComponents/Text";
 
 export default function ImageListView({
   images = [],
@@ -40,31 +49,25 @@ export default function ImageListView({
   return (
     <>
       <AppBar position="static" color="inherit">
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="stretch"
-          spacing={1}
-          sx={{ color: "#111" }}
-        >
-          <Button
-            sx={{ color: "#616161" }}
-            component="label"
-            onChange={addHandler}
-            fullWidth
-          >
-            <input hidden accept={`image/*`} type="file" />
-            <AddAPhoto />
-          </Button>
-          <Button
-            sx={{ color: "#616161" }}
-            fullWidth
-            component="label"
-            onClick={deleteHandler}
-          >
-            <DeleteIcon />
-          </Button>
-        </Stack>
+        <Toolbar>
+          <Text {...{ variant: Variant.h6, text: "Фотографии" }} />
+        </Toolbar>
+        <Box sx={{ minWidth: "100%" }}>
+          <BottomNavigation showLabels>
+            <BottomNavigationAction
+              label="Добавить"
+              icon={<AddAPhoto sx={{ color: "#616161" }} />}
+              value={"Добавить"}
+              onClick={addHandler}
+            />
+            <BottomNavigationAction
+              label="Удалить"
+              icon={<DeleteIcon />}
+              value={"Удалить"}
+              onClick={deleteHandler}
+            />
+          </BottomNavigation>
+        </Box>
       </AppBar>
       <TableContainer sx={{ maxHeight: 360 }}>
         <Box

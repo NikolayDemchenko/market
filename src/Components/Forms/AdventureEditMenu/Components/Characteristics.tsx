@@ -33,19 +33,6 @@ export default function Characteristics({
   characteristics?: TCharacteristic[];
   setCharacteristics: Function;
 }) {
-  function getAmount(value: number) {
-    console.log(value);
-  }
-
-  function getMultiText(value: string) {
-    console.log(value);
-  }
-
-  function getText(value: string) {
-    console.log(value);
-  }
-
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -60,10 +47,10 @@ export default function Characteristics({
       )
     );
   };
+
   const addCharacteristic = (characteristic: TCharacteristic) => {
     setCharacteristics([...characteristics, characteristic]);
   };
-
 
   return (
     <>
@@ -71,7 +58,7 @@ export default function Characteristics({
         {...{
           handleClose,
           open,
-          setCharacteristic:addCharacteristic,
+          setCharacteristic: addCharacteristic,
         }}
       />
       <AppBar position="static" color="inherit">
@@ -90,11 +77,18 @@ export default function Characteristics({
               label="Удалить"
               icon={<DeleteIcon />}
               value={"Удалить"}
+              onClick={() =>
+                setCharacteristics(
+                  characteristics.filter(
+                    (characteristic) => !characteristic.checked
+                  )
+                )
+              }
             />
           </BottomNavigation>
         </Box>
       </AppBar>
-      {/* <Box sx={{ bgcolor: "rgba(0, 0, 0, 0.12)" }}> */}
+      <Box sx={{ bgcolor: "rgba(0, 0, 0, 0.08)" }}>
       <List dense sx={{ width: "100%" }}>
         {characteristics &&
           characteristics.map(
@@ -106,8 +100,12 @@ export default function Characteristics({
                     key,
                     checkedToggle,
                     labelId: "",
-                    setCharacteristic: (item:TCharacteristic) => {
-                      setCharacteristics(characteristics.map(charact=>charact===characteristic?item:charact));
+                    setCharacteristic: (item: TCharacteristic) => {
+                      setCharacteristics(
+                        characteristics.map((charact) =>
+                          charact === characteristic ? item : charact
+                        )
+                      );
                     },
                   }}
                 />
@@ -115,7 +113,7 @@ export default function Characteristics({
             }
           )}
       </List>
-      {/* </Box> */}
+      </Box>
     </>
   );
 }
@@ -246,79 +244,83 @@ export function Characteristic({
     color: theme.palette.text.primary,
   }));
 
-
-
-  const [openEdit, setOpenEdit] = React.useState(false);
-  const handleOpenEdit = () => setOpenEdit(true);
-  const handleCloseEdit = () => setOpenEdit(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
-   
-      <Item elevation={1}>
-        <ListItem
-          secondaryAction={
-            <Checkbox
+    <Item elevation={1}>
+      <ListItem
+        secondaryAction={
+          <Checkbox
             edge="end"
             onChange={() => checkedToggle(characteristic)}
             checked={characteristic.checked}
             inputProps={{ "aria-labelledby": labelId }}
-            />
-          }
-          disablePadding
-        >
-          <CharacteristicModal
-            {...{
-              handleClose: handleCloseEdit,
-              open: openEdit,
-              setCharacteristic,
-              characteristic
-            }}
           />
-          <ListItemButton onClick={handleOpenEdit}>
-            <Stack spacing={1}>
+        }
+        disablePadding
+      >
+        <CharacteristicModal
+          {...{
+            handleClose,
+            open,
+            setCharacteristic,
+            characteristic,
+          }}
+        />
+        <ListItemButton onClick={handleOpen}>
+          <Stack spacing={1}>
+            <NamedText
+              {...{
+                name: "Название",
+                nameVariant: Variant.caption,
+                text: characteristic.name,
+                textVariant: Variant.body1,
+              }}
+            />
+            <NamedText
+              {...{
+                name: "Описание",
+                nameVariant: Variant.caption,
+                text: characteristic.description,
+                textVariant: Variant.body1,
+              }}
+            />
+            <NamedText
+              {...{
+                name: "Количество участников",
+                nameVariant: Variant.caption,
+                text: `${characteristic.slotAmount}`,
+                textVariant: Variant.body1,
+              }}
+            />
+            <NamedText
+              {...{
+                name: "Продолжительность",
+                nameVariant: Variant.caption,
+                text: characteristic.duration,
+                textVariant: Variant.body1,
+              }}
+            />
+            <NamedText
+              {...{
+                name: "Цена",
+                nameVariant: Variant.caption,
+                text: `${characteristic.price}`,
+                textVariant: Variant.body1,
+              }}
+            />
               <NamedText
                 {...{
-                  name: "Название",
+                  name: "Дата цены",
                   nameVariant: Variant.caption,
-                  text: characteristic.name,
+                  text: characteristic.priceData,
                   textVariant: Variant.body1,
                 }}
               />
-              <NamedText
-                {...{
-                  name: "Описание",
-                  nameVariant: Variant.caption,
-                  text: characteristic.description,
-                  textVariant: Variant.body1,
-                }}
-              />
-              <NamedText
-                {...{
-                  name: "Количество участников",
-                  nameVariant: Variant.caption,
-                  text: `${characteristic.slotAmount}`,
-                  textVariant: Variant.body1,
-                }}
-              />
-              <NamedText
-                {...{
-                  name: "Продолжительность",
-                  nameVariant: Variant.caption,
-                  text: characteristic.duration,
-                  textVariant: Variant.body1,
-                }}
-              />
-              <NamedText
-                {...{
-                  name: "Цена",
-                  nameVariant: Variant.caption,
-                  text: `${characteristic.price}`,
-                  textVariant: Variant.body1,
-                }}
-              />
-            </Stack>
-          </ListItemButton>
-        </ListItem>
-      </Item>
-   
+          </Stack>
+        </ListItemButton>
+      </ListItem>
+    </Item>
   );
 }

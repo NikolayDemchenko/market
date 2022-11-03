@@ -1,20 +1,33 @@
 import * as React from "react";
 import ReactPlayer from "react-player";
 import ImageListItem from "@mui/material/ImageListItem";
-import { AppBar, Button, Stack } from "@mui/material";
+import {
+  AppBar,
+  BottomNavigation,
+  BottomNavigationAction,
+  Modal,
+  Stack,
+  Toolbar,
+} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Box from "@mui/material/Box";
 import DeleteIcon from "@mui/icons-material/Delete";
-import BasicModal from "../../../BaseComponents/Modals/BasicModal";
 import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
 import { TAdventureVideo } from "../../../../types/provider";
-
-export default function VideoListView({ 
-  videos=[], 
-  setVideos 
+import {
+  Text,
+  Variant,
+} from "../../../BaseComponents/DisplayingComponents/Text";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
+import BasicButton from "../../../BaseComponents/Buttons/BasicButton";
+import MultilineText from "../../../BaseComponents/Inputs/MultilineText";
+export default function VideoListView({
+  videos = [],
+  setVideos,
 }: {
   videos?: TAdventureVideo[];
-  setVideos: Function; }) {
+  setVideos: Function;
+}) {
   const addHandler = (url: string) => {
     setVideos([
       ...videos,
@@ -40,27 +53,32 @@ export default function VideoListView({
   const getVideoUrl = (url: string) => {
     addHandler(url);
   };
-
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <>
+      <VideoAddModal {...{ getVideoUrl, open, handleClose }}></VideoAddModal>
       <AppBar position="static" color="inherit">
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="stretch"
-          spacing={1}
-          sx={{ color: "#111" }}
-        >
-          <BasicModal {...{ getVideoUrl }}></BasicModal>
-          <Button
-            sx={{ color: "#616161" }}
-            fullWidth
-            component="label"
-            onClick={deleteHandler}
-          >
-            <DeleteIcon />
-          </Button>
-        </Stack>
+        <Toolbar>
+          <Text {...{ variant: Variant.h6, text: "Видео" }} />
+        </Toolbar>
+        <Box sx={{ minWidth: "100%" }}>
+          <BottomNavigation showLabels>
+            <BottomNavigationAction
+              label="Добавить"
+              icon={<VideoCallIcon sx={{ color: "#616161" }} />}
+              value={"Добавить"}
+              onClick={handleOpen}
+            />
+            <BottomNavigationAction
+              label="Удалить"
+              icon={<DeleteIcon />}
+              value={"Удалить"}
+              onClick={deleteHandler}
+            />
+          </BottomNavigation>
+        </Box>  
       </AppBar>
       <TableContainer sx={{ maxHeight: 360 }}>
         <Box
@@ -90,5 +108,54 @@ export default function VideoListView({
         </Box>
       </TableContainer>
     </>
+  );
+}
+
+export function VideoAddModal({
+  getVideoUrl,
+  open,
+  handleClose,
+}: {
+  getVideoUrl: Function;
+  handleClose: Function;
+  open: boolean;
+}) {
+  const [inputData, setInputData] = React.useState("");
+
+  return (
+    <Modal
+      open={open}
+      onClose={() => handleClose()}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box
+        sx={{
+          position: "absolute" as "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 400,
+          bgcolor: "background.paper",
+          border: "2px solid #000",
+          boxShadow: 24,
+          p: 4,
+        }}
+      >
+        <Stack spacing={1}>
+          <Text
+            {...{ variant: Variant.body1, text: "Вставьте ссылку на видео" }}
+          />
+          <MultilineText label={""} defaultValue={""} getText={setInputData} />
+          <BasicButton
+            btnText={"Добавить видео"}
+            onClick={() => {
+              getVideoUrl(inputData);
+              handleClose();
+            }}
+          />
+        </Stack>
+      </Box>
+    </Modal>
   );
 }
