@@ -1,6 +1,7 @@
 import * as React from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { Text, Variant } from "../DisplayingComponents/Text";
 
 export default function SignedCheckBox({
   getCheck, 
@@ -15,7 +16,7 @@ export default function SignedCheckBox({
   return (
     <FormControlLabel sx={{pl:1}}     
       control={<Checkbox {...{onChange}}/>}
-      label={checkBoxText}
+      label={<Text {...{ variant: Variant.body1, text: checkBoxText }} />}
     />
   );
 }

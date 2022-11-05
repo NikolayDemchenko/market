@@ -8,7 +8,7 @@ import { Text, Variant } from "../DisplayingComponents/Text";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import { Stack } from "@mui/material";
 
-export default function BasicModal({ getVideoUrl }: { getVideoUrl: Function }) {
+export  function VideoModal({ getVideoUrl }: { getVideoUrl: Function }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -32,7 +32,7 @@ export default function BasicModal({ getVideoUrl }: { getVideoUrl: Function }) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 400,
+            width: 360,
             bgcolor: "background.paper",
             border: "2px solid #000",
             boxShadow: 24,

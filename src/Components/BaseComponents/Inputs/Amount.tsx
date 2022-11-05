@@ -20,7 +20,7 @@ export default function Amount({label,
   return (   
       <TextField
       fullWidth 
-      // sx={{minWidth:"100%"}}
+      // color="warning"
         onChange={onChange}
         id="outlined-number"
         label={label}
@@ -29,7 +29,7 @@ export default function Amount({label,
           inputProps: {
             max,
             min,
-            defaultValue,
+            defaultValue:defaultValue||"",
           },
         }}
         // helperText="Укажите количество билетов"

@@ -6,7 +6,7 @@ export default function BasicButton({
 onClick:Function
 }) {
   return (
-    <Button sx={{ minWidth: "100%" }} variant="contained" size="large" onClick={()=>onClick()}>
+    <Button fullWidth variant="contained" size="large" onClick={()=>onClick()}>
       {btnText}
     </Button>
   );

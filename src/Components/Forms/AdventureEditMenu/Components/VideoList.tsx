@@ -3,15 +3,14 @@ import ReactPlayer from "react-player";
 import ImageListItem from "@mui/material/ImageListItem";
 import {
   AppBar,
-  BottomNavigation,
-  BottomNavigationAction,
+  Grid,
+  IconButton,
   Modal,
   Stack,
   Toolbar,
 } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Box from "@mui/material/Box";
-import DeleteIcon from "@mui/icons-material/Delete";
 import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
 import { TAdventureVideo } from "../../../../types/provider";
 import {
@@ -21,6 +20,7 @@ import {
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import BasicButton from "../../../BaseComponents/Buttons/BasicButton";
 import MultilineText from "../../../BaseComponents/Inputs/MultilineText";
+import { HiddenDelete } from "../../../BaseComponents/Buttons/HiddenDelete";
 export default function VideoListView({
   videos = [],
   setVideos,
@@ -36,10 +36,6 @@ export default function VideoListView({
         title: "New video",
       },
     ]);
-  };
-
-  const deleteHandler = () => {
-    setVideos(videos.filter((video) => !video.checked));
   };
 
   const clickVideoHandler = (item: any) => {
@@ -59,27 +55,27 @@ export default function VideoListView({
   return (
     <>
       <VideoAddModal {...{ getVideoUrl, open, handleClose }}></VideoAddModal>
-      <AppBar position="static" color="inherit">
-        <Toolbar>
-          <Text {...{ variant: Variant.h6, text: "Видео" }} />
-        </Toolbar>
-        <Box sx={{ minWidth: "100%" }}>
-          <BottomNavigation showLabels>
-            <BottomNavigationAction
-              label="Добавить"
-              icon={<VideoCallIcon sx={{ color: "#616161" }} />}
-              value={"Добавить"}
-              onClick={handleOpen}
-            />
-            <BottomNavigationAction
-              label="Удалить"
-              icon={<DeleteIcon />}
-              value={"Удалить"}
-              onClick={deleteHandler}
-            />
-          </BottomNavigation>
-        </Box>  
-      </AppBar>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" color="inherit">
+          <Toolbar>
+            <Grid container alignItems="center" spacing={2}>
+              <Grid item xs={6}>
+                <Text {...{ variant: Variant.h6, text: "Видео" }} />
+              </Grid>
+              <Grid item xs={6}>
+                <IconButton size="large" component="label" onClick={handleOpen}>
+                  <Grid container direction="column" alignItems="center">
+                    <VideoCallIcon />
+                    <Text {...{ variant: Variant.caption, text: "Добавить" }} />
+                  </Grid>
+                </IconButton>
+                <Box sx={{ flexGrow: 1 }} />
+              </Grid>
+            </Grid>
+                <HiddenDelete {...{ items: videos, setItems: setVideos }} />
+          </Toolbar>
+        </AppBar>
+      </Box>
       <TableContainer sx={{ maxHeight: 360 }}>
         <Box
           sx={{
@@ -135,7 +131,7 @@ export function VideoAddModal({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 400,
+          width: 360,
           bgcolor: "background.paper",
           border: "2px solid #000",
           boxShadow: 24,

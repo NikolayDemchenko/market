@@ -20,8 +20,6 @@ export enum Variant {
 
 export function Text({ text, variant }: { text: string; variant: Variant }) {
   return (
-    <Typography variant={variant} gutterBottom>
-      {text}
-    </Typography>
+    <Typography variant={variant}  >{text}</Typography>
   );
 }

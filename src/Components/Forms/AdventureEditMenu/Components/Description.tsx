@@ -1,102 +1,142 @@
 import React from "react";
-import { Text, Variant } from "../../../BaseComponents/DisplayingComponents/Text";
-import HSlon from "../../../BaseComponents/StaticContentComponents/HSlon";
-import RowText from "../../../BaseComponents/Inputs/RowText";
+import {
+  Text,
+  Variant,
+} from "../../../BaseComponents/DisplayingComponents/Text";
 import PhoneInput from "../../../BaseComponents/Inputs/Phone";
-import PasswordInput from "../../../BaseComponents/Inputs/Password";
-import Amount from "../../../BaseComponents/Inputs/Amount";
-import SelectInput from "../../../BaseComponents/Inputs/Select";
-import BasicButton from "../../../BaseComponents/Buttons/BasicButton";
 import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
 import MultilineInput from "../../../BaseComponents/Inputs/MultilineText";
-import TimeWithMinute from "../../../BaseComponents/Inputs/TimeWithMinute";
 import SignedCheckBox from "../../../BaseComponents/Inputs/SignedCheckBox";
 import { TDescription } from "../../../../types/provider";
 import Box from "@mui/material/Box";
-import Tooltip from "../../../BaseComponents/Inputs/Tooltip";
+import Tooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
+import { Toolbar } from "@mui/material";
+import Amount from "../../../BaseComponents/Inputs/Amount";
 
-
-export default function Description({description, setDescription}:{description?:TDescription,setDescription:Function}) {
-  function getSelect(value: string) {
-    console.log(value);
-  }
-  function getAmount(value: number) {
-    console.log(value);
-  }
-  function getPassword(value: string) {
-    console.log(value);
-  }
-  function getMultiText(value: string) {
-    console.log(value);
-  }
-  function getPhoneNumber(value: string) {
-    console.log(value);
-  }
-  function getText(value: string) {
-    console.log(value);
-  }
-  function getTime(value: string) {
-    console.log(value);
-  }
-
+export default function Description({
+  description,
+  setDescription,
+}: {
+  description?: TDescription;
+  setDescription: Function;
+}) {
+  // const {slotSize}:TDescription=description
   return (
     <Stack spacing={1}>
-      {/* <Grid container justifyContent="center"> */}
-        <Text {...{ variant: Variant.body1, text: "Описание" }} />
-      {/* </Grid> */}
-    
+      <Toolbar>
+        <Text {...{ variant: Variant.h6, text: "Описание" }} />
+      </Toolbar>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <MultilineInput
-          {...{ defaultValue: "", getText: getMultiText, label: "Программа" }}
+          {...{
+            defaultValue: "",
+            getText: (program: string) =>
+              setDescription({ ...description, program }),
+            label: "Программа",
+          }}
         />
         <Tooltip title="Программа приключения"></Tooltip>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <MultilineInput
-          {...{ defaultValue: "", getText: getMultiText, label: "Важная информация" }}
+          {...{
+            defaultValue: "",
+            getText: (info: string) =>
+              setDescription({
+                ...description,
+                info,
+              }),
+            label: "Важная информация",
+          }}
         />
         <Tooltip title="Важная информация о приключении" />
       </Box>
-        <SignedCheckBox
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <MultilineInput
+          {...{
+            defaultValue: "",
+            getText: (limitation: string) =>
+              setDescription({
+                ...description,
+                limitation,
+              }),
+            label: "Ограничения",
+          }}
+        />
+        <Tooltip title="Ограничения" />
+      </Box>
+      <Amount
         {...{
-          getCheck:()=>{console.log("Предварительная запись");},
+          label: "Количество участников",
+          // max: 8,
+          // min: 1,
+          // defaultValue: description?.peopleAmount,
+          getAmount: (peopleAmount: number) =>
+            setDescription({
+              ...description,
+              peopleAmount,
+            }),
+        }}
+      />
+      <SignedCheckBox
+        {...{
+          getCheck: () =>
+            setDescription({
+              ...description,
+              preRegistration: !description?.preRegistration,
+            }),
           checked: false,
           checkBoxText: "Предварительная запись",
         }}
       />
-              <MultilineInput
-          {...{ defaultValue: "", getText: getMultiText, label: "Адрес" }}
-        />
-        <PhoneInput
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <MultilineInput
           {...{
-            label: "Контакты",
             defaultValue: "",
-            getPhoneNumber,
+            getText: (seasonality: string) =>
+              setDescription({ ...description, seasonality }),
+            label: "Сезонность",
           }}
         />
-      {/* <PhoneInput
+        <Tooltip title="Укажите месяцы через запятую" />
+      </Box>
+
+      <MultilineInput
         {...{
-          label: "Введите номер телефона",
           defaultValue: "",
-          getPhoneNumber,
+          getText: (address: string) =>
+            setDescription({ ...description, address }),
+          label: "Адрес",
         }}
-      /> */}
-      {/* <PasswordInput {...{ label: "Введите пароль", getPassword }} /> */}
-      {/* <Amount
+      />
+      <PhoneInput
         {...{
-          label: "Укажите количество билетов",
-          max: 8,
-          min: 1,
-          defaultValue: 1,
-          getAmount,
+          label: "Контакты",
+          defaultValue: "",
+          getPhoneNumber: (phone: string) =>
+            setDescription({ ...description, phone }),
         }}
-      /> */}
-      {/* <SelectInput
-        {...{ label: "Выберите характеристику", getSelect, options }}
-      /> */} 
-      {/* <TimeWithMinute {...{ getTime, label: "Минимальная продолжительность" }} /> */}
-      {/* <BasicButton {...{ btnText: "Подтвердить выбор", onClick: () => {} }} /> */}
+      />
+      <Amount
+        {...{
+          label: "Объём слота",
+          getAmount: (slotVolume: number) =>
+            setDescription({
+              ...description,
+              slotVolume,
+            }),
+        }}
+      />
+      <Amount
+        {...{
+          label: "Размер слота",
+          getAmount: (slotSize: number) =>
+            setDescription({
+              ...description,
+              slotSize,
+            }),
+        }}
+      />
     </Stack>
   );
 }

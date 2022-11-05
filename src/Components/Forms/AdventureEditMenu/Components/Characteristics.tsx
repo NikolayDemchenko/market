@@ -2,9 +2,9 @@ import React from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import {
-  BottomNavigation,
-  BottomNavigationAction,
   Checkbox,
+  Grid,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -22,10 +22,10 @@ import RowText from "../../../BaseComponents/Inputs/RowText";
 import MultilineText from "../../../BaseComponents/Inputs/MultilineText";
 import Amount from "../../../BaseComponents/Inputs/Amount";
 import AppBar from "@mui/material/AppBar";
-import DeleteIcon from "@mui/icons-material/Delete";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import BasicButton from "../../../BaseComponents/Buttons/BasicButton";
 import { NamedText } from "../../../BaseComponents/DisplayingComponents/NamedText";
+import { HiddenDelete } from "../../../BaseComponents/Buttons/HiddenDelete";
 export default function Characteristics({
   characteristics = [],
   setCharacteristics,
@@ -51,68 +51,63 @@ export default function Characteristics({
   const addCharacteristic = (characteristic: TCharacteristic) => {
     setCharacteristics([...characteristics, characteristic]);
   };
-
   return (
     <>
       <CharacteristicModal
         {...{
           handleClose,
           open,
-          setCharacteristic: addCharacteristic,
+          setCharacteristic: addCharacteristic, 
         }}
       />
-      <AppBar position="static" color="inherit">
-        <Toolbar>
-          <Text {...{ variant: Variant.h6, text: "Характеристики" }} />
-        </Toolbar>
-        <Box sx={{ minWidth: "100%" }}>
-          <BottomNavigation showLabels>
-            <BottomNavigationAction
-              label="Добавить"
-              icon={<PlaylistAddIcon sx={{ color: "#616161" }} />}
-              value={"Добавить"}
-              onClick={handleOpen}
-            />
-            <BottomNavigationAction
-              label="Удалить"
-              icon={<DeleteIcon />}
-              value={"Удалить"}
-              onClick={() =>
-                setCharacteristics(
-                  characteristics.filter(
-                    (characteristic) => !characteristic.checked
-                  )
-                )
-              }
-            />
-          </BottomNavigation>
-        </Box>
-      </AppBar>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" color="inherit">
+          <Toolbar>
+         <Grid container alignItems="center" spacing={2}>
+              <Grid item xs={6}>
+                <Text {...{ variant: Variant.h6, text: "Характеристики" }} />
+              </Grid>
+              <Grid item xs={6}>
+                <IconButton size="large" component="label" onClick={handleOpen}>
+                <Grid container direction="column" alignItems="center">
+                <PlaylistAddIcon />
+                <Text {...{ variant: Variant.caption, text: "Добавить" }} />
+              </Grid>
+                </IconButton>
+                <Box sx={{ flexGrow: 1 }} />
+              </Grid>
+            </Grid>
+                <HiddenDelete
+                {...{ items: characteristics, setItems: setCharacteristics }}
+              />
+          </Toolbar>
+        </AppBar>
+      </Box>
       <Box sx={{ bgcolor: "rgba(0, 0, 0, 0.08)" }}>
-      <List dense sx={{ width: "100%" }}>
-        {characteristics &&
-          characteristics.map(
-            (characteristic: TCharacteristic, key: number) => {
-              return (
-                <Characteristic
-                  {...{
-                    characteristic,
-                    key,
-                    checkedToggle,
-                    labelId: "",
-                    setCharacteristic: (item: TCharacteristic) => {
-                      setCharacteristics(
-                        characteristics.map((charact) =>
-                          charact === characteristic ? item : charact
-                        )
-                      );
-                    },
-                  }}
-                />
-              );
-            }
-          )}
-      </List>
+        <List dense sx={{ width: "100%" }}>
+          {characteristics &&
+            characteristics.map(
+              (characteristic: TCharacteristic, key: number) => {
+                return (
+                  <Characteristic
+                    {...{
+                      characteristic,
+                      key,
+                      checkedToggle,
+                      labelId: "",
+                      setCharacteristic: (item: TCharacteristic) => {
+                        setCharacteristics(
+                          characteristics.map((charact) =>
+                            charact === characteristic ? item : charact
+                          )
+                        );
+                      },
+                    }}
+                  />
+                );
+              }
+            )}
+        </List>
       </Box>
     </>
   );
@@ -129,12 +124,14 @@ export function CharacteristicModal({
   setCharacteristic: Function;
   characteristic?: TCharacteristic;
 }) {
-  console.log("characteristic :>> ", characteristic);
   const [modalState, setModalState] = React.useState({ ...characteristic });
   return (
     <Modal
+
       open={open}
-      onClose={() => handleClose()}
+      onClose={() => {
+        setModalState({})
+        handleClose()}}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -144,7 +141,7 @@ export function CharacteristicModal({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 400,
+          width: 360,     
           bgcolor: "background.paper",
           border: "2px solid #000",
           // boxShadow: 24,
@@ -215,8 +212,14 @@ export function CharacteristicModal({
           <BasicButton
             btnText={"Сохранить"}
             onClick={() => {
-              setCharacteristic(modalState);
-              handleClose();
+              if(modalState.name&&modalState.duration&&modalState.description&&modalState.price&&modalState.priceData&&modalState.slotAmount){
+                setCharacteristic(modalState);
+                setModalState({})
+                handleClose();
+              }
+              else{
+                alert("Не все поля заполнены!")
+              }
             }}
           />
         </Stack>
@@ -272,52 +275,52 @@ export function Characteristic({
           <Stack spacing={1}>
             <NamedText
               {...{
-                name: "Название",
-                nameVariant: Variant.caption,
+                name: "Название :",
+                nameVariant: Variant.button,
                 text: characteristic.name,
                 textVariant: Variant.body1,
               }}
             />
             <NamedText
               {...{
-                name: "Описание",
-                nameVariant: Variant.caption,
+                name: "Описание :",
+                nameVariant: Variant.button,
                 text: characteristic.description,
                 textVariant: Variant.body1,
               }}
             />
             <NamedText
               {...{
-                name: "Количество участников",
-                nameVariant: Variant.caption,
+                name: "Количество участников :",
+                nameVariant: Variant.button,
                 text: `${characteristic.slotAmount}`,
                 textVariant: Variant.body1,
               }}
             />
             <NamedText
               {...{
-                name: "Продолжительность",
-                nameVariant: Variant.caption,
+                name: "Продолжительность :",
+                nameVariant: Variant.button,
                 text: characteristic.duration,
                 textVariant: Variant.body1,
               }}
             />
             <NamedText
               {...{
-                name: "Цена",
-                nameVariant: Variant.caption,
+                name: "Цена :",
+                nameVariant: Variant.button,
                 text: `${characteristic.price}`,
                 textVariant: Variant.body1,
               }}
             />
-              <NamedText
-                {...{
-                  name: "Дата цены",
-                  nameVariant: Variant.caption,
-                  text: characteristic.priceData,
-                  textVariant: Variant.body1,
-                }}
-              />
+            <NamedText
+              {...{
+                name: "Дата цены :",
+                nameVariant: Variant.button,
+                text: characteristic.priceData,
+                textVariant: Variant.body1,
+              }}
+            />
           </Stack>
         </ListItemButton>
       </ListItem>

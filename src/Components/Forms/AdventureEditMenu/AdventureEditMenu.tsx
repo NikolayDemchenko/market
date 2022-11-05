@@ -1,15 +1,7 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
 import RowText from "../../BaseComponents/Inputs/RowText";
-import Amount from "../../BaseComponents/Inputs/Amount";
-import SignedCheckBox from "../../BaseComponents/Inputs/SignedCheckBox";
-import AdventureNom from "./Components/Description";
-import AdventureLot from "./Components/Lots/LotList";
-import LotOption from "./Components/Options/OptionList";
 import VideoListView from "./Components/VideoList";
 import ImageListView from "./Components/ImageList";
 import {
@@ -21,7 +13,8 @@ import {
 } from "../../../types/provider";
 import Description from "./Components/Description";
 import Characteristics from "./Components/Characteristics";
-import { Toolbar } from "@mui/material";
+import { Stack, Toolbar } from "@mui/material";
+import BasicButton from "../../BaseComponents/Buttons/BasicButton";
 
 export default function AdventureEditMenu() {
   const [adventure, setAdventure] = React.useState<TAdventure>({
@@ -56,6 +49,10 @@ export default function AdventureEditMenu() {
       },
     ],
   });
+
+  const saveAdventure = () => {
+    console.log("adventure :>> ", adventure); 
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       {/* <Grid container spacing={2}> */}
@@ -82,14 +79,14 @@ export default function AdventureEditMenu() {
         {...{
           images: adventure.images,
           setImages: (images: TAdventureImage[]) =>
-            setAdventure((adventure) => ({ ...adventure, images })),
+            setAdventure({ ...adventure, images }),
         }}
       ></ImageListView>
       <VideoListView
         {...{
           videos: adventure.videos,
           setVideos: (videos: TAdventureVideo[]) => {
-            setAdventure((adventure) => ({ ...adventure, videos }));
+            setAdventure({ ...adventure, videos });
           },
         }}
       ></VideoListView>
@@ -98,11 +95,30 @@ export default function AdventureEditMenu() {
           characteristics: adventure.characteristics,
           setCharacteristics: (characteristics: TCharacteristic[]) => {
             console.log("characteristics :>> ", characteristics);
-            setAdventure((adventure) => ({ ...adventure, characteristics }));
+            setAdventure({ ...adventure, characteristics });
           },
         }}
       ></Characteristics>
+       <Stack direction="row" spacing={2} sx={{maxWidth:"100%"}}>
 
+      <BasicButton
+        btnText={"Отмена"}
+        onClick={() => {
+          // if(modalState.name&&modalState.duration&&modalState.description&&modalState.price&&modalState.priceData&&modalState.slotAmount){
+          //   setCharacteristic(modalState);
+          //   setModalState({})
+          //   handleClose();
+          // }
+          // else{
+            //   alert("Не все поля заполнены!")
+            // }
+          }}
+          />
+      <BasicButton
+        btnText={"Сохранить"}
+        onClick={saveAdventure}
+        />
+        </Stack>
       {/* </Grid> */}
     </Box>
   );

@@ -1,21 +1,19 @@
 import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
 import ImageListItem from "@mui/material/ImageListItem";
-import {
-  AppBar,
-  BottomNavigation,
-  BottomNavigationAction,
-  Toolbar,
-} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
-import Box from "@mui/material/Box";
-import DeleteIcon from "@mui/icons-material/Delete";
 import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
 import { TAdventureImage } from "../../../../types/provider";
 import {
   Text,
   Variant,
 } from "../../../BaseComponents/DisplayingComponents/Text";
+import { HiddenDelete } from "../../../BaseComponents/Buttons/HiddenDelete";
+import Grid from "@mui/material/Grid";
 
 export default function ImageListView({
   images = [],
@@ -25,6 +23,7 @@ export default function ImageListView({
   setImages: (images: TAdventureImage[]) => void;
 }) {
   const addHandler = (event: any) => {
+    console.log("event :>> ", event);
     setImages([
       ...images,
       {
@@ -32,10 +31,6 @@ export default function ImageListView({
         title: "New image",
       },
     ]);
-  };
-
-  const deleteHandler = () => {
-    setImages(images.filter((image) => !image.checked));
   };
 
   const clickImgHandler = (item: any) => {
@@ -48,27 +43,28 @@ export default function ImageListView({
 
   return (
     <>
-      <AppBar position="static" color="inherit">
-        <Toolbar>
-          <Text {...{ variant: Variant.h6, text: "Фотографии" }} />
-        </Toolbar>
-        <Box sx={{ minWidth: "100%" }}>
-          <BottomNavigation showLabels>
-            <BottomNavigationAction
-              label="Добавить"
-              icon={<AddAPhoto sx={{ color: "#616161" }} />}
-              value={"Добавить"}
-              onClick={addHandler}
-            />
-            <BottomNavigationAction
-              label="Удалить"
-              icon={<DeleteIcon />}
-              value={"Удалить"}
-              onClick={deleteHandler}
-            />
-          </BottomNavigation>
-        </Box>
-      </AppBar>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" color="inherit">
+          <Toolbar>
+          <Grid container alignItems="center" spacing={2}>
+              <Grid item xs={6}>
+                <Text {...{ variant: Variant.h6, text: "Фото" }} />
+              </Grid>
+              <Grid item xs={6}>
+                <IconButton size="large" component="label" onChange={addHandler}>
+                <Grid container direction="column" alignItems="center">
+                <input hidden accept={`image/*`} type="file" />
+                <AddAPhoto />
+                <Text {...{ variant: Variant.caption, text: "Добавить" }} />
+              </Grid>
+                </IconButton>
+                <Box sx={{ flexGrow: 1 }} />
+              </Grid>
+            </Grid>
+                <HiddenDelete {...{items:images,setItems:setImages}}/>            
+          </Toolbar>
+        </AppBar>
+      </Box>
       <TableContainer sx={{ maxHeight: 360 }}>
         <Box
           sx={{
