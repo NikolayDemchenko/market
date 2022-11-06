@@ -3,7 +3,7 @@ import {
   Text,
   Variant,
 } from "../../../BaseComponents/DisplayingComponents/Text";
-import PhoneInput from "../../../BaseComponents/Inputs/Phone";
+import PhoneInput from "../../../BaseComponents/Inputs/MaskedInputs";
 import Stack from "@mui/material/Stack";
 import MultilineInput from "../../../BaseComponents/Inputs/MultilineText";
 import SignedCheckBox from "../../../BaseComponents/Inputs/SignedCheckBox";

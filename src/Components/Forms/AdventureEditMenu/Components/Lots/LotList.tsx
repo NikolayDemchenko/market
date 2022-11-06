@@ -4,8 +4,8 @@ import {
   Variant,
 } from "../../../../BaseComponents/DisplayingComponents/Text";
 import HSlon from "../../../../BaseComponents/StaticContentComponents/HSlon";
-import RowText from "../../../../BaseComponents/Inputs/RowText";
-import PhoneInput from "../../../../BaseComponents/Inputs/Phone";
+import {RowText} from "../../../../BaseComponents/Inputs/RowText";
+import PhoneInput from "../../../../BaseComponents/Inputs/MaskedInputs";
 import PasswordInput from "../../../../BaseComponents/Inputs/Password";
 import Amount from "../../../../BaseComponents/Inputs/Amount";
 import SelectInput from "../../../../BaseComponents/Inputs/Select";

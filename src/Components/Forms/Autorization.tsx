@@ -5,7 +5,7 @@ import SignedCheckBox from "../BaseComponents/Inputs/SignedCheckBox";
 import BasicButton from "../BaseComponents/Buttons/BasicButton";
 import HSlon from "../BaseComponents/StaticContentComponents/HSlon";
 import PasswordInput from "../BaseComponents/Inputs/Password";
-import PhoneInput from "../BaseComponents/Inputs/Phone";
+import PhoneInput from "../BaseComponents/Inputs/MaskedInputs";
 import Stack from "@mui/material/Stack";
 
 

@@ -1,15 +1,16 @@
+import { InputAdornment } from "@mui/material";
 import TextField from "@mui/material/TextField";
-export  function RowText({
+export default function NameInput({
   label,
   defaultValue,
-  getText,
+  getPrice,
 }: {
   label: string;
-  defaultValue: string;
-  getText: Function;
+  defaultValue?: number;
+  getPrice: Function;
 }) {
   const onChange = (event: { target: { value: any } }) => {
-    getText(event.target.value);
+    getPrice(event.target.value);
   };
   return (
     <TextField
@@ -19,11 +20,17 @@ export  function RowText({
           color: "red",
         },
       }}
+      type="number"
       onChange={onChange}
       label={label}
-      // label={<Text {...{ variant: Variant.h6, text: label }} />}
+      InputProps={{
+        endAdornment: <InputAdornment position="end">Руб</InputAdornment>,
+        inputProps: {
+          min: 0,
+        },
+      }}
       defaultValue={defaultValue}
-      fullWidth     
+      fullWidth
     />
   );
 }

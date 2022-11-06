@@ -1,7 +1,7 @@
 import { Text, Variant } from "../BaseComponents/DisplayingComponents/Text";
 import HSlon from "../BaseComponents/StaticContentComponents/HSlon";
-import RowText from "../BaseComponents/Inputs/RowText";
-import PhoneInput from "../BaseComponents/Inputs/Phone";
+import {RowText} from "../BaseComponents/Inputs/RowText";
+import PhoneInput from "../BaseComponents/Inputs/MaskedInputs";
 import PasswordInput from "../BaseComponents/Inputs/Password";
 import BasicButton from "../BaseComponents/Buttons/BasicButton";
 import Stack from "@mui/material/Stack";

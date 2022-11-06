@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
-import RowText from "../../BaseComponents/Inputs/RowText";
+import { RowText } from "../../BaseComponents/Inputs/RowText";
 import VideoListView from "./Components/VideoList";
 import ImageListView from "./Components/ImageList";
 import {
@@ -15,9 +15,10 @@ import Description from "./Components/Description";
 import Characteristics from "./Components/Characteristics";
 import { Stack, Toolbar } from "@mui/material";
 import BasicButton from "../../BaseComponents/Buttons/BasicButton";
+import { createAdventure } from "../../../REST/AdventureREST";
 
 export default function AdventureEditMenu() {
-  const [adventure, setAdventure] = React.useState<TAdventure>({
+  const [adventure, setAdventureState] = React.useState<TAdventure>({
     id: "",
     name: "",
     img: "",
@@ -49,9 +50,9 @@ export default function AdventureEditMenu() {
       },
     ],
   });
-
-  const saveAdventure = () => {
-    console.log("adventure :>> ", adventure); 
+  const setAdventure = (adventure: TAdventure) => {
+    console.log('adventure :>> ', adventure);
+    setAdventureState(adventure);
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -99,26 +100,27 @@ export default function AdventureEditMenu() {
           },
         }}
       ></Characteristics>
-       <Stack direction="row" spacing={2} sx={{maxWidth:"100%"}}>
-
-      <BasicButton
-        btnText={"Отмена"}
-        onClick={() => {
-          // if(modalState.name&&modalState.duration&&modalState.description&&modalState.price&&modalState.priceData&&modalState.slotAmount){
-          //   setCharacteristic(modalState);
-          //   setModalState({})
-          //   handleClose();
-          // }
-          // else{
+      <Stack direction="row" spacing={2} sx={{ maxWidth: "100%" }}>
+        <BasicButton
+          btnText={"Отмена"}
+          onClick={() => {
+            // if(modalState.name&&modalState.duration&&modalState.description&&modalState.price&&modalState.priceData&&modalState.slotAmount){
+            //   setCharacteristic(modalState);
+            //   setModalState({})
+            //   handleClose();
+            // }
+            // else{
             //   alert("Не все поля заполнены!")
             // }
           }}
-          />
-      <BasicButton
-        btnText={"Сохранить"}
-        onClick={saveAdventure}
         />
-        </Stack>
+        <BasicButton
+          btnText={"Сохранить"}
+          onClick={() => {
+            createAdventure(adventure, setAdventure);
+          }}
+        />
+      </Stack>
       {/* </Grid> */}
     </Box>
   );

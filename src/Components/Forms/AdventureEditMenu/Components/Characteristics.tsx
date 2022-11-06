@@ -18,7 +18,6 @@ import {
   Text,
   Variant,
 } from "../../../BaseComponents/DisplayingComponents/Text";
-import RowText from "../../../BaseComponents/Inputs/RowText";
 import MultilineText from "../../../BaseComponents/Inputs/MultilineText";
 import Amount from "../../../BaseComponents/Inputs/Amount";
 import AppBar from "@mui/material/AppBar";
@@ -26,6 +25,12 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import BasicButton from "../../../BaseComponents/Buttons/BasicButton";
 import { NamedText } from "../../../BaseComponents/DisplayingComponents/NamedText";
 import { HiddenDelete } from "../../../BaseComponents/Buttons/HiddenDelete";
+import {
+  DateInput,
+  DurationInput,
+} from "../../../BaseComponents/Inputs/MaskedInputs";
+import Price from "../../../BaseComponents/Inputs/Price";
+
 export default function Characteristics({
   characteristics = [],
   setCharacteristics,
@@ -57,29 +62,29 @@ export default function Characteristics({
         {...{
           handleClose,
           open,
-          setCharacteristic: addCharacteristic, 
+          setCharacteristic: addCharacteristic,
         }}
       />
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" color="inherit">
           <Toolbar>
-         <Grid container alignItems="center" spacing={2}>
+            <Grid container alignItems="center" spacing={2}>
               <Grid item xs={6}>
                 <Text {...{ variant: Variant.h6, text: "Характеристики" }} />
               </Grid>
               <Grid item xs={6}>
                 <IconButton size="large" component="label" onClick={handleOpen}>
-                <Grid container direction="column" alignItems="center">
-                <PlaylistAddIcon />
-                <Text {...{ variant: Variant.caption, text: "Добавить" }} />
-              </Grid>
+                  <Grid container direction="column" alignItems="center">
+                    <PlaylistAddIcon />
+                    <Text {...{ variant: Variant.caption, text: "Добавить" }} />
+                  </Grid>
                 </IconButton>
                 <Box sx={{ flexGrow: 1 }} />
               </Grid>
             </Grid>
-                <HiddenDelete
-                {...{ items: characteristics, setItems: setCharacteristics }}
-              />
+            <HiddenDelete
+              {...{ items: characteristics, setItems: setCharacteristics }}
+            />
           </Toolbar>
         </AppBar>
       </Box>
@@ -127,11 +132,11 @@ export function CharacteristicModal({
   const [modalState, setModalState] = React.useState({ ...characteristic });
   return (
     <Modal
-
       open={open}
       onClose={() => {
-        setModalState({})
-        handleClose()}}
+        setModalState({});
+        handleClose();
+      }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -141,7 +146,7 @@ export function CharacteristicModal({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 360,     
+          width: 320,
           bgcolor: "background.paper",
           border: "2px solid #000",
           // boxShadow: 24,
@@ -183,42 +188,46 @@ export function CharacteristicModal({
                 setModalState((state) => ({ ...state, slotAmount })),
             }}
           />
-          <RowText
+          <DurationInput
             {...{
               label: "Продолжительность",
               defaultValue: characteristic ? characteristic.duration : "",
-              getText: (duration: string) =>
+              getData: (duration: string) =>
                 setModalState((state) => ({ ...state, duration })),
             }}
           />
-          <Amount
+          <Price
             {...{
               label: "Цена",
-              // max: 8,
-              min: 0,
-              defaultValue: characteristic ? characteristic.price : undefined,
-              getAmount: (price: number) =>
+              defaultValue: characteristic && characteristic.price,
+              getPrice: (price: number) =>
                 setModalState((state) => ({ ...state, price })),
             }}
           />
-          <RowText
+          <DateInput
             {...{
               label: "Дата цены",
               defaultValue: characteristic ? characteristic.priceData : "",
-              getText: (priceData: string) =>
+              getData: (priceData: string) =>
                 setModalState((state) => ({ ...state, priceData })),
             }}
           />
           <BasicButton
             btnText={"Сохранить"}
             onClick={() => {
-              if(modalState.name&&modalState.duration&&modalState.description&&modalState.price&&modalState.priceData&&modalState.slotAmount){
+              if (
+                modalState.name &&
+                modalState.duration &&
+                modalState.description &&
+                modalState.price &&
+                modalState.priceData &&
+                modalState.slotAmount
+              ) {
                 setCharacteristic(modalState);
-                setModalState({})
+                setModalState({});
                 handleClose();
-              }
-              else{
-                alert("Не все поля заполнены!")
+              } else {
+                alert("Не все поля заполнены!");
               }
             }}
           />
