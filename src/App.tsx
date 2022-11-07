@@ -37,7 +37,7 @@ function App() {
       <Box sx={{p:3}}>
 
       <BasicButton
-        btnText={"Кнопка для тестирование запросов к 1c"}
+        btnText={"Кнопка для тестирования запросов к 1c"}
         onClick={() => {
           getProviderAdventureListBody((data: object) => {
             console.log("data :>> ", data);
