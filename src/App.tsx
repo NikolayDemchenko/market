@@ -12,38 +12,6 @@ import BasicButton from "./Components/BaseComponents/Buttons/BasicButton";
 import { getAdventureList } from "./REST/AdventureMongoREST";
 
 function App() {
-  // const adv = {
-  //   id: "",
-  //   name: "",
-  //   img: "",
-  //   status: false,
-  //   images,
-  //   videos,
-  //   description: {
-  //     address: "",
-  //     info: "",
-  //     limitations: "",
-  //     phone: "",
-  //     preRegistration: false,
-  //     program: "",
-  //     connectedСalendar: false,
-  //     indivisibleVolume: true,
-  //     peopleAmount: 1,
-  //     seasonality: "январь, март",
-  //     slotSize: 2,
-  //     slotVolume: 3,
-  //   },
-  //   characteristics: [
-  //     {
-  //       name: "Всё включено",
-  //       description: "Всё включено",
-  //       duration: "Всё включено",
-  //       price: 5000,
-  //       priceData: "Всё включено",
-  //       slotAmount: 5,
-  //     },
-  //   ],
-  // };
 
   const [state, setState] = React.useState<TState>({ list: [] });
   React.useEffect(() => {
