@@ -13,7 +13,7 @@ import {
   styled,
   Toolbar,
 } from "@mui/material";
-import { TCharacteristic } from "../../../../types/provider";
+import { TCharacteristic } from "../../../../Model/types";
 import {
   Text,
   Variant,

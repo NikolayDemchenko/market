@@ -7,7 +7,7 @@ export default function MultilineText({
   getText,
 }: {
   label: string;
-  defaultValue: string;
+  defaultValue?: string;
   getText: Function;
 }) {
   const onChange = (event: { target: { value: any } }) => {

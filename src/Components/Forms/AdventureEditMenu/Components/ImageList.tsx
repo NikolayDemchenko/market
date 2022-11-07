@@ -7,7 +7,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import TableContainer from "@mui/material/TableContainer";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
 import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
-import { TAdventureImage } from "../../../../types/provider";
+import { TAdventureImage } from "../../../../Model/types";
 import {
   Text,
   Variant,

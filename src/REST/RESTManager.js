@@ -1,44 +1,43 @@
 import axios from 'axios';
 const url = 'http://localhost:8000';
 const get = async (requestName, params) => {
-	console.log(`%cget :>> ${requestName}`, 'color:#070');
+	console.log(`%cget request ${requestName} params :>>`, 'color:#700',params);
 	try {
 		const res = await axios({
 			method: 'get',
 			url: `${url}${requestName}`,
 			params,
 		});
-		// console.log('res.data', res.data);
+		console.log(`%cget response ${requestName}:>>`, 'color:#070', res)
 		return res.data;
 	} catch (e) {
 		console.error(e);
 	}
 };
 const post = async (requestName, data) => {
-	console.log(`%cpost :>> ${requestName}`, 'color:#700');
-	// console.log('data', data)
+	console.log(`%cpost request ${requestName} data :>>`, 'color:#700',data);
 	try {
 		const res = await axios({
 			method: 'post',
 			url: `${url}${requestName}`,
 			data,
 		});
-		console.log('response', res)
+		console.log(`%cpost response ${requestName}:>>`, 'color:#070', res)
 		return res.data;
 	} catch (e) {
 		console.error(e);
 	}
+	
 };
 const put = async (requestName, data) => {
-	console.log(`%cput :>> ${requestName}`, 'color:#007');
-	// console.log('data', data)
+	console.log(`%cput request ${requestName} data :>>`, 'color:#700',data);
 	try {
 		const res = await axios({
 			method: 'put',
 			url: `${url}${requestName}`,
 			data,
 		});
-		// console.log('res', res)
+		console.log(`%cput response ${requestName}:>>`, 'color:#070', res)
 		return res;
 	} catch (e) {
 		console.error(e);

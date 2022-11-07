@@ -14,18 +14,22 @@ type TDetails = {
   inn: string;
 };
 
-// Приключение
+// Общий стейт и сетстейт
+type TState = { list: TAdventure[]; adventure?: TAdventure };
+type TSetState = React.Dispatch<React.SetStateAction<TState>>;
 
+// Приключение
 type TAdventure = {
   id: string;
   name: string;
-  img: string;
   status: boolean;
-  description: TDescription;
+  description?: TDescription;
   images?: TAdventureImage[];
   videos?: TAdventureVideo[];
   characteristics?: TCharacteristic[];
+  checked?:boolean
 };
+// Блок описания
 type TDescription = {
   program: string;
   info: string;
@@ -40,6 +44,7 @@ type TDescription = {
   connectedСalendar: boolean;
   indivisibleVolume: boolean;
 };
+// Характеристика
 type TCharacteristic = {
   name: string;
   description: string;
@@ -47,7 +52,7 @@ type TCharacteristic = {
   duration: string;
   price: number;
   priceData: string;
-  checked?:boolean
+  checked?: boolean;
 };
 enum Monts {
   "январь" = "январь",
@@ -97,4 +102,6 @@ export type {
   TDescription,
   TAdventureVideo,
   TCharacteristic,
+  TState,
+  TSetState,
 };

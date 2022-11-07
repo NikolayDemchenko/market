@@ -10,49 +10,31 @@ import {
   TAdventureVideo,
   TCharacteristic,
   TDescription,
-} from "../../../types/provider";
+  TSetState,
+} from "../../../Model/types";
 import Description from "./Components/Description";
 import Characteristics from "./Components/Characteristics";
 import { Stack, Toolbar } from "@mui/material";
 import BasicButton from "../../BaseComponents/Buttons/BasicButton";
-import { createAdventure } from "../../../REST/AdventureREST";
+import { createAdventure,updateAdventure } from "../../../REST/AdventureMongoREST";
+export default function AdventureEditMenu({
+  adventure,
+  setState,
+}: {
+  adventure: TAdventure;
+  setState: TSetState;
+}) { 
+  const setAdventure = (adv: TAdventure) => {  
+    setState((state) => ({ list: { ...state!.list }, adventure: adv }));
+  };
+  const createAdv = (adventure: TAdventure) => {
+    console.log("adventure :>> ", adventure);
+   createAdventure(adventure, setState); 
 
-export default function AdventureEditMenu() {
-  const [adventure, setAdventureState] = React.useState<TAdventure>({
-    id: "",
-    name: "",
-    img: "",
-    status: false,
-    images,
-    videos,
-    description: {
-      address: "",
-      info: "",
-      limitations: "",
-      phone: "",
-      preRegistration: false,
-      program: "",
-      connectedСalendar: false,
-      indivisibleVolume: true,
-      peopleAmount: 1,
-      seasonality: "январь, март",
-      slotSize: 2,
-      slotVolume: 3,
-    },
-    characteristics: [
-      {
-        name: "Всё включено",
-        description: "Всё включено",
-        duration: "Всё включено",
-        price: 5000,
-        priceData: "Всё включено",
-        slotAmount: 5,
-      },
-    ],
-  });
-  const setAdventure = (adventure: TAdventure) => {
-    console.log('adventure :>> ', adventure);
-    setAdventureState(adventure);
+  };
+  const updateAdv = (adventure: TAdventure) => {
+    console.log("adventure :>> ", adventure);
+    updateAdventure(adventure,setState)
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -104,20 +86,17 @@ export default function AdventureEditMenu() {
         <BasicButton
           btnText={"Отмена"}
           onClick={() => {
-            // if(modalState.name&&modalState.duration&&modalState.description&&modalState.price&&modalState.priceData&&modalState.slotAmount){
-            //   setCharacteristic(modalState);
-            //   setModalState({})
-            //   handleClose();
-            // }
-            // else{
-            //   alert("Не все поля заполнены!")
-            // }
+            setState((state) => {
+              const { adventure, list } = state;
+              return { list };
+            });
           }}
         />
         <BasicButton
           btnText={"Сохранить"}
           onClick={() => {
-            createAdventure(adventure, setAdventure);
+            !adventure.id?console.log('Без ID :>> ' ):console.log('C ID :>> ' );
+            !adventure.id?createAdv(adventure):updateAdv(adventure);
           }}
         />
       </Stack>
@@ -125,70 +104,3 @@ export default function AdventureEditMenu() {
     </Box>
   );
 }
-
-const images = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    checked: false,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
-    title: "Sea star",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
-    title: "Bike",
-  },
-];
-const videos = [
-  {
-    video: "https://www.youtube.com/watch?v=a2DkRBnp4ns",
-    title: "",
-    checked: false,
-  },
-  {
-    video: "https://www.youtube.com/watch?v=5VK3fZsQtQE",
-    title: "",
-  },
-  {
-    video: "https://www.youtube.com/watch?v=FgvJH91a5K0",
-    title: "",
-  },
-];

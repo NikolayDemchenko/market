@@ -20,7 +20,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Avatar from "@mui/material/Avatar";
 import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
-import { TOption } from "../../../../../types/provider";
+import { TOption } from "../../../../../Model/types";
 import { List, Paper, styled } from "@mui/material";
 
 // Запрос к бд -> Получить и передать массив данных;

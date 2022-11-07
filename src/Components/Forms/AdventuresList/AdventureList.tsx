@@ -1,64 +1,112 @@
-import * as React from 'react';
-import {TAdventure } from "../../../types/provider";
-import AdventureListView from "./AdventureListView";
+import * as React from "react";
+import List from "@mui/material/List";
+import AdvListItem from "./AdventureListItem";
+import { TAdventure, TSetState } from "../../../Model/types";
+import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import AddIcon from "@mui/icons-material/Add";
+import AddTaskIcon from "@mui/icons-material/AddTask";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { AppBar, Grid, Stack, Toolbar } from "@mui/material";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
+import Box from "@mui/material/Box";
+import { removeAdventureById } from "../../../REST/AdventureMongoREST";
 
-
-export default function AdventureList() {
-  function getAdventureData() {
-    return adventures;
-  }
+export default function AdventureList({
+  adventures,
+  setState,
+}: {
+  adventures: TAdventure[];
+  setState: TSetState;
+}) {
+  // function getAdventureData() {
+    //   return adventures;
+    // }
 
   function onClickBtn(value: any) {
     console.log(value);
   }
 
-  function onClickItem() {
-    console.log('Нажали на приключение в списке.');
+  const setAdventure=(adventure:TAdventure)=> setState((state)=>({list:state.list,adventure})) 
+  function onClickItem(adventure:TAdventure) {
+    setAdventure(adventure)
+    console.log("Нажали на приключение в списке.");
+    // getAdventureById()
   }
 
-  function checkedToggle(value: { adventure: object, checked: boolean }) {
-    console.log(value);
+  function checkAdventure(adventure:TAdventure) {
+    setState({list:
+      adventures.map((_adventure) =>
+      _adventure === adventure ? { ..._adventure, checked: !_adventure.checked } : _adventure
+      )
+    });
   }
+
 
   return (
-    <AdventureListView { ...{
-        adventures: getAdventureData(), 
-        onClickBtn, 
-        onClickItem,
-        checkedToggle
-    } } />
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <AppBar color="inherit">
+          <Toolbar>
+            <Box sx={{ minWidth: "100%" }}>
+              <Text {...{ variant: Variant.h4, text: "Приключения" }} />
+              <BottomNavigation
+                showLabels
+                onChange={(event: React.SyntheticEvent, value: any) => {
+                  value();
+                }}
+              >
+                <BottomNavigationAction
+                  label="Добавить"
+                  icon={<AddIcon />}
+                  value={() => {
+                    setState(state=>({list:[...state.list], adventure:{name:"",status:false,id:"",}}));
+                    onClickBtn("Добавить");
+                  }}
+                />
+                <BottomNavigationAction
+                  label="Опубликовать"
+                  icon={<AddTaskIcon />}
+                  value={() => onClickBtn("Опубликовать")}
+                />
+                <BottomNavigationAction
+                  label="Снять с публикации"
+                  icon={<RemoveCircleOutlineIcon />}
+                  value={() => onClickBtn("Снять публикацию")}
+                />
+                <BottomNavigationAction
+                  label="Удалить"
+                  icon={<DeleteIcon />}
+                  value={() =>{ 
+                    adventures.forEach((adv)=>{
+                      console.log('adv.checked :>> ', adv.checked);
+                      adv.checked&&removeAdventureById(adv.id,setState)
+                    })
+                    onClickBtn("Удалить")}}
+                />
+              </BottomNavigation>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Grid>
+      <Grid item xs={12}>
+        {/* <List dense sx={{ width: "100%" }}> */}
+        <Box sx={{ pt: 10, bgcolor: "rgba(0, 0, 0, 0.12)" }}>
+          <Stack spacing={0.6}>
+            {adventures.map((adventure: TAdventure, key) => {
+              const labelId = `checkbox-list-secondary-label-${adventure.id}`;
+              return (
+                <AdvListItem
+                  {...{ adventure, labelId, onClickItem, checkAdventure, key }}
+                />
+              );
+            })}
+          </Stack>
+        </Box>
+        {/* </List> */}
+      </Grid>
+    </Grid>
   );
 }
-
-// Получаем из бд список приключений (скорее всего, массив объектов);
-let adventures: TAdventure[] = [
-    {
-        id: '0001',
-        name: 'Катание на квадроцикле',
-        img: '',
-        status: true,
-        description:{address:"",info:"",limitations:"",phone:"",preRegistration:false,program:"",connectedСalendar:false,indivisibleVolume:true,peopleAmount:1,seasonality:"январь, март",slotSize:2,slotVolume:3}
-    },
-    {
-        id: '0002',
-        name: 'Страйкбол',
-        img: '',
-        status: true,
-        description:{address:"",info:"",limitations:"",phone:"",preRegistration:false,program:"",connectedСalendar:false,indivisibleVolume:true,peopleAmount:1,seasonality:"январь, март",slotSize:2,slotVolume:3}
-    },
-    {
-        id: '0003',
-        name: 'Полёт в аэротрубе',
-        img: '',
-        status: false,
-        description:{address:"",info:"",limitations:"",phone:"",preRegistration:false,program:"",connectedСalendar:false,indivisibleVolume:true,peopleAmount:1,seasonality:"январь, март",slotSize:2,slotVolume:3}
-    },
-    {
-        id: '0004',
-        name: 'Свидание на крыше',
-        img: '',
-        status: true,
-        description:{address:"",info:"",limitations:"",phone:"",preRegistration:false,program:"",connectedСalendar:false,indivisibleVolume:true,peopleAmount:1,seasonality:"январь, март",slotSize:2,slotVolume:3}
-    },   
-];

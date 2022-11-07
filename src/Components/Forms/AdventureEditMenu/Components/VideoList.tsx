@@ -12,7 +12,7 @@ import {
 import TableContainer from "@mui/material/TableContainer";
 import Box from "@mui/material/Box";
 import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
-import { TAdventureVideo } from "../../../../types/provider";
+import { TAdventureVideo } from "../../../../Model/types";
 import {
   Text,
   Variant,

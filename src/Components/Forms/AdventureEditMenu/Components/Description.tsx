@@ -7,7 +7,7 @@ import PhoneInput from "../../../BaseComponents/Inputs/MaskedInputs";
 import Stack from "@mui/material/Stack";
 import MultilineInput from "../../../BaseComponents/Inputs/MultilineText";
 import SignedCheckBox from "../../../BaseComponents/Inputs/SignedCheckBox";
-import { TDescription } from "../../../../types/provider";
+import { TDescription } from "../../../../Model/types";
 import Box from "@mui/material/Box";
 import Tooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
 import { Toolbar } from "@mui/material";
@@ -29,7 +29,7 @@ export default function Description({
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <MultilineInput
           {...{
-            defaultValue: "",
+            defaultValue: description?.program,
             getText: (program: string) =>
               setDescription({ ...description, program }),
             label: "Программа",
@@ -40,7 +40,7 @@ export default function Description({
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <MultilineInput
           {...{
-            defaultValue: "",
+            defaultValue: description?.info,
             getText: (info: string) =>
               setDescription({
                 ...description,
@@ -54,11 +54,11 @@ export default function Description({
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <MultilineInput
           {...{
-            defaultValue: "",
-            getText: (limitation: string) =>
+            defaultValue: description?.limitations,
+            getText: (limitations: string) =>
               setDescription({
                 ...description,
-                limitation,
+                limitations,
               }),
             label: "Ограничения",
           }}
@@ -70,7 +70,7 @@ export default function Description({
           label: "Количество участников",
           // max: 8,
           // min: 1,
-          // defaultValue: description?.peopleAmount,
+          defaultValue: description?.peopleAmount,
           getAmount: (peopleAmount: number) =>
             setDescription({
               ...description,
@@ -85,14 +85,14 @@ export default function Description({
               ...description,
               preRegistration: !description?.preRegistration,
             }),
-          checked: false,
+          checked: description?.preRegistration,
           checkBoxText: "Предварительная запись",
         }}
       />
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <MultilineInput
           {...{
-            defaultValue: "",
+            defaultValue: description?.seasonality,
             getText: (seasonality: string) =>
               setDescription({ ...description, seasonality }),
             label: "Сезонность",
@@ -103,7 +103,7 @@ export default function Description({
 
       <MultilineInput
         {...{
-          defaultValue: "",
+          defaultValue: description?.address,
           getText: (address: string) =>
             setDescription({ ...description, address }),
           label: "Адрес",
@@ -112,13 +112,14 @@ export default function Description({
       <PhoneInput
         {...{
           label: "Контакты",
-          defaultValue: "",
+          defaultValue: description?.phone,
           getPhoneNumber: (phone: string) =>
             setDescription({ ...description, phone }),
         }}
       />
       <Amount
         {...{
+          defaultValue: description?.slotVolume,
           label: "Объём слота",
           getAmount: (slotVolume: number) =>
             setDescription({
@@ -129,12 +130,24 @@ export default function Description({
       />
       <Amount
         {...{
+          defaultValue: description?.slotSize,
           label: "Размер слота",
           getAmount: (slotSize: number) =>
             setDescription({
               ...description,
               slotSize,
             }),
+        }}
+      />
+            <SignedCheckBox
+        {...{
+          getCheck: () =>
+            setDescription({
+              ...description,
+              indivisibleVolume: !description?.indivisibleVolume,
+            }),
+          checked: description?.indivisibleVolume,
+          checkBoxText: "Не делимый объем",
         }}
       />
     </Stack>

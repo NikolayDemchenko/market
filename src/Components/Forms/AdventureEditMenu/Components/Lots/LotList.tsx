@@ -16,7 +16,7 @@ import MultilineInput from "../../../../BaseComponents/Inputs/MultilineText";
 import TimeWithMinute from "../../../../BaseComponents/Inputs/TimeWithMinute";
 import { Box } from "@mui/system";
 import { List, Paper, styled } from "@mui/material";
-import {TAdventureLot } from "../../../../../types/provider";
+import {TAdventureLot } from "../../../../../Model/types";
 // Запрос к бд -> Получить и передать массив данных;
 let options = ["5 минут", "10 минут", "15 минут", "20 минут"];
 
