@@ -3,7 +3,9 @@ import {
   Text,
   Variant,
 } from "../../../BaseComponents/DisplayingComponents/Text";
-import PhoneInput from "../../../BaseComponents/Inputs/MaskedInputs";
+import PhoneInput, {
+  DurationInput,
+} from "../../../BaseComponents/Inputs/MaskedInputs";
 import Stack from "@mui/material/Stack";
 import MultilineInput from "../../../BaseComponents/Inputs/MultilineText";
 import SignedCheckBox from "../../../BaseComponents/Inputs/SignedCheckBox";
@@ -12,13 +14,14 @@ import Box from "@mui/material/Box";
 import Tooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
 import { Toolbar } from "@mui/material";
 import Amount from "../../../BaseComponents/Inputs/Amount";
+import { MontsSelect } from "../../../BaseComponents/Inputs/MontsSelect";
 
 export default function Description({
   description,
   setDescription,
 }: {
-  description?: TDescription;
-  setDescription: Function;
+  description: TDescription;
+  setDescription: (description: TDescription) => void;
 }) {
   // const {slotSize}:TDescription=description
   return (
@@ -51,6 +54,17 @@ export default function Description({
         />
         <Tooltip title="Важная информация о приключении" />
       </Box>
+      <DurationInput
+        {...{
+          label: "Продолжительность",
+          defaultValue: description?.duration,
+          getData: (duration: string) =>
+            setDescription({
+              ...description,
+              duration,
+            }),
+        }}
+      />
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <MultilineInput
           {...{
@@ -70,36 +84,14 @@ export default function Description({
           label: "Количество участников",
           // max: 8,
           // min: 1,
-          defaultValue: description?.peopleAmount,
-          getAmount: (peopleAmount: number) =>
+          defaultValue: description?.participantsQuantity,
+          getAmount: (participantsQuantity: number) =>
             setDescription({
               ...description,
-              peopleAmount,
+              participantsQuantity,
             }),
         }}
       />
-      <SignedCheckBox
-        {...{
-          getCheck: () =>
-            setDescription({
-              ...description,
-              preRegistration: !description?.preRegistration,
-            }),
-          checked: description?.preRegistration,
-          checkBoxText: "Предварительная запись",
-        }}
-      />
-      <Box sx={{ display: "flex", alignItems: "center" }}>
-        <MultilineInput
-          {...{
-            defaultValue: description?.seasonality,
-            getText: (seasonality: string) =>
-              setDescription({ ...description, seasonality }),
-            label: "Сезонность",
-          }}
-        />
-        <Tooltip title="Укажите месяцы через запятую" />
-      </Box>
 
       <MultilineInput
         {...{
@@ -139,7 +131,31 @@ export default function Description({
             }),
         }}
       />
-            <SignedCheckBox
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <MontsSelect
+          {...{
+            monts: description.seasonality,
+            getMonts: (seasonality: string) =>
+              setDescription({
+                ...description,
+                seasonality,
+              }),
+          }}
+        />
+        <Tooltip title="Нажмите и выберите месяцы" />
+      </Box>
+      <SignedCheckBox
+        {...{
+          getCheck: () =>
+            setDescription({
+              ...description,
+              preRegistration: !description?.preRegistration,
+            }),
+          checked: description?.preRegistration,
+          checkBoxText: "Предварительная запись",
+        }}
+      />
+      <SignedCheckBox
         {...{
           getCheck: () =>
             setDescription({
@@ -148,6 +164,30 @@ export default function Description({
             }),
           checked: description?.indivisibleVolume,
           checkBoxText: "Не делимый объем",
+        }}
+      />
+      <SignedCheckBox
+        {...{
+          getCheck: () =>
+            setDescription({
+              ...description,
+              possibilitySellingCertificate:
+                !description?.possibilitySellingCertificate,
+            }),
+          checked: description?.possibilitySellingCertificate,
+          checkBoxText: "Возможность продажи сертификата",
+        }}
+      />
+      <SignedCheckBox
+        {...{
+          getCheck: () =>
+            setDescription({
+              ...description,
+              autofill: !description?.autofill,
+            }),
+          checked: description?.autofill,
+          checkBoxText:
+            "Автоматическое заполнение календаря регламентным заданием",
         }}
       />
     </Stack>

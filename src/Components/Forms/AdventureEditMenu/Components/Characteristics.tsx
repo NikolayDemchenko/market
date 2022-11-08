@@ -178,24 +178,23 @@ export function CharacteristicModal({
           />
           <Amount
             {...{
-              label: "Количество участников",
-              // max: 8,
+              label: "Количество слотов", 
               min: 1,
               defaultValue: characteristic
-                ? characteristic.slotAmount
+                ? characteristic.slotQuantity
                 : undefined,
-              getAmount: (slotAmount: number) =>
-                setModalState((state) => ({ ...state, slotAmount })),
+              getAmount: (slotQuantity: number) =>
+                setModalState((state) => ({ ...state, slotQuantity })),
             }}
           />
-          <DurationInput
+          {/* <DurationInput
             {...{
               label: "Продолжительность",
               defaultValue: characteristic ? characteristic.duration : "",
               getData: (duration: string) =>
                 setModalState((state) => ({ ...state, duration })),
             }}
-          />
+          /> */}
           <Price
             {...{
               label: "Цена",
@@ -207,9 +206,9 @@ export function CharacteristicModal({
           <DateInput
             {...{
               label: "Дата цены",
-              defaultValue: characteristic ? characteristic.priceData : "",
-              getData: (priceData: string) =>
-                setModalState((state) => ({ ...state, priceData })),
+              defaultValue: characteristic ? characteristic.priceDate : "",
+              getData: (priceDate: string) =>
+                setModalState((state) => ({ ...state, priceDate })),
             }}
           />
           <BasicButton
@@ -217,11 +216,11 @@ export function CharacteristicModal({
             onClick={() => {
               if (
                 modalState.name &&
-                modalState.duration &&
+                // modalState.duration &&
                 modalState.description &&
                 modalState.price &&
-                modalState.priceData &&
-                modalState.slotAmount
+                modalState.priceDate &&
+                modalState.slotQuantity
               ) {
                 setCharacteristic(modalState);
                 setModalState({});
@@ -259,6 +258,7 @@ export function Characteristic({
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   return (
     <Item elevation={1}>
       <ListItem
@@ -300,20 +300,20 @@ export function Characteristic({
             />
             <NamedText
               {...{
-                name: "Количество участников :",
+                name: "Количество слотов :",
                 nameVariant: Variant.button,
-                text: `${characteristic.slotAmount}`,
+                text: `${characteristic.slotQuantity}`,
                 textVariant: Variant.body1,
               }}
             />
-            <NamedText
+            {/* <NamedText
               {...{
                 name: "Продолжительность :",
                 nameVariant: Variant.button,
                 text: characteristic.duration,
                 textVariant: Variant.body1,
               }}
-            />
+            /> */}
             <NamedText
               {...{
                 name: "Цена :",
@@ -326,7 +326,7 @@ export function Characteristic({
               {...{
                 name: "Дата цены :",
                 nameVariant: Variant.button,
-                text: characteristic.priceData,
+                text: characteristic.priceDate,
                 textVariant: Variant.body1,
               }}
             />

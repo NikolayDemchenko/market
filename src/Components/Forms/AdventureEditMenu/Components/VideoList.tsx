@@ -87,13 +87,13 @@ export default function VideoListView({
         >
           {videos.map((item) => (
             <ImageListItem
-              key={item.video}
+              key={item.url}
               onClick={() => clickVideoHandler(item)}
               sx={{ m: 0.5, width: 286, maxHeight: 160 }}
             >
               <CheckedComponentWrapper {...{ checked: item.checked }} />
               <ReactPlayer
-                url={item.video}
+                url={item.url}
                 width={"286px"}
                 height={"160px"}
                 controls={false}

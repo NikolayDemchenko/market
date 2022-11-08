@@ -14,6 +14,7 @@ import {
 } from "../../../BaseComponents/DisplayingComponents/Text";
 import { HiddenDelete } from "../../../BaseComponents/Buttons/HiddenDelete";
 import Grid from "@mui/material/Grid";
+import { toBase64 } from './imageToBase64';
 
 export default function ImageListView({
   images = [],
@@ -23,6 +24,7 @@ export default function ImageListView({
   setImages: (images: TAdventureImage[]) => void;
 }) {
   const addHandler = (event: any) => {
+    toBase64(event);
     console.log("event :>> ", event);
     setImages([
       ...images,

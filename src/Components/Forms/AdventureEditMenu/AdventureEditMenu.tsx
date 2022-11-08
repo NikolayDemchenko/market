@@ -16,7 +16,7 @@ import Description from "./Components/Description";
 import Characteristics from "./Components/Characteristics";
 import { Stack, Toolbar } from "@mui/material";
 import BasicButton from "../../BaseComponents/Buttons/BasicButton";
-import { createAdventure,updateAdventure } from "../../../REST/AdventureMongoREST";
+import { createAdventure,updateAdventure } from "../../../REST/AdventureREST1C";
 export default function AdventureEditMenu({
   adventure,
   setState,
