@@ -3,13 +3,41 @@ import {
   TAdventure_1C,
   TCharacteristic,
   TCharacters_1C,
-} from "../Model/types";
+  TPosition_1C,
+} from "../../Model/types";
+import axios from 'axios';
 
-export async function rest1C(
+const url = 'http://localhost:8000';
+
+interface Irest1c {
+  ( methodName: string,
+    requestBody: object,
+    responseHandler: Function): void;
+}
+export const crossRest1c:Irest1c = async (
   methodName: string,
   requestBody: object,
   responseHandler: Function
-) {
+) => {
+	console.log(`%cpost CROSS request ${methodName} :>>`, "background: #9cf; ",requestBody);
+	try {
+		const res = await axios({
+			method: 'post',
+			url: `${url}/rest1c`,
+			data:{methodName,requestBody},
+		});
+		console.log(`%cpost CROSS response ${methodName}:>>`, "background: #cfc; ", res.data)
+		responseHandler(res.data);
+	} catch (e) {
+		console.error(e);
+	}
+	
+};
+export const rest1c:Irest1c=async(
+  methodName: string,
+  requestBody: object,
+  responseHandler: Function
+) =>{
   // Универсальный метод запросов к 1С
   console.log(
     `%c ${methodName} ----> request :>>`,
@@ -31,12 +59,20 @@ export async function rest1C(
   };
 }
 
+
+
+export class RestSelector{
+  private rest1C
+  constructor(rest1C:Function) {
+    this.rest1C=rest1C
+    
+  }
 // Получение списка номенклатур по конкретному поставщику: 15.LIST_POSITION.
-const getProviderAdventureListBody = (
+getProviderAdventureListBody = (
   callback: Function,
   GUID_PROVIDER: string
 ) => {
-  rest1C(
+  this.rest1C(
     "LIST_POSITION",
     {
       GUID_PROVIDER,
@@ -51,8 +87,8 @@ const getProviderAdventureListBody = (
 // }
 
 // Возвращает информацию по заданной номенклатуре: 16.GET_INFO_POSITION.
-const getAdventureDataBody = (callback: Function, ADVENTURE_GUID: string) => {
-  rest1C(
+getAdventureDataBody = (callback: Function, ADVENTURE_GUID: string) => {
+  this.rest1C(
     "GET_INFO_POSITION",
     {
       ADVENTURE_GUID,
@@ -67,14 +103,15 @@ const getAdventureDataBody = (callback: Function, ADVENTURE_GUID: string) => {
 
 // Редактирует текущую номенклатуру, либо создает новую и записывает новый guid
 // номенклатуры: 17.RECORD_INFO_POSITION.
-const getRecordAdventureInfoBody = (
+createAdventure = (
   // Вызываем, например, при нажатии на кнопку 1С;
-  callback: Function,
-  body: object
+  body: object,
+  callback: Function
 ) => {
   // ADVENTURE_LINK: "",
-  rest1C("RECORD_INFO_POSITION", body, callback);
+  this.rest1C("RECORD_INFO_POSITION", body, callback);
 };
+
 // Пример запроса:
 //     "PROVIDER_GUID": "51b1096a-3cd5-11ec-8122-001999b9620c",
 //     "ADVENTURE_GUID": "6d5b172f-31b0-11ec-8122-001999b9620c",
@@ -155,29 +192,28 @@ const getRecordAdventureInfoBody = (
 //     ]
 // };
 
-const getTransferImageBody = (callback: Function, ADVENTURE_GUID: string) => {
-  rest1C(
+sendImages = ( ADVENTURE_GUID: string, PHOTOS: object[],callback: Function) => {
+  console.log('PHOTOS :>> ', PHOTOS);
+  this.rest1C(
     "TRANSFER_FILE",
     {
       ADVENTURE_GUID,
-      PHOTOS: [
-        {
-          NAME: "",
-          EXTANTION: "",
-          PHOTO: "", // Строка Base64;
-        },
-      ],
+      PHOTOS,
     },
     callback
   );
 };
 
-export {
-  getProviderAdventureListBody,
-  getAdventureDataBody,
-  getRecordAdventureInfoBody,
-  getTransferImageBody,
+getImages = (callback: Function, ADVENTURE_GUID: string) => {
+  this.rest1C(
+    "GET_ADVENTURE_IMAGE_LIST",
+    {
+      ADVENTURE_GUID,
+    },
+    callback
+  );
 };
+}
 
 export const convertTo1C = (adventure: TAdventure) => {
   // ADVENTURE_LINK: "",
@@ -196,7 +232,7 @@ export const convertTo1C = (adventure: TAdventure) => {
     slotSize,
     indivisibleVolume,
     possibilitySellingCertificate,
-    autofill,
+    autofill,duration
   } = description;
   const adventureBody: TAdventure_1C = {
     PROVIDER_GUID: providerId,
@@ -208,7 +244,7 @@ export const convertTo1C = (adventure: TAdventure) => {
     PARTICIPANTS_QUANTITY: `${participantsQuantity}`,
     PRE_RECORDING: preRegistration,
     SEASONALITY: seasonality,
-    ADVENTURE_DURATION: "1 час",
+    ADVENTURE_DURATION: duration,
     ADDRESS: address,
     PHONE: phone,
     POSSIBILITY_SELLING_CERTIFICATE: possibilitySellingCertificate,
@@ -220,10 +256,10 @@ export const convertTo1C = (adventure: TAdventure) => {
     CHARACTERS: characteristics.map(
       ({ id, name, description, slotQuantity, price, priceDate }) => {
         const charact: TCharacters_1C = {
-          CHARACTER_GUID: id,
+          CHARACTER_GUID: id||"",
           CHARACTER_NAME: name,
           CHARACTER_DESCRITPION: description,
-          SLOT_QUANTITY: `${slotQuantity}`,
+          SLOT_QUANTITY: slotQuantity,
           CHARACTER_PRICE: price,
           PRICE_START_DATE: priceDate,
         };
@@ -300,4 +336,41 @@ export const convert1CToReact = (adventure_1c: TAdventure_1C) => {
     ),
   };
   return reactAdventure;
+};
+
+export const convert1CPositionTo1CAdventure = (position_1c: TPosition_1C) => {
+  const { GUID, ACTIVE, GUID_PROVIDER, NAME, Name_POVIDER }: TPosition_1C =
+  position_1c;
+
+  const adventureBody: TAdventure_1C = {
+    PROVIDER_GUID: GUID_PROVIDER,
+    ADVENTURE_GUID: GUID,
+    ADVENTURE_NAME: NAME,
+    ADVENTURE_PROGRAM: "",
+    IMPORTANT_INFO: "",
+    LIMITATIONS: "",
+    PARTICIPANTS_QUANTITY: "",
+    PRE_RECORDING: false,
+    SEASONALITY: "",
+    ADVENTURE_DURATION: "",
+    ADDRESS: "",
+    PHONE: "",
+    POSSIBILITY_SELLING_CERTIFICATE: false,
+    SLOT_VOLUME: 0, // Максимальное количество билетов;
+    SLOT_SIZE: 0, // 10 минут, 30 минут и т.д.;
+    AUTOFILL: false,
+    INDIVISIBLE_SLOT_VOLUME: false,
+    VIDEO_LIST: [], // Массив url;
+    CHARACTERS: [
+      {
+        CHARACTER_GUID: "",
+        CHARACTER_NAME: "",
+        CHARACTER_DESCRITPION: "",
+        SLOT_QUANTITY: 0,
+        CHARACTER_PRICE: 0,
+        PRICE_START_DATE: "",
+      },
+    ],
+  };
+  return adventureBody;
 };

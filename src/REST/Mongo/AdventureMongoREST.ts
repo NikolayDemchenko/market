@@ -1,15 +1,18 @@
-import { IAdventureREST } from "../Model/Interfaces";
-import { TAdventure, TSetState } from "../Model/types";
+import { IAdventureREST } from "../../Model/Interfaces";
+import { TAdventure, TSetState, TState } from "../../Model/types";
 import { RESTManager } from "./RESTManager";
 
 const { getCollection, getDocById, createDoc, updateDoc, removeDocById } =
   RESTManager("adventures");
 
-class AdventureMongoREST implements IAdventureREST {
-
+export class AdventureMongoREST implements IAdventureREST {
+  private providerId;
+  constructor(providerId: string) {
+    this.providerId = providerId;
+  }
 
   getAdventureList = (setState: TSetState) =>{
-    getCollection().then((list) => {
+    getCollection(this.providerId).then((list) => {
       setState({
         list: list.map((adv: any) => {
           const { _id, ...adventure } = adv;
@@ -30,14 +33,14 @@ class AdventureMongoREST implements IAdventureREST {
     });
   };
 
-  createAdventure = (adventure: TAdventure, setState: TSetState) => {
+  createAdventure = ({adventure}: TState, setState: TSetState) => {
     createDoc(adventure).then((data) => {
       this.getAdventureList(setState);
     });
   };
 
-  updateAdventure = (adventure: TAdventure, setState: TSetState) => {
-    const { id, ..._adventure } = adventure;
+  updateAdventure = ({adventure}: TState, setState: TSetState) => {
+    const { id, ..._adventure } = adventure!;
     updateDoc({ ..._adventure, _id: id }).then((adv) => {
       this.getAdventureList(setState);
     });
@@ -48,17 +51,3 @@ class AdventureMongoREST implements IAdventureREST {
     });
   };
 }
-const {
-  getAdventureList,
-  getAdventureById,
-  createAdventure,
-  updateAdventure,
-  removeAdventureById,
-} = new AdventureMongoREST();
-export {
-  getAdventureList,
-  getAdventureById,
-  createAdventure,
-  updateAdventure,
-  removeAdventureById,
-};

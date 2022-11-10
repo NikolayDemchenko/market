@@ -29,7 +29,7 @@ type TDetails = {
 
 // Общий стейт и сетстейт
 type TState = { list: TAdventure[]; adventure?: TAdventure };
-type TSetState = React.Dispatch<React.SetStateAction<TState>>;
+type TSetState = React.Dispatch<React.SetStateAction<TState|undefined>>;
 
 // Приключение
 type TAdventure = {
@@ -76,7 +76,13 @@ type TCharacteristic = {
 type TAdventureImage = {
   img: string;
   title: string;
+  requestData: TImageRequestData;
   checked?: boolean;
+};
+type TImageRequestData = {
+  imgBase64: string;
+  imgName: string;
+  imgExtension: string;
 };
 type TAdventureVideo = {
   url: string;
@@ -84,6 +90,13 @@ type TAdventureVideo = {
   checked?: boolean;
 };
 
+type TPosition_1C = {
+  GUID_PROVIDER: string;
+  Name_POVIDER: string;
+  GUID: string;
+  NAME: string;
+  ACTIVE: boolean;
+};
 type TAdventure_1C = {
   PROVIDER_GUID: string;
   ADVENTURE_GUID: string;
@@ -106,10 +119,10 @@ type TAdventure_1C = {
   CHARACTERS: TCharacters_1C[];
 };
 type TCharacters_1C = {
-  CHARACTER_GUID?: string;
+  CHARACTER_GUID: string;
   CHARACTER_NAME: string;
   CHARACTER_DESCRITPION: string;
-  SLOT_QUANTITY: string;
+  SLOT_QUANTITY: number;
   CHARACTER_PRICE: number;
   PRICE_START_DATE: string;
 };
@@ -136,9 +149,11 @@ export type {
   TAdventure_1C,
   TCharacters_1C,
   TAdventureImage,
+  TImageRequestData,
   TDescription,
   TAdventureVideo,
   TCharacteristic,
   TState,
   TSetState,
+  TPosition_1C,
 };

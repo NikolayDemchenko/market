@@ -52,8 +52,8 @@ export function MontsSelect({
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        // aria-labelledby="modal-modal-title"
+        // aria-describedby="modal-modal-description"
       >
         <Box
           sx={{
@@ -61,14 +61,12 @@ export function MontsSelect({
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 360,
-            bgcolor: "background.paper",
-            border: "2px solid #000",
+            bgcolor: "background.paper",       
             boxShadow: 24,
             p: 4,
           }}
         >
-          <Sheet sx={{ width: 360, mb: 2, borderRadius: "sm" }}>
+          <Sheet sx={{ width: "320px", mb: 2, borderRadius: "sm" }}>
             <Toolbar>
               <Text
                 {...{ text: "Выберите месяцы", variant: Variant.h6 }}

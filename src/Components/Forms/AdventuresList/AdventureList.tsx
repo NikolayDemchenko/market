@@ -6,6 +6,7 @@ import {
   TCharacteristic,
   TDescription,
   TSetState,
+  TState,
 } from "../../../Model/types";
 import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
 import BottomNavigation from "@mui/material/BottomNavigation";
@@ -17,16 +18,17 @@ import { AppBar, Grid, Stack, TableContainer, Toolbar } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 import Box from "@mui/material/Box";
-import { removeAdventureById,getAdventureById } from "../../../REST/AdventureREST1C";
+import { removeAdventureById,getAdventureById } from "../../../REST/rest";
 
 export default function AdventureList({
-  adventures,
+  state,
   setState,
 }: {
-  adventures: TAdventure[];
+  state: TState;
   setState: TSetState;
 }) {
 
+const {list}=state
   function onClickBtn(value: any) {
     console.log(value);
   }
@@ -40,7 +42,7 @@ export default function AdventureList({
 
   function checkAdventure(adventure: TAdventure) {
     setState({
-      list: adventures.map((_adventure) =>
+      list: list.map((_adventure) =>
         _adventure === adventure
           ? { ..._adventure, checked: !_adventure.checked }
           : _adventure
@@ -51,7 +53,7 @@ const adventure:TAdventure= {
   name: "",
   status: false,
   id: "",
-  providerId: adventures[0].providerId,
+  providerId: list[0].providerId,
   description: {
     program: "",
     info: "",
@@ -98,7 +100,7 @@ const adventure:TAdventure= {
                 icon={<AddIcon />}
                 value={() => {
                   setState((state) => ({
-                    list: [...state.list],
+                    list: [...state!.list],
                     adventure,
                   }));
                   onClickBtn("Добавить");
@@ -118,7 +120,7 @@ const adventure:TAdventure= {
                 label="Удалить"
                 icon={<DeleteIcon />}
                 value={() => {
-                  adventures.forEach((adv) => {
+                  list.forEach((adv) => {
                     console.log("adv.checked :>> ", adv.checked);
                     adv.checked && removeAdventureById(adv.id, setState);
                   });
@@ -134,7 +136,7 @@ const adventure:TAdventure= {
         <TableContainer sx={{ height: 600 }}>
           <Box component="main" sx={{ p: 0.5, bgcolor: "rgba(0, 0, 0, 0.12)" }}>
             <Stack spacing={0.6}>
-              {adventures.map((adventure: TAdventure, key) => {
+              {list.map((adventure: TAdventure, key) => {
                 const labelId = `checkbox-list-secondary-label-${adventure.id}`;
                 return (
                   <AdvListItem

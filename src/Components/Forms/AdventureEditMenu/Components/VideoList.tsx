@@ -1,14 +1,7 @@
 import * as React from "react";
 import ReactPlayer from "react-player";
 import ImageListItem from "@mui/material/ImageListItem";
-import {
-  AppBar,
-  Grid,
-  IconButton,
-  Modal,
-  Stack,
-  Toolbar,
-} from "@mui/material";
+import { AppBar, Grid, IconButton, Modal, Stack, Toolbar } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Box from "@mui/material/Box";
 import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
@@ -26,14 +19,15 @@ export default function VideoListView({
   setVideos,
 }: {
   videos?: TAdventureVideo[];
-  setVideos: Function;
+  setVideos: (videos:TAdventureVideo[])=>void;
 }) {
-  const addHandler = (url: string) => {
+  console.log("videos :>> ", videos);
+  const getVideoUrl = (url: string) => {
     setVideos([
       ...videos,
       {
-        video: url,
-        title: "New video",
+        url,
+        title: "",
       },
     ]);
   };
@@ -46,9 +40,6 @@ export default function VideoListView({
     );
   };
 
-  const getVideoUrl = (url: string) => {
-    addHandler(url);
-  };
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -72,7 +63,7 @@ export default function VideoListView({
                 <Box sx={{ flexGrow: 1 }} />
               </Grid>
             </Grid>
-                <HiddenDelete {...{ items: videos, setItems: setVideos }} />
+            <HiddenDelete {...{ items: videos, setItems: setVideos }} />
           </Toolbar>
         </AppBar>
       </Box>
@@ -85,22 +76,25 @@ export default function VideoListView({
             bgcolor: "background.paper",
           }}
         >
-          {videos.map((item) => (
-            <ImageListItem
-              key={item.url}
-              onClick={() => clickVideoHandler(item)}
-              sx={{ m: 0.5, width: 286, maxHeight: 160 }}
-            >
-              <CheckedComponentWrapper {...{ checked: item.checked }} />
-              <ReactPlayer
-                url={item.url}
+          {videos.map((video) => {
+            console.log('video.url :>> ', video.url);
+            return (
+              <ImageListItem
+                key={video.url}
+                onClick={() => clickVideoHandler(video)}
+                sx={{ m: 0.5, width: 286, maxHeight: 160 }}
+              >
+                <CheckedComponentWrapper {...{ checked: video.checked }} />          
+                <ReactPlayer       
+                url={video.url}
                 width={"286px"}
                 height={"160px"}
                 controls={false}
                 style={{ pointerEvents: "none" }}
               />
-            </ImageListItem>
-          ))}
+              </ImageListItem>
+            );
+          })}
         </Box>
       </TableContainer>
     </>

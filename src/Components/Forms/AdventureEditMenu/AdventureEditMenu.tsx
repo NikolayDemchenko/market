@@ -11,30 +11,36 @@ import {
   TCharacteristic,
   TDescription,
   TSetState,
+  TState,
 } from "../../../Model/types";
 import Description from "./Components/Description";
 import Characteristics from "./Components/Characteristics";
 import { Stack, Toolbar } from "@mui/material";
 import BasicButton from "../../BaseComponents/Buttons/BasicButton";
-import { createAdventure,updateAdventure } from "../../../REST/AdventureREST1C";
+import {
+  createAdventure,
+  updateAdventure,
+  getAdventureList,
+} from "../../../REST/rest";
 export default function AdventureEditMenu({
-  adventure,
+  state,
   setState,
 }: {
-  adventure: TAdventure;
+  state: TState;
   setState: TSetState;
-}) { 
-  const setAdventure = (adv: TAdventure) => {  
+}) {
+
+  const {adventure}=state
+  const setAdventure = (adv: TAdventure) => {
     setState((state) => ({ list: { ...state!.list }, adventure: adv }));
   };
   const createAdv = (adventure: TAdventure) => {
     console.log("adventure :>> ", adventure);
-   createAdventure(adventure, setState); 
-
+    createAdventure(state, setState);
   };
   const updateAdv = (adventure: TAdventure) => {
     console.log("adventure :>> ", adventure);
-    updateAdventure(adventure,setState)
+    updateAdventure(state, setState);
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -47,38 +53,38 @@ export default function AdventureEditMenu({
       <RowText
         {...{
           label: "Название",
-          defaultValue: adventure.name,
-          getText: (name: string) => setAdventure({ ...adventure, name }),
+          defaultValue: adventure!.name,
+          getText: (name: string) => setAdventure({ ...adventure!, name }),
         }}
       />
       <Description
         {...{
-          description: adventure.description,
+          description: adventure!.description,
           setDescription: (description: TDescription) =>
-            setAdventure({ ...adventure, description }),
+            setAdventure({ ...adventure!, description }),
         }}
       ></Description>
       <ImageListView
         {...{
-          images: adventure.images,
+          images: adventure!.images,
           setImages: (images: TAdventureImage[]) =>
-            setAdventure({ ...adventure, images }),
+            setAdventure({ ...adventure!, images }),
         }}
       ></ImageListView>
       <VideoListView
         {...{
-          videos: adventure.videos,
+          videos: adventure!.videos,
           setVideos: (videos: TAdventureVideo[]) => {
-            setAdventure({ ...adventure, videos });
+            setAdventure({ ...adventure!, videos });
           },
         }}
       ></VideoListView>
       <Characteristics
         {...{
-          characteristics: adventure.characteristics,
+          characteristics: adventure!.characteristics,
           setCharacteristics: (characteristics: TCharacteristic[]) => {
             console.log("characteristics :>> ", characteristics);
-            setAdventure({ ...adventure, characteristics });
+            setAdventure({ ...adventure!, characteristics });
           },
         }}
       ></Characteristics>
@@ -86,17 +92,16 @@ export default function AdventureEditMenu({
         <BasicButton
           btnText={"Отмена"}
           onClick={() => {
-            setState((state) => {
-              const { adventure, list } = state;
-              return { list };
-            });
+            getAdventureList(setState);
           }}
         />
         <BasicButton
           btnText={"Сохранить"}
           onClick={() => {
-            !adventure.id?console.log('Без ID :>> ' ):console.log('C ID :>> ' );
-            !adventure.id?createAdv(adventure):updateAdv(adventure);
+            !adventure!.id
+              ? console.log("Без ID :>> ")
+              : console.log("C ID :>> ");
+            !adventure!.id ? createAdv(adventure!) : updateAdv(adventure!);
           }}
         />
       </Stack>

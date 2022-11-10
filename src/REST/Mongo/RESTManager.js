@@ -14,6 +14,7 @@ const get = async (requestName, params) => {
 		console.error(e);
 	}
 };
+
 const post = async (requestName, data) => {
 	console.log(`%cpost request ${requestName} data :>>`, 'color:#700',data);
 	try {
@@ -50,7 +51,7 @@ export const RESTManager = (collectionName) => {
 		post,
 		put,
 		// Возвращает коллекцию
-		getCollection: () => get(`/${collectionName}/getCollection`),
+		getCollection: (parent_id) => get(`/${collectionName}/getCollection`, { parent_id }),
 		// Возвращает массив уникальных значений указанного поля
 		getUniqueValues: (fieldName) => get(`/${collectionName}/getUniqueValues`, { fieldName }),
 		// Возвращает документ по id

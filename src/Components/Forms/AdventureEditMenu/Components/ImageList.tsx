@@ -7,7 +7,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import TableContainer from "@mui/material/TableContainer";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
 import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
-import { TAdventureImage } from "../../../../Model/types";
+import { TAdventureImage, TImageRequestData } from "../../../../Model/types";
 import {
   Text,
   Variant,
@@ -24,15 +24,16 @@ export default function ImageListView({
   setImages: (images: TAdventureImage[]) => void;
 }) {
   const addHandler = (event: any) => {
-    toBase64(event);
-    console.log("event :>> ", event);
-    setImages([
-      ...images,
-      {
-        img: URL.createObjectURL(event.target.files[0]),
-        title: "New image",
-      },
-    ]);
+    toBase64(event, (requestData: TImageRequestData) => {
+      setImages([
+        ...images,
+        {
+          img: URL.createObjectURL(event.target.files[0]),
+          title: "New image",
+          requestData,
+        },
+      ]);
+    });
   };
 
   const clickImgHandler = (item: any) => {
@@ -76,28 +77,19 @@ export default function ImageListView({
             bgcolor: "background.paper",
           }}
         >
-          {images.map((item) => (
+          {images.map((item, index) => (
             <ImageListItem
               sx={{ m: 0.5, width: 160, maxHeight: 160 }}
-              key={item.img}
+              key={index}
               onClick={() => clickImgHandler(item)}
             >
               <CheckedComponentWrapper {...{ checked: item.checked }} />
-              {item.img.includes("blob") ? (
                 <img
                   src={item.img}
                   srcSet={`${item.img}`}
                   alt={item.title}
                   loading="lazy"
                 />
-              ) : (
-                <img
-                  src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                  srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                  alt={item.title}
-                  loading="lazy"
-                />
-              )}
             </ImageListItem>
           ))}
         </Box>
