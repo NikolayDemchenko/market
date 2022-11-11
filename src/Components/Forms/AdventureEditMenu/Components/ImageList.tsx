@@ -36,7 +36,7 @@ export default function ImageListView({
     });
   };
 
-  const clickImgHandler = (item: any) => {
+  const clickImgHandler = (item: TAdventureImage) => {
     setImages(
       images.map((image) =>
         image === item ? { ...image, checked: !image.checked } : image

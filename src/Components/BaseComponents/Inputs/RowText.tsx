@@ -8,7 +8,7 @@ export  function RowText({
   defaultValue: string;
   getText: Function;
 }) {
-  const onChange = (event: { target: { value: any } }) => {
+  const onChange = (event: { target: { value: string } }) => {
     getText(event.target.value);
   };
   return (

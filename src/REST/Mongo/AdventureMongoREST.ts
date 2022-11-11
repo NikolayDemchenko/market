@@ -1,5 +1,5 @@
 import { IAdventureREST } from "../../Model/Interfaces";
-import { TAdventure, TSetState, TState } from "../../Model/types";
+import { TAdventure, TAdventureMongoDB, TSetState, TState } from "../../Model/types";
 import { RESTManager } from "./RESTManager";
 
 const { getCollection, getDocById, createDoc, updateDoc, removeDocById } =
@@ -14,9 +14,9 @@ export class AdventureMongoREST implements IAdventureREST {
   getAdventureList = (setState: TSetState) =>{
     getCollection(this.providerId).then((list) => {
       setState({
-        list: list.map((adv: any) => {
+        list: list.map((adv: TAdventureMongoDB) => {
           const { _id, ...adventure } = adv;
-          const frontAdventure = { ...adventure, id: _id };
+          const frontAdventure:TAdventure = { ...adventure, id: _id };
           // console.log('frontAdventure :>> ', frontAdventure);
           return frontAdventure;
         }),

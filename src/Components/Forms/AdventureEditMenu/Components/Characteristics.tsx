@@ -42,7 +42,7 @@ export default function Characteristics({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const checkedToggle = (item: any) => {
+  const checkedToggle = (item: TCharacteristic) => {
     console.log("item :>> ", item);
     setCharacteristics(
       characteristics.map((characteristic) =>
@@ -207,8 +207,13 @@ export function CharacteristicModal({
             {...{
               label: "Дата цены",
               defaultValue: characteristic ? characteristic.priceDate : "",
-              getData: (priceDate: string) =>
-                setModalState((state) => ({ ...state, priceDate })),
+              getData: (priceDate: string) =>{
+                console.log('priceDate :>> ', priceDate.substr(0,2));
+                console.log('priceDate :>> ', priceDate.substr(3,2));
+                console.log('priceDate :>> ', priceDate.substr(6,4));
+                console.log('priceDate :>> ', );
+
+                setModalState((state) => ({ ...state, priceDate }))}
             }}
           />
           <BasicButton
@@ -219,7 +224,7 @@ export function CharacteristicModal({
                 // modalState.duration &&
                 modalState.description &&
                 modalState.price &&
-                modalState.priceDate &&
+                // modalState.priceDate && // Не понятно, что с этим делать
                 modalState.slotQuantity
               ) {
                 setCharacteristic(modalState);

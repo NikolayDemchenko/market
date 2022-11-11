@@ -14,7 +14,7 @@ import Box from "@mui/material/Box";
 import Tooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
 import { Toolbar } from "@mui/material";
 import Amount from "../../../BaseComponents/Inputs/Amount";
-import { MontsSelect } from "../../../BaseComponents/Inputs/MontsSelect";
+import { MonthsSelect } from "../../../BaseComponents/Inputs/MonthsSelect";
 
 export default function Description({
   description,
@@ -83,7 +83,7 @@ export default function Description({
         {...{
           label: "Количество участников",
           // max: 8,
-          // min: 1,
+          min: 1,
           defaultValue: description?.participantsQuantity,
           getAmount: (participantsQuantity: number) =>
             setDescription({
@@ -122,7 +122,8 @@ export default function Description({
       />
       <Amount
         {...{
-          defaultValue: description?.slotSize,
+          defaultValue: description?.slotSize < 0 ? 1:description?.slotSize,
+          min:1,
           label: "Размер слота",
           getAmount: (slotSize: number) =>
             setDescription({
@@ -132,9 +133,9 @@ export default function Description({
         }}
       />
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <MontsSelect
+        <MonthsSelect
           {...{
-            monts: description.seasonality,
+            months: description.seasonality,
             getMonts: (seasonality: string) =>
               setDescription({
                 ...description,

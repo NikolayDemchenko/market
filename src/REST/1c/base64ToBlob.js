@@ -1,5 +1,5 @@
 export const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
-    console.log(b64Data.replace(/\s/g, ""));
+    // console.log(b64Data.replace(/\s/g, ""));
 
     const byteCharacters = atob(b64Data.replace(/\s/g, ""));
     const byteArrays = [];

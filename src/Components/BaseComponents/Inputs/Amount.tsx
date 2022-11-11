@@ -14,7 +14,7 @@ export default function Amount({label,
   getAmount: Function;
 }) {
 
-  const onChange = (event: { target: { value: any; }; }) => {
+  const onChange = (event: { target: { value: string; }; }) => {
     getAmount(event.target.value);
   };
   return (   

@@ -15,30 +15,6 @@ export default function AdvListItem({ adventure, labelId, onClickItem, checkAdve
     onClickItem: Function,
     checkAdventure: Function,
 }) {
-    // const [checked, setChecked] = React.useState(['1']);
-
-    // const handleToggle = (value: any) => () => {
-    //     const currentIndex = checked.indexOf(value.id);
-    //     const newChecked = [...checked];
-
-    //     if (currentIndex === -1) newChecked.push(value.id);
-    //     else newChecked.splice(currentIndex, 1);
-
-    //     setChecked(newChecked);
-
-    //     if (newChecked.length === 1) {
-    //         checkedToggle({
-    //             adventure: value,
-    //             checked: false
-    //         });
-    //     } else {
-    //         checkedToggle({
-    //             adventure: value,
-    //             checked: true
-    //         }); 
-    //     }
-    // };
-
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",

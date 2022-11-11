@@ -32,7 +32,7 @@ export default function VideoListView({
     ]);
   };
 
-  const clickVideoHandler = (item: any) => {
+  const clickVideoHandler = (item: TAdventureVideo) => {
     setVideos(
       videos.map((video) =>
         video === item ? { ...video, checked: !video.checked } : video
@@ -77,6 +77,7 @@ export default function VideoListView({
           }}
         >
           {videos.map((video) => {
+            if (!video.url) return null;
             console.log('video.url :>> ', video.url);
             return (
               <ImageListItem

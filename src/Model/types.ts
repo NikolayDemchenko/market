@@ -1,5 +1,5 @@
 import { Guid } from "guid-typescript";
-enum Monts {
+export enum Monts {
   "январь" = "январь",
   "февраль" = "февраль",
   "март" = "март",
@@ -14,7 +14,7 @@ enum Monts {
   "декабрь" = "декабрь",
 }
 // Поставщик
-type TProvider = {
+export type TProvider = {
   id: Guid;
   name: string;
   phone: string;
@@ -22,17 +22,17 @@ type TProvider = {
   adventures: TAdventure[];
 };
 // Реквизиты поставщика
-type TDetails = {
+export type TDetails = {
   name: string;
   inn: string;
 };
 
 // Общий стейт и сетстейт
-type TState = { list: TAdventure[]; adventure?: TAdventure };
-type TSetState = React.Dispatch<React.SetStateAction<TState|undefined>>;
+export type TState = { list: TAdventure[]; adventure?: TAdventure };
+export type TSetState = React.Dispatch<React.SetStateAction<TState | undefined>>;
 
 // Приключение
-type TAdventure = {
+export type TAdventure = {
   id: string;
   providerId: string;
   name: string;
@@ -43,8 +43,19 @@ type TAdventure = {
   characteristics: TCharacteristic[];
   checked?: boolean;
 };
+export type TAdventureMongoDB = {
+  _id: string;
+  providerId: string;
+  name: string;
+  status: boolean;
+  description: TDescription;
+  images?: TAdventureImage[];
+  videos?: TAdventureVideo[];
+  characteristics: TCharacteristic[];
+  checked?: boolean;
+};
 // Блок описания
-type TDescription = {
+export type TDescription = {
   program: string;
   info: string;
   limitations: string;
@@ -62,7 +73,7 @@ type TDescription = {
   duration: string;
 };
 // Характеристика
-type TCharacteristic = {
+export type TCharacteristic = {
   id?: string;
   name: string;
   description: string;
@@ -73,31 +84,44 @@ type TCharacteristic = {
   checked?: boolean;
 };
 
-type TAdventureImage = {
+export type TAdventureImage = {
   img: string;
   title: string;
   requestData: TImageRequestData;
   checked?: boolean;
 };
-type TImageRequestData = {
+export type TImageRequestData = {
   imgBase64: string;
   imgName: string;
   imgExtension: string;
 };
-type TAdventureVideo = {
+export type TAdventureVideo = {
   url: string;
   title?: string;
   checked?: boolean;
 };
 
-type TPosition_1C = {
+
+export type TImagesResponse1C={
+  STATUS_CODE: number
+  STATUS_NAME: string
+  STATUS_TEXT: string
+  DURATION: number
+  PHOTOS:TImage1C []
+}
+export type TImage1C = {
+  PHOTO: string;
+  NAME: string;
+  EXTANTION: string;
+};
+export type TPosition_1C = {
   GUID_PROVIDER: string;
-  Name_POVIDER: string;
+  NAME_POVIDER: string;
   GUID: string;
   NAME: string;
   ACTIVE: boolean;
 };
-type TAdventure_1C = {
+export type TAdventure_1C = {
   PROVIDER_GUID: string;
   ADVENTURE_GUID: string;
   ADVENTURE_NAME: string;
@@ -118,7 +142,7 @@ type TAdventure_1C = {
   VIDEO_LIST: string[]; // Массив url;
   CHARACTERS: TCharacters_1C[];
 };
-type TCharacters_1C = {
+export type TCharacters_1C = {
   CHARACTER_GUID: string;
   CHARACTER_NAME: string;
   CHARACTER_DESCRITPION: string;
@@ -127,33 +151,15 @@ type TCharacters_1C = {
   PRICE_START_DATE: string;
 };
 
-type TAdventureLot = {
+
+export type TAdventureLot = {
   name: string;
   description: string;
   personAmount: number;
 };
-type TOption = {
+export type TOption = {
   name: string;
   description: string;
   duration: string;
   price: number;
-};
-
-export type {
-  TAdventureLot,
-  TOption,
-  Monts,
-  TProvider,
-  TDetails,
-  TAdventure,
-  TAdventure_1C,
-  TCharacters_1C,
-  TAdventureImage,
-  TImageRequestData,
-  TDescription,
-  TAdventureVideo,
-  TCharacteristic,
-  TState,
-  TSetState,
-  TPosition_1C,
 };

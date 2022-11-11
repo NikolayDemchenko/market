@@ -4,6 +4,9 @@ import {
   TAdventure,
   TAdventureImage,
   TAdventure_1C,
+  TImage1C,
+  TImagesResponse1C,
+  TPosition_1C,
   TSetState,
   TState,
 } from "../../Model/types";
@@ -16,8 +19,8 @@ import {
   convertTo1C,
   convert1CToReact,
   convert1CPositionTo1CAdventure,
-  RestSelector,
-} from "./rest1C";
+} from "./Converter";
+import { RestSelector } from "./rest1C";
 
 export class AdventureREST1C implements IAdventureREST {
   restSelector: RestSelector;
@@ -27,11 +30,11 @@ export class AdventureREST1C implements IAdventureREST {
     this.restSelector = restTransfer;
   }
   getAdventureList = (setState: TSetState) => {
-    this.restSelector.getProviderAdventureListBody(
-      ({ LIST_POSITION }: { LIST_POSITION: [] }) => {
-        console.log("list :>> ", LIST_POSITION);
+    this.restSelector.getAdventureList(
+      ({ LIST_POSITION }: { LIST_POSITION: TPosition_1C[] }) => {
+        console.log('LIST_POSITION :>> ', LIST_POSITION);
         setState({
-          list: LIST_POSITION.map((adv: any) =>
+          list: LIST_POSITION.map((adv: TPosition_1C) =>
             convert1CToReact(convert1CPositionTo1CAdventure(adv))
           ),
         });
@@ -41,34 +44,31 @@ export class AdventureREST1C implements IAdventureREST {
   };
   //   "51b1096a-3cd5-11ec-8122-001999b9620c"
   getAdventureById = (id: string, setState: TSetState) => {
-    this.restSelector.getAdventureDataBody((adv: TAdventure_1C) => {
-      this.restSelector.getImages((response: any) => {
-        let mapImages = response.PHOTOS.map((el: any) =>
-          b64toBlob(el.PHOTO, "image/jpg")
-        );
+    this.restSelector.getAdventure((adv: TAdventure_1C) => {
+      this.restSelector.getImages((response: TImagesResponse1C) => {  
+        let images = response.PHOTOS.map((el: TImage1C): TAdventureImage => {
+          console.log("el :>> ", el);
+          const image: TAdventureImage = {
+            img: b64toBlob(el.PHOTO, "image/jpg"),
+            title: "",
+            requestData: {
+              imgBase64: el.PHOTO,
+              imgName: el.NAME,
+              imgExtension: el.EXTANTION,
+            }, 
+          };
+          return image;
+        });
         setState((state) => {
           return {
             list: { ...state!.list },
             adventure: {
               ...convert1CToReact(adv),
-              images: mapImages.map(function (img: string): TAdventureImage {
-                const image: TAdventureImage = {
-                  img,
-                  title: "",
-                  requestData: {
-                    imgBase64: "",
-                    imgName: "",
-                    imgExtension: "",
-                  },
-                };
-
-                return image;
-              }),
+              images,
             },
           };
         });
       }, adv.ADVENTURE_GUID); // Передавать гуид приключения; 3d6b2347-5f39-11ed-814b-001999b9620c
-      console.log("adventure :>> ", adv);
     }, id);
   };
 
@@ -78,13 +78,12 @@ export class AdventureREST1C implements IAdventureREST {
       convertTo1C(adventure!),
       (data: { ADVENTURE_GUID: string }) => {
         console.log("data :>> ", data);
-        this.sendImages(data, state, (response: any) => {
+        this.sendImages(data, state, (response: object) => {
           console.log("response :>> ", response);
         });
         this.getAdventureList(setState);
       }
     );
-
   };
   sendImages = (
     data: { ADVENTURE_GUID: string },
@@ -109,11 +108,9 @@ export class AdventureREST1C implements IAdventureREST {
     const { adventure } = state;
     this.restSelector.createAdventure(
       convertTo1C(adventure!),
-      (data: { ADVENTURE_GUID: string; } ) => {
-        console.log("data :>> ", data);
-        this.sendImages(data, state, (response: any) => {
-          console.log("response :>> ", response);
-          this.getAdventureList(setState);// Как здесь задействуется res?
+      (data: { ADVENTURE_GUID: string }) => {
+        this.sendImages(data, state, () => {
+          this.getAdventureList(setState); // Как здесь задействуется res?
         });
       }
     );

@@ -16,8 +16,8 @@ function App() {
   React.useEffect(() => {
     getAdventureList(setState);// Раскомментировать и в стейт пустой массив передать вместо _adventures
   }, []);
-
-  console.log("state :>> ", state);
+  console.log(`%c state   <----  :>>`, "background:#caced3; ",state);
+  
  
   return (
     <>

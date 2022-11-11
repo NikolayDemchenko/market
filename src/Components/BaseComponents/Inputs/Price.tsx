@@ -9,7 +9,7 @@ export default function NameInput({
   defaultValue?: number;
   getPrice: Function;
 }) {
-  const onChange = (event: { target: { value: any } }) => {
+  const onChange = (event: { target: { value: string } }) => {
     getPrice(event.target.value);
   };
   return (

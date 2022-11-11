@@ -29,14 +29,14 @@ export default function AdventureList({
 }) {
 
 const {list}=state
-  function onClickBtn(value: any) {
+  function onClickLog(value: string) {
     console.log(value);
   }
   
 
   function onClickItem(adventure: TAdventure) {
     getAdventureById(adventure.id,setState)
-    console.log("Нажали на приключение в списке.");
+    console.log(`Нажали на ${adventure.name}`);
     // getAdventureById()
   }
 
@@ -91,7 +91,7 @@ const adventure:TAdventure= {
             <Text {...{ variant: Variant.h4, text: "Приключения" }} />
             <BottomNavigation
               showLabels
-              onChange={(event: React.SyntheticEvent, value: any) => {
+              onChange={(event: React.SyntheticEvent, value: Function) => {
                 value();
               }}
             >
@@ -103,18 +103,18 @@ const adventure:TAdventure= {
                     list: [...state!.list],
                     adventure,
                   }));
-                  onClickBtn("Добавить");
+                  onClickLog("Добавить");
                 }}
               />
               <BottomNavigationAction
                 label="Опубликовать"
                 icon={<AddTaskIcon />}
-                value={() => onClickBtn("Опубликовать")}
+                value={() => onClickLog("Опубликовать")}
               />
               <BottomNavigationAction
                 label="Снять с публикации"
                 icon={<RemoveCircleOutlineIcon />}
-                value={() => onClickBtn("Снять публикацию")}
+                value={() => onClickLog("Снять публикацию")}
               />
               <BottomNavigationAction
                 label="Удалить"
@@ -124,7 +124,7 @@ const adventure:TAdventure= {
                     console.log("adv.checked :>> ", adv.checked);
                     adv.checked && removeAdventureById(adv.id, setState);
                   });
-                  onClickBtn("Удалить");
+                  onClickLog("Удалить");
                 }}
               />
             </BottomNavigation>

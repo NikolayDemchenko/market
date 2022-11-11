@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 export default function TimeWithMinute({getTime,label}:{getTime:Function,label:string}) {
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-07'));
+  const [value, setValue] = React.useState<Dayjs>(dayjs('2022-04-07'));
   const onChange = (value:any) => {
     setValue(value)
     value&&getTime({hours:value.$H,minutes:value.$m});
