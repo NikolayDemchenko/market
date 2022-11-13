@@ -28,8 +28,8 @@ export type TDetails = {
 };
 
 // Общий стейт и сетстейт
-export type TState = { list: TAdventure[]; adventure?: TAdventure };
-export type TSetState = React.Dispatch<React.SetStateAction<TState | undefined>>;
+export type TState = { list: TAdventure[]; adventure?: TAdventure,spinner?:boolean };
+export type TSetState = React.Dispatch<React.SetStateAction<TState>>;
 
 // Приключение
 export type TAdventure = {
@@ -101,19 +101,6 @@ export type TAdventureVideo = {
   checked?: boolean;
 };
 
-
-export type TImagesResponse1C={
-  STATUS_CODE: number
-  STATUS_NAME: string
-  STATUS_TEXT: string
-  DURATION: number
-  PHOTOS:TImage1C []
-}
-export type TImage1C = {
-  PHOTO: string;
-  NAME: string;
-  EXTANTION: string;
-};
 export type TPosition_1C = {
   GUID_PROVIDER: string;
   NAME_POVIDER: string;
@@ -142,6 +129,7 @@ export type TAdventure_1C = {
   VIDEO_LIST: string[]; // Массив url;
   CHARACTERS: TCharacters_1C[];
 };
+
 export type TCharacters_1C = {
   CHARACTER_GUID: string;
   CHARACTER_NAME: string;
@@ -150,6 +138,22 @@ export type TCharacters_1C = {
   CHARACTER_PRICE: number;
   PRICE_START_DATE: string;
 };
+
+export type TImagesResponse1C={
+  STATUS_CODE: number
+  STATUS_NAME: string
+  STATUS_TEXT: string
+  DURATION: number
+  PHOTOS:TImage1C []
+}
+export type TImage1C = {
+  PHOTO: string;
+  NAME: string;
+  EXTANTION: string;
+};
+
+
+
 
 
 export type TAdventureLot = {

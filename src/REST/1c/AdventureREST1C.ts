@@ -30,10 +30,12 @@ export class AdventureREST1C implements IAdventureREST {
     this.restSelector = restTransfer;
   }
   getAdventureList = (setState: TSetState) => {
+    setState((state) => ({ ...state, spinner: true }));
     this.restSelector.getAdventureList(
       ({ LIST_POSITION }: { LIST_POSITION: TPosition_1C[] }) => {
-        console.log('LIST_POSITION :>> ', LIST_POSITION);
+        console.log("LIST_POSITION :>> ", LIST_POSITION);
         setState({
+          spinner: false,
           list: LIST_POSITION.map((adv: TPosition_1C) =>
             convert1CToReact(convert1CPositionTo1CAdventure(adv))
           ),
@@ -44,8 +46,9 @@ export class AdventureREST1C implements IAdventureREST {
   };
   //   "51b1096a-3cd5-11ec-8122-001999b9620c"
   getAdventureById = (id: string, setState: TSetState) => {
+    setState((state) => ({ ...state, spinner: true }));
     this.restSelector.getAdventure((adv: TAdventure_1C) => {
-      this.restSelector.getImages((response: TImagesResponse1C) => {  
+      this.restSelector.getImages((response: TImagesResponse1C) => {
         let images = response.PHOTOS.map((el: TImage1C): TAdventureImage => {
           console.log("el :>> ", el);
           const image: TAdventureImage = {
@@ -55,12 +58,13 @@ export class AdventureREST1C implements IAdventureREST {
               imgBase64: el.PHOTO,
               imgName: el.NAME,
               imgExtension: el.EXTANTION,
-            }, 
+            },
           };
           return image;
         });
         setState((state) => {
           return {
+            spinner: false,
             list: { ...state!.list },
             adventure: {
               ...convert1CToReact(adv),
@@ -73,6 +77,7 @@ export class AdventureREST1C implements IAdventureREST {
   };
 
   createAdventure = (state: TState, setState: TSetState) => {
+    setState((state) => ({ ...state, spinner: true }));
     const { adventure } = state;
     this.restSelector.createAdventure(
       convertTo1C(adventure!),
@@ -105,6 +110,7 @@ export class AdventureREST1C implements IAdventureREST {
   };
 
   updateAdventure = (state: TState, setState: TSetState) => {
+    setState((state) => ({ ...state, spinner: true }));
     const { adventure } = state;
     this.restSelector.createAdventure(
       convertTo1C(adventure!),

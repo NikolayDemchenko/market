@@ -14,28 +14,25 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import AddIcon from "@mui/icons-material/Add";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { AppBar, Grid, Stack, TableContainer, Toolbar } from "@mui/material";
+import { Grid, Stack, TableContainer, Toolbar } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 import Box from "@mui/material/Box";
-import { removeAdventureById,getAdventureById } from "../../../REST/rest";
+import { removeAdventureById, getAdventureById } from "../../../REST/rest";
 
 export default function AdventureList({
-  state,
+  state: { list },
   setState,
 }: {
   state: TState;
   setState: TSetState;
 }) {
-
-const {list}=state
   function onClickLog(value: string) {
     console.log(value);
   }
-  
 
   function onClickItem(adventure: TAdventure) {
-    getAdventureById(adventure.id,setState)
+    getAdventureById(adventure.id, setState);
     console.log(`Нажали на ${adventure.name}`);
     // getAdventureById()
   }
@@ -49,39 +46,39 @@ const {list}=state
       ),
     });
   }
-const adventure:TAdventure= {
-  name: "",
-  status: false,
-  id: "",
-  providerId: list[0].providerId,
-  description: {
-    program: "",
-    info: "",
-    limitations: "",
-    participantsQuantity: 0,
-    preRegistration: false,
-    seasonality: "",
-    address: "",
-    phone: "",
-    slotVolume: 0,
-    slotSize: 0,
-    connectedСalendar: false,
-    indivisibleVolume: false,
-    possibilitySellingCertificate: false,
-    autofill: false,
-    duration: ""
-},
-  characteristics: [
-    {
-      id: "",
-      name: "",
-      description: "",
-      slotQuantity: 0,    
-      price: 0,
-      priceDate: "",
+  const newAdventure: TAdventure = {
+    name: "",
+    status: false,
+    id: "",
+    providerId: list[0] ? list[0].providerId : "",
+    description: {
+      program: "",
+      info: "",
+      limitations: "",
+      participantsQuantity: 0,
+      preRegistration: false,
+      seasonality: "",
+      address: "",
+      phone: "",
+      slotVolume: 0,
+      slotSize: 0,
+      connectedСalendar: false,
+      indivisibleVolume: false,
+      possibilitySellingCertificate: false,
+      autofill: false,
+      duration: "",
     },
-  ],
-}
+    characteristics: [
+      {
+        id: "",
+        name: "",
+        description: "",
+        slotQuantity: 0,
+        price: 0,
+        priceDate: "",
+      },
+    ],
+  };
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -101,7 +98,7 @@ const adventure:TAdventure= {
                 value={() => {
                   setState((state) => ({
                     list: [...state!.list],
-                    adventure,
+                    adventure: newAdventure,
                   }));
                   onClickLog("Добавить");
                 }}

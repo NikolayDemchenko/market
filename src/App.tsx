@@ -2,57 +2,24 @@ import React from "react";
 import AdventureEditMenu from "./Components/Forms/AdventureEditMenu/AdventureEditMenu";
 import AdventureList from "./Components/Forms/AdventuresList/AdventureList";
 import { TAdventure, TState } from "./Model/types";
-
-import BasicButton from "./Components/BaseComponents/Buttons/BasicButton";
-import { getAdventureList
-  , } from "./REST/rest";
-import { Box } from "@mui/material";
-import BaseReactPlayer from "react-player/base";
-import ReactPlayer from "react-player";
-
+import { getAdventureList } from "./REST/rest";
+import { CircularSpinner } from "./Components/BaseComponents/DisplayingComponents/CircularSpinner";
 
 function App() {
-  const [state, setState] = React.useState<TState>();
+  const [state, setState] = React.useState<TState>({list:[]});
   React.useEffect(() => {
-    getAdventureList(setState);// Раскомментировать и в стейт пустой массив передать вместо _adventures
+    getAdventureList(setState);
   }, []);
-  console.log(`%c state   <----  :>>`, "background:#caced3; ",state);
-  
- 
+  console.log(`%c state   <----  :>>`, "background:#caced3; ", state);
+
   return (
     <>
+      {state && <CircularSpinner {...{ spinner: state.spinner }} />}
       {state && state.adventure ? (
-        <AdventureEditMenu
-          {...{ state, setState }}
-        ></AdventureEditMenu>
+        <AdventureEditMenu {...{ state, setState }}></AdventureEditMenu>
       ) : (
-        state && (
-          <AdventureList
-            {...{ state, setState }}
-          ></AdventureList>
-        )
-      )}
-      <Box sx={{ p: 3 }}>
-        {/* <BasicButton
-          btnText={"Кнопка для тестирования запросов к 1c"}
-          onClick={() => {
-            getProviderAdventureListBody((data: object) => {
-              console.log("data :>> ", data);
-            }, "51b1096a-3cd5-11ec-8122-001999b9620c");
-            getAdventureDataBody((data: object) => {
-              console.log("data :>> ", data);
-            }, "6d5b172f-31b0-11ec-8122-001999b9620c");
-          }} 
-          
-        /> */}
-                  {/* <ReactPlayer
-                url={"https://www.youtube.com/watch?v=Lv9D9nopQVY"}
-                width={"286px"}
-                height={"160px"}
-                controls={false}
-                // style={{ pointerEvents: "none" }}
-              /> */}
-      </Box>
+        state && <AdventureList {...{ state, setState }}></AdventureList>
+      )}     
     </>
   );
 }
@@ -197,7 +164,7 @@ let _adventures: TAdventure[] = [
       slotSize: 2,
       slotVolume: 3,
     },
-  }, 
+  },
 ];
 
 const images = [
