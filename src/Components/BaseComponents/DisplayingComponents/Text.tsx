@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Typography } from "@mui/material";
+import Container from "@mui/material/Container";
+import { styled } from "@mui/material/styles";
 
 export enum Variant {
   button = "button",
@@ -18,8 +20,21 @@ export enum Variant {
   inherit = "inherit",
 }
 
-export function Text({ text, variant }: { text: string; variant: Variant }) {
-  return (
-    <Typography variant={variant}  >{text}</Typography>
-  );
+export function Text(props: { text: string; variant: Variant }) { 
+  return <BootstrapTypography {...props}>{props.text}</BootstrapTypography>;
 }
+
+const BootstrapTypography = styled(Typography)(({ theme }) => ({
+  fontFamily: [
+    "-apple-system",
+    "BlinkMacSystemFont",
+    '"Segoe UI"',
+    "Roboto",
+    '"Helvetica Neue"',
+    "Arial",
+    "sans-serif",
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(","),
+}));

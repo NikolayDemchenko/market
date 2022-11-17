@@ -22,14 +22,15 @@ import MultilineText from "../../../BaseComponents/Inputs/MultilineText";
 import Amount from "../../../BaseComponents/Inputs/Amount";
 import AppBar from "@mui/material/AppBar";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
-import BasicButton from "../../../BaseComponents/Buttons/BasicButton";
+import { BasicButton } from "../../../BaseComponents/Inputs/Buttons/BasicButton";
 import { NamedText } from "../../../BaseComponents/DisplayingComponents/NamedText";
-import { HiddenDelete } from "../../../BaseComponents/Buttons/HiddenDelete";
+import { HiddenDelete } from "../../../BaseComponents/Inputs/Buttons/HiddenDelete";
 import {
   DateInput,
   DurationInput,
 } from "../../../BaseComponents/Inputs/MaskedInputs";
 import Price from "../../../BaseComponents/Inputs/Price";
+import BasicTooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
 
 export default function Characteristics({
   characteristics = [],
@@ -67,7 +68,7 @@ export default function Characteristics({
       />
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" color="inherit">
-          <Toolbar>
+          <Toolbar sx={{ display: "flex", alignItems: "center" }}>
             <Grid container alignItems="center" spacing={2}>
               <Grid item xs={6}>
                 <Text {...{ variant: Variant.h6, text: "Характеристики" }} />
@@ -85,6 +86,7 @@ export default function Characteristics({
             <HiddenDelete
               {...{ items: characteristics, setItems: setCharacteristics }}
             />
+            <BasicTooltip title="Ценновое предложение" />
           </Toolbar>
         </AppBar>
       </Box>
@@ -178,7 +180,7 @@ export function CharacteristicModal({
           />
           <Amount
             {...{
-              label: "Количество слотов", 
+              label: "Количество слотов",
               min: 1,
               defaultValue: characteristic
                 ? characteristic.slotQuantity
@@ -203,7 +205,7 @@ export function CharacteristicModal({
                 setModalState((state) => ({ ...state, price })),
             }}
           />
-          <DateInput
+          {/* <DateInput
             {...{
               label: "Дата цены",
               defaultValue: characteristic ? characteristic.priceDate : "",
@@ -215,26 +217,30 @@ export function CharacteristicModal({
 
                 setModalState((state) => ({ ...state, priceDate }))}
             }}
-          />
+          /> */}
+
           <BasicButton
-            btnText={"Сохранить"}
-            onClick={() => {
-              if (
-                modalState.name &&
-                // modalState.duration &&
-                modalState.description &&
-                modalState.price &&
-                // modalState.priceDate && // Не понятно, что с этим делать
-                modalState.slotQuantity
-              ) {
-                setCharacteristic(modalState);
-                setModalState({});
-                handleClose();
-              } else {
-                alert("Не все поля заполнены!");
-              }
+            {...{
+              onClick: () => {
+                if (
+                  modalState.name &&
+                  // modalState.duration &&
+                  modalState.description &&
+                  modalState.price &&
+                  // modalState.priceDate && // Не понятно, что с этим делать
+                  modalState.slotQuantity
+                ) {
+                  setCharacteristic(modalState);
+                  setModalState({});
+                  handleClose();
+                } else {
+                  alert("Не все поля заполнены!");
+                }
+              },
             }}
-          />
+          >
+            Сохранить
+          </BasicButton>
         </Stack>
       </Box>
     </Modal>
@@ -327,14 +333,14 @@ export function Characteristic({
                 textVariant: Variant.body1,
               }}
             />
-            <NamedText
+            {/* <NamedText
               {...{
                 name: "Дата цены :",
                 nameVariant: Variant.button,
                 text: characteristic.priceDate,
                 textVariant: Variant.body1,
               }}
-            />
+            /> */}
           </Stack>
         </ListItemButton>
       </ListItem>

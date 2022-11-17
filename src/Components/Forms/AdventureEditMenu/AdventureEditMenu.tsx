@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
-import { RowText } from "../../BaseComponents/Inputs/RowText";
+import { RowTextInput } from "../../BaseComponents/Inputs/RowTextInput";
 import VideoListView from "./Components/VideoList";
 import ImageListView from "./Components/ImageList";
 import {
@@ -16,7 +16,7 @@ import {
 import Description from "./Components/Description";
 import Characteristics from "./Components/Characteristics";
 import { Stack, Toolbar } from "@mui/material";
-import BasicButton from "../../BaseComponents/Buttons/BasicButton";
+import { BasicButton } from "../../BaseComponents/Inputs/Buttons/BasicButton";
 import {
   createAdventure,
   updateAdventure,
@@ -29,8 +29,7 @@ export default function AdventureEditMenu({
   state: TState;
   setState: TSetState;
 }) {
-
-  const {adventure}=state
+  const { adventure } = state;
   const setAdventure = (adv: TAdventure) => {
     setState((state) => ({ list: { ...state!.list }, adventure: adv }));
   };
@@ -50,7 +49,7 @@ export default function AdventureEditMenu({
           {...{ variant: Variant.h5, text: "Редактирование приключения" }}
         />
       </Toolbar>
-      <RowText
+      <RowTextInput
         {...{
           label: "Название",
           defaultValue: adventure!.name,
@@ -90,20 +89,26 @@ export default function AdventureEditMenu({
       ></Characteristics>
       <Stack direction="row" spacing={2} sx={{ maxWidth: "100%" }}>
         <BasicButton
-          btnText={"Отмена"}
-          onClick={() => {
-            getAdventureList(setState);
+          {...{
+            onClick: () => {
+              getAdventureList(setState);
+            },
           }}
-        />
+        >
+          Отмена
+        </BasicButton>
         <BasicButton
-          btnText={"Сохранить"}
-          onClick={() => {
-            !adventure!.id
-              ? console.log("Без ID :>> ")
-              : console.log("C ID :>> ");
-            !adventure!.id ? createAdv(adventure!) : updateAdv(adventure!);
+          {...{
+            onClick: () => {
+              !adventure!.id
+                ? console.log("Без ID :>> ")
+                : console.log("C ID :>> ");
+              !adventure!.id ? createAdv(adventure!) : updateAdv(adventure!);
+            },
           }}
-        />
+        >
+          Сохранить
+        </BasicButton>
       </Stack>
       {/* </Grid> */}
     </Box>

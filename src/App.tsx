@@ -4,6 +4,13 @@ import AdventureList from "./Components/Forms/AdventuresList/AdventureList";
 import { TAdventure, TState } from "./Model/types";
 import { getAdventureList } from "./REST/rest";
 import { CircularSpinner } from "./Components/BaseComponents/DisplayingComponents/CircularSpinner";
+import Swiper from "./Swiper";
+import TicketDataForm from "./Components/Forms/TicketDataForm";
+import CertificateForm from "./Components/Forms/CertificateForm";
+import PhoneConfirmationForm from "./Components/Forms/PhoneConfirmationForm";
+import BonusesForm from "./Components/Forms/BonusesForm";
+import { OrderConfirmation } from "./Components/Forms/OrderConfirmation";
+import { SuccessfulComplet } from "./Components/Forms/SuccessfulComplet";
 
 function App() {
   const [state, setState] = React.useState<TState>({list:[]});
@@ -14,12 +21,34 @@ function App() {
 
   return (
     <>
-      {state && <CircularSpinner {...{ spinner: state.spinner }} />}
+      {/* <Swiper></Swiper> */}
+      <TicketDataForm></TicketDataForm>
+      <br></br>
+      <br></br>
+      <br></br>
+      <CertificateForm></CertificateForm>
+      <br></br>
+      <br></br>
+      <br></br>      
+      <OrderConfirmation></OrderConfirmation>
+      <br></br>
+      <br></br>
+      <br></br>   
+      <SuccessfulComplet></SuccessfulComplet>
+      <br></br>
+      <br></br>
+      <br></br>   
+      <PhoneConfirmationForm></PhoneConfirmationForm>
+      <br></br>
+      <br></br>
+      <br></br>
+      <BonusesForm></BonusesForm>
+      {/* {state && <CircularSpinner {...{ spinner: state.spinner }} />}
       {state && state.adventure ? (
         <AdventureEditMenu {...{ state, setState }}></AdventureEditMenu>
       ) : (
         state && <AdventureList {...{ state, setState }}></AdventureList>
-      )}     
+      )}      */}
     </>
   );
 }

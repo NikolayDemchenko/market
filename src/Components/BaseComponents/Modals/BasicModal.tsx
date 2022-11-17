@@ -3,12 +3,12 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import MultilineTextInput from "../Inputs/MultilineText";
-import AddButton from "../Buttons/BasicButton";
+import { BasicButton } from "../Inputs/Buttons/BasicButton";
 import { Text, Variant } from "../DisplayingComponents/Text";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import { Stack } from "@mui/material";
 
-export  function VideoModal({ getVideoUrl }: { getVideoUrl: Function }) {
+export function VideoModal({ getVideoUrl }: { getVideoUrl: Function }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -48,13 +48,16 @@ export  function VideoModal({ getVideoUrl }: { getVideoUrl: Function }) {
               defaultValue={""}
               getText={setInputData}
             />
-            <AddButton
-              btnText={"Добавить видео"}
-              onClick={() => {
-                getVideoUrl(inputData);
-                handleClose();
+            <BasicButton
+              {...{
+                onClick: () => {
+                  getVideoUrl(inputData);
+                  handleClose();
+                },
               }}
-            />
+            >
+              Добавить видео
+            </BasicButton>
           </Stack>
         </Box>
       </Modal>

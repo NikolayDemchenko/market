@@ -11,9 +11,10 @@ import {
   Variant,
 } from "../../../BaseComponents/DisplayingComponents/Text";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
-import BasicButton from "../../../BaseComponents/Buttons/BasicButton";
+import {BasicButton} from "../../../BaseComponents/Inputs/Buttons/BasicButton";
 import MultilineText from "../../../BaseComponents/Inputs/MultilineText";
-import { HiddenDelete } from "../../../BaseComponents/Buttons/HiddenDelete";
+import { HiddenDelete } from "../../../BaseComponents/Inputs/Buttons/HiddenDelete";
+import BasicTooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
 export default function VideoListView({
   videos = [],
   setVideos,
@@ -48,7 +49,7 @@ export default function VideoListView({
       <VideoAddModal {...{ getVideoUrl, open, handleClose }}></VideoAddModal>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" color="inherit">
-          <Toolbar>
+          <Toolbar sx={{ display: "flex", alignItems: "center" }}>
             <Grid container alignItems="center" spacing={2}>
               <Grid item xs={6}>
                 <Text {...{ variant: Variant.h6, text: "Видео" }} />
@@ -64,6 +65,7 @@ export default function VideoListView({
               </Grid>
             </Grid>
             <HiddenDelete {...{ items: videos, setItems: setVideos }} />
+            <BasicTooltip title="Вставьте ссылку на ютуб-видео" />
           </Toolbar>
         </AppBar>
       </Box>
@@ -138,13 +140,17 @@ export function VideoAddModal({
             {...{ variant: Variant.body1, text: "Вставьте ссылку на видео" }}
           />
           <MultilineText label={""} defaultValue={""} getText={setInputData} />
+         
           <BasicButton
-            btnText={"Добавить видео"}
-            onClick={() => {
-              getVideoUrl(inputData);
+            {...{
+              onClick: () => {
+                getVideoUrl(inputData);
               handleClose();
+              },
             }}
-          />
+          >
+            Добавить видео
+          </BasicButton>    
         </Stack>
       </Box>
     </Modal>

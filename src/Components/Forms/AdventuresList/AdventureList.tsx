@@ -103,7 +103,7 @@ export default function AdventureList({
                   onClickLog("Добавить");
                 }}
               />
-              <BottomNavigationAction
+              {/* <BottomNavigationAction
                 label="Опубликовать"
                 icon={<AddTaskIcon />}
                 value={() => onClickLog("Опубликовать")}
@@ -123,7 +123,7 @@ export default function AdventureList({
                   });
                   onClickLog("Удалить");
                 }}
-              />
+              /> */}
             </BottomNavigation>
           </Box>
         </Toolbar>

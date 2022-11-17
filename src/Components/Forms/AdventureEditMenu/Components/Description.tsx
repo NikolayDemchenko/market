@@ -15,6 +15,7 @@ import Tooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
 import { Toolbar } from "@mui/material";
 import Amount from "../../../BaseComponents/Inputs/Amount";
 import { MonthsSelect } from "../../../BaseComponents/Inputs/MonthsSelect";
+import SelectInput from "../../../BaseComponents/Inputs/Select";
 
 export default function Description({
   description,
@@ -75,35 +76,52 @@ export default function Description({
                 limitations,
               }),
             label: "Ограничения",
+            placeholder: `
+Пример:
+Минимальный возраст от ___ ;
+Ограничение 2;
+Ограничение 3;
+            `
           }}
         />
         <Tooltip title="Ограничения" />
       </Box>
-      <Amount
-        {...{
-          label: "Количество участников",
-          // max: 8,
-          min: 1,
-          defaultValue: description?.participantsQuantity,
-          getAmount: (participantsQuantity: number) =>
-            setDescription({
-              ...description,
-              participantsQuantity,
-            }),
-        }}
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Amount
+          {...{
+            label: "Количество участников в билете",
+            // max: 8,
+            min: 1,
+            defaultValue: description?.participantsQuantity,
+            getAmount: (participantsQuantity: number) =>
+              setDescription({
+                ...description,
+                participantsQuantity,
+              }),
+          }}
+        />
+        <Tooltip title="Например, у квадроцикла может быть два места, но сам квадроцикл это один билет" />
+      </Box>
+      <SelectInput { ...{  // Стартовый регион добавляется из информации в личном кабинете;
+          getSelect: (value: string)=>{console.log(value)},
+          options: ["Воронеж", "Челябинск", "Екатеринбург"], 
+          label: "Регион" 
+        }} 
       />
-
-      <MultilineInput
-        {...{
-          defaultValue: description?.address,
-          getText: (address: string) =>
-            setDescription({ ...description, address }),
-          label: "Адрес",
-        }}
-      />
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <MultilineInput
+          {...{
+            defaultValue: description?.address,
+            getText: (address: string) =>
+              setDescription({ ...description, address }),
+            label: "Адрес",
+          }}
+        />
+        <Tooltip title="Введите адрес или координаты для навигатора" />
+      </Box>
       <PhoneInput
         {...{
-          label: "Контакты",
+          label: "Телефон",
           defaultValue: description?.phone,
           getPhoneNumber: (phone: string) =>
             setDescription({ ...description, phone }),
@@ -112,7 +130,8 @@ export default function Description({
       <Amount
         {...{
           defaultValue: description?.slotVolume,
-          label: "Объём слота",
+          min:1,
+          label: "Максимальное количество билетов",
           getAmount: (slotVolume: number) =>
             setDescription({
               ...description,
@@ -124,7 +143,7 @@ export default function Description({
         {...{
           defaultValue: description?.slotSize < 0 ? 1:description?.slotSize,
           min:1,
-          label: "Размер слота",
+          label: "Размер слота в минутах",
           getAmount: (slotSize: number) =>
             setDescription({
               ...description,
@@ -156,7 +175,7 @@ export default function Description({
           checkBoxText: "Предварительная запись",
         }}
       />
-      <SignedCheckBox
+      {/* <SignedCheckBox
         {...{
           getCheck: () =>
             setDescription({
@@ -166,7 +185,7 @@ export default function Description({
           checked: description?.indivisibleVolume,
           checkBoxText: "Не делимый объем",
         }}
-      />
+      /> */}
       <SignedCheckBox
         {...{
           getCheck: () =>
@@ -179,7 +198,8 @@ export default function Description({
           checkBoxText: "Возможность продажи сертификата",
         }}
       />
-      <SignedCheckBox
+      
+      {/* <SignedCheckBox
         {...{
           getCheck: () =>
             setDescription({
@@ -188,9 +208,9 @@ export default function Description({
             }),
           checked: description?.autofill,
           checkBoxText:
-            "Автоматическое заполнение календаря регламентным заданием",
+            "Автоматическое заполнение календаря регламентным заданием",// Разобраться в ближайшие две недели
         }}
-      />
+      /> */}
     </Stack>
   );
 }

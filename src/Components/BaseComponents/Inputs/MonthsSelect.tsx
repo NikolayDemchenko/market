@@ -6,7 +6,7 @@ import Sheet from "@mui/joy/Sheet";
 import Done from "@mui/icons-material/Done";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import AddButton from "../Buttons/BasicButton";
+import { BasicButton } from "./Buttons/BasicButton";
 import { Text, Variant } from "../DisplayingComponents/Text";
 import { ListItemButton, Toolbar } from "@mui/material";
 
@@ -21,7 +21,9 @@ export const MonthsSelect = ({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   // console.log('months.replace().split() :>> ', months.replace(/\s/g, '').split(","));
-  const [value, _setValue] = React.useState<string[]>(months.replace(/\s/g, '').split(","));
+  const [value, _setValue] = React.useState<string[]>(
+    months.replace(/\s/g, "").split(",")
+  );
   console.log("value :>> ", value);
   const setValue = (value: string[]) => {
     const months = [
@@ -110,7 +112,7 @@ export const MonthsSelect = ({
                 "Сентябрь",
                 "Октябрь",
                 "Ноябрь",
-              ].map((item,index) => {
+              ].map((item, index) => {
                 // console.log('value.includes(item) :>> ',item,value, value.includes(item));
                 return (
                   <ListItem sx={{ width: "30%" }} key={index}>
@@ -156,13 +158,16 @@ export const MonthsSelect = ({
               })}
             </List>
           </Sheet>
-          <AddButton
-            btnText={"Применить"}
-            onClick={() => {
-              getMonts(value.join(", "));
-              handleClose();
+          <BasicButton
+            {...{
+              onClick: () => {
+                getMonts(value.join(", "));
+                handleClose();
+              },
             }}
-          />
+          >
+            Применить
+          </BasicButton>
         </Box>
       </Modal>
     </>

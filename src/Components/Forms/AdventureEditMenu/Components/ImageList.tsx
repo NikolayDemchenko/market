@@ -12,9 +12,10 @@ import {
   Text,
   Variant,
 } from "../../../BaseComponents/DisplayingComponents/Text";
-import { HiddenDelete } from "../../../BaseComponents/Buttons/HiddenDelete";
+import { HiddenDelete } from "../../../BaseComponents/Inputs/Buttons/HiddenDelete";
 import Grid from "@mui/material/Grid";
 import { toBase64 } from './imageToBase64';
+import BasicTooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
 
 export default function ImageListView({
   images = [],
@@ -48,7 +49,7 @@ export default function ImageListView({
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" color="inherit">
-          <Toolbar>
+          <Toolbar sx={{ display: "flex", alignItems: "center" }}>
           <Grid container alignItems="center" spacing={2}>
               <Grid item xs={6}>
                 <Text {...{ variant: Variant.h6, text: "Фото" }} />
@@ -64,7 +65,8 @@ export default function ImageListView({
                 <Box sx={{ flexGrow: 1 }} />
               </Grid>
             </Grid>
-                <HiddenDelete {...{items:images,setItems:setImages}}/>            
+                <HiddenDelete {...{items:images,setItems:setImages}}/>
+                <BasicTooltip title="Прикрепите горизонтальное изображение" />            
           </Toolbar>
         </AppBar>
       </Box>

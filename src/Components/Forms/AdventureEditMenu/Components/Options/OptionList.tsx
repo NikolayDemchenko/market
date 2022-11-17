@@ -4,12 +4,12 @@ import {
   Variant,
 } from "../../../../BaseComponents/DisplayingComponents/Text";
 import HSlon from "../../../../BaseComponents/StaticContentComponents/HSlon";
-import {RowText} from "../../../../BaseComponents/Inputs/RowText";
+import {RowTextInput} from "../../../../BaseComponents/Inputs/RowTextInput";
 import PhoneInput from "../../../../BaseComponents/Inputs/MaskedInputs";
 import PasswordInput from "../../../../BaseComponents/Inputs/Password";
 import Amount from "../../../../BaseComponents/Inputs/Amount";
 import SelectInput from "../../../../BaseComponents/Inputs/Select";
-import BasicButton from "../../../../BaseComponents/Buttons/BasicButton";
+import {BasicButton} from "../../../../BaseComponents/Inputs/Buttons/BasicButton";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import MultilineInput from "../../../../BaseComponents/Inputs/MultilineText";
@@ -65,7 +65,7 @@ export default function TestForm({options}:{options?:TOption[]}) {
                   <Stack spacing={1}>
                     <Text {...{ variant: Variant.body1, text: "Опция" }} />
 
-                    <RowText
+                    <RowTextInput
                       {...{
                         label: "Введите Ваше имя",
                         defaultValue: "",

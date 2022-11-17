@@ -42,7 +42,8 @@ export const convertTo1C = (adventure: TAdventure) => {
     POSSIBILITY_SELLING_CERTIFICATE: possibilitySellingCertificate,
     SLOT_VOLUME: slotVolume, // Максимальное количество билетов;
     SLOT_SIZE: slotSize, // 10 минут, 30 минут и т.д.;
-    AUTOFILL: autofill,
+    AUTOFILL: true,
+    // AUTOFILL: autofill,
     INDIVISIBLE_SLOT_VOLUME: indivisibleVolume,
     VIDEO_LIST: videos?.map((video) => video.url) || [], // Массив url;
     CHARACTERS: characteristics.map(

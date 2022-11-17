@@ -5,10 +5,12 @@ export default function MultilineText({
   label,
   defaultValue,
   getText,
+  placeholder,
 }: {
   label: string;
   defaultValue?: string;
   getText: Function;
+  placeholder?: string;
 }) {
   const onChange = (event: { target: { value: string } }) => {
     getText(event.target.value);
@@ -20,6 +22,7 @@ export default function MultilineText({
       defaultValue={defaultValue}
       fullWidth
       multiline
+      placeholder={placeholder}
     />
   );
 }

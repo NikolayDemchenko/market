@@ -1,5 +1,5 @@
 import TextField from "@mui/material/TextField";
-export  function RowText({
+export  function RowTextInput({
   label,
   defaultValue,
   getText,
