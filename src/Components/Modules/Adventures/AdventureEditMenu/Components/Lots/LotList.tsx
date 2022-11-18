@@ -1,22 +1,14 @@
 import React from "react";
-import {
-  Text,
-  Variant,
-} from "../../../../BaseComponents/DisplayingComponents/Text";
-import HSlon from "../../../../BaseComponents/StaticContentComponents/HSlon";
-import {RowTextInput} from "../../../../BaseComponents/Inputs/RowTextInput";
-import PhoneInput from "../../../../BaseComponents/Inputs/MaskedInputs";
-import PasswordInput from "../../../../BaseComponents/Inputs/Password";
-import Amount from "../../../../BaseComponents/Inputs/Amount";
-import SelectInput from "../../../../BaseComponents/Inputs/Select";
-import {BasicButton} from "../../../../BaseComponents/Inputs/Buttons/BasicButton";
+
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import MultilineInput from "../../../../BaseComponents/Inputs/MultilineText";
-import TimeWithMinute from "../../../../BaseComponents/Inputs/TimeWithMinute";
 import { Box } from "@mui/system";
 import { List, Paper, styled } from "@mui/material";
-import {TAdventureLot } from "../../../../../Model/types";
+import { TAdventureLot } from "../../../../../../Model/types";
+import { Text, Variant } from "../../../../../BaseComponents/DisplayingComponents/Text";
+import Amount from "../../../../../BaseComponents/Inputs/Amount";
+import { RowTextInput } from "../../../../../BaseComponents/Inputs/RowTextInput";
+import { MultilineText } from "../../../../../BaseComponents/Inputs/MultilineText";
 // Запрос к бд -> Получить и передать массив данных;
 let options = ["5 минут", "10 минут", "15 минут", "20 минут"];
 
@@ -65,7 +57,7 @@ export default function LotList({ lots }: { lots?: TAdventureLot[] }) {
                     <RowTextInput
                       {...{ label: "Название", defaultValue: lot.name, getText }}
                     />
-                    <MultilineInput
+                    <MultilineText
                       {...{
                         defaultValue: lot.description,
                         getText: getMultiText,

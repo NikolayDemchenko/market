@@ -7,8 +7,8 @@ import {
   TDescription,
   TSetState,
   TState,
-} from "../../../Model/types";
-import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
+} from "../../../../Model/types";
+import { Text, Variant } from "../../../BaseComponents/DisplayingComponents/Text";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import AddIcon from "@mui/icons-material/Add";
@@ -18,15 +18,15 @@ import { Grid, Stack, TableContainer, Toolbar } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 import Box from "@mui/material/Box";
-import { removeAdventureById, getAdventureById } from "../../../REST/rest";
+import { removeAdventureById, getAdventureById } from "../../../../REST/rest";
 
-export default function AdventureList({
+export  const AdventureList=({
   state: { list },
   setState,
 }: {
   state: TState;
   setState: TSetState;
-}) {
+}) =>{
   function onClickLog(value: string) {
     console.log(value);
   }

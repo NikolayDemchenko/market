@@ -1,21 +1,15 @@
+import { Stack, Toolbar, Box } from "@mui/material";
 import React from "react";
-import {
-  Text,
-  Variant,
-} from "../../../BaseComponents/DisplayingComponents/Text";
-import PhoneInput, {
-  DurationInput,
-} from "../../../BaseComponents/Inputs/MaskedInputs";
-import Stack from "@mui/material/Stack";
-import MultilineInput from "../../../BaseComponents/Inputs/MultilineText";
-import SignedCheckBox from "../../../BaseComponents/Inputs/SignedCheckBox";
-import { TDescription } from "../../../../Model/types";
-import Box from "@mui/material/Box";
-import Tooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
-import { Toolbar } from "@mui/material";
-import Amount from "../../../BaseComponents/Inputs/Amount";
-import { MonthsSelect } from "../../../BaseComponents/Inputs/MonthsSelect";
-import SelectInput from "../../../BaseComponents/Inputs/Select";
+import { TDescription } from "../../../../../Model/types";
+import { Text, Variant } from "../../../../BaseComponents/DisplayingComponents/Text";
+import { BasicTooltip } from "../../../../BaseComponents/DisplayingComponents/Tooltip";
+import Amount from "../../../../BaseComponents/Inputs/Amount";
+import PhoneInput, { DurationInput } from "../../../../BaseComponents/Inputs/MaskedInputs";
+import { MonthsSelect } from "../../../../BaseComponents/Inputs/MonthsSelect";
+import { MultilineText } from "../../../../BaseComponents/Inputs/MultilineText";
+import { SelectInput } from "../../../../BaseComponents/Inputs/SelectInput";
+import SignedCheckBox from "../../../../BaseComponents/Inputs/SignedCheckBox";
+
 
 export default function Description({
   description,
@@ -31,7 +25,7 @@ export default function Description({
         <Text {...{ variant: Variant.h6, text: "Описание" }} />
       </Toolbar>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <MultilineInput
+        <MultilineText
           {...{
             defaultValue: description?.program,
             getText: (program: string) =>
@@ -39,10 +33,10 @@ export default function Description({
             label: "Программа",
           }}
         />
-        <Tooltip title="Программа приключения"></Tooltip>
+        <BasicTooltip title="Программа приключения"></BasicTooltip>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <MultilineInput
+        <MultilineText
           {...{
             defaultValue: description?.info,
             getText: (info: string) =>
@@ -53,7 +47,7 @@ export default function Description({
             label: "Важная информация",
           }}
         />
-        <Tooltip title="Важная информация о приключении" />
+        <BasicTooltip title="Важная информация о приключении" />
       </Box>
       <DurationInput
         {...{
@@ -67,7 +61,7 @@ export default function Description({
         }}
       />
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <MultilineInput
+        <MultilineText
           {...{
             defaultValue: description?.limitations,
             getText: (limitations: string) =>
@@ -84,7 +78,7 @@ export default function Description({
             `
           }}
         />
-        <Tooltip title="Ограничения" />
+        <BasicTooltip title="Ограничения" />
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Amount
@@ -100,7 +94,7 @@ export default function Description({
               }),
           }}
         />
-        <Tooltip title="Например, у квадроцикла может быть два места, но сам квадроцикл это один билет" />
+        <BasicTooltip title="Например, у квадроцикла может быть два места, но сам квадроцикл это один билет" />
       </Box>
       <SelectInput { ...{  // Стартовый регион добавляется из информации в личном кабинете;
           getSelect: (value: string)=>{console.log(value)},
@@ -109,7 +103,7 @@ export default function Description({
         }} 
       />
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <MultilineInput
+        <MultilineText
           {...{
             defaultValue: description?.address,
             getText: (address: string) =>
@@ -117,7 +111,7 @@ export default function Description({
             label: "Адрес",
           }}
         />
-        <Tooltip title="Введите адрес или координаты для навигатора" />
+        <BasicTooltip title="Введите адрес или координаты для навигатора" />
       </Box>
       <PhoneInput
         {...{
@@ -162,7 +156,7 @@ export default function Description({
               }),
           }}
         />
-        <Tooltip title="Нажмите и выберите месяцы" />
+        <BasicTooltip title="Нажмите и выберите месяцы" />
       </Box>
       <SignedCheckBox
         {...{

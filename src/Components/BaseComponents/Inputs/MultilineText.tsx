@@ -1,7 +1,7 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 
-export default function MultilineText({
+export const MultilineText=({
   label,
   defaultValue,
   getText,
@@ -11,7 +11,7 @@ export default function MultilineText({
   defaultValue?: string;
   getText: Function;
   placeholder?: string;
-}) {
+})=> {
   const onChange = (event: { target: { value: string } }) => {
     getText(event.target.value);
   };

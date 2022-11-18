@@ -1,264 +1,104 @@
 import React from "react";
-import AdventureEditMenu from "./Components/Forms/AdventureEditMenu/AdventureEditMenu";
-import AdventureList from "./Components/Forms/AdventuresList/AdventureList";
-import { TAdventure, TState } from "./Model/types";
-import { getAdventureList } from "./REST/rest";
-import { CircularSpinner } from "./Components/BaseComponents/DisplayingComponents/CircularSpinner";
 import Swiper from "./Swiper";
-import TicketDataForm from "./Components/Forms/TicketDataForm";
-import CertificateForm from "./Components/Forms/CertificateForm";
-import PhoneConfirmationForm from "./Components/Forms/PhoneConfirmationForm";
-import BonusesForm from "./Components/Forms/BonusesForm";
-import { OrderConfirmation } from "./Components/Forms/OrderConfirmation";
-import { SuccessfulComplet } from "./Components/Forms/SuccessfulComplet";
+import { OrderConfirmationForm } from "./Components/Modules/Booking/OrderConfirmationForm";
+import Autorization, { TAutorizData } from "./Components/Forms/Autorization";
+import { Adventures } from "./Components/Modules/Adventures/Adventures";
+import {
+  BonusesForm,
+  TBonusesConfirmation,
+} from "./Components/Modules/Booking/BonusesForm";
+import {
+  CertificateForm,
+  TCertificate,
+} from "./Components/Modules/Booking/CertificateForm";
+import PhoneConfirmationForm, {
+  TPhoneConfirmation,
+} from "./Components/Modules/Booking/PhoneConfirmationForm";
+import { SuccessfulCompletForm } from "./Components/Modules/Booking/SuccessfulCompletForm";
+import {
+  TicketDataForm,
+  TTicketData,
+} from "./Components/Modules/Booking/TicketDataForm";
 
 function App() {
-  const [state, setState] = React.useState<TState>({list:[]});
-  React.useEffect(() => {
-    getAdventureList(setState);
-  }, []);
-  console.log(`%c state   <----  :>>`, "background:#caced3; ", state);
+  const order = {
+    bookingName: `Кино на крыше "Маленькая мисс Счастье"`,
+    bookingTime: "21:00",
+    ticketAmount: "5 шт",
+    price: "500 руб.",
+    summ: "1800 руб.",
+    name: "Васян",
+    phone: "+7(911)111-11-11",
+    email: "info@hslon.ru",
+    allBonuses: "5000 бонусов",
+    remainingBonuses: "4800 бонусов",
+    certificateDiscount: "1000 руб.",
+    bonusDiscount: "1200 руб.",
+    totalPay: "1100 руб.",
+  };
 
   return (
     <>
-      {/* <Swiper></Swiper> */}
-      <TicketDataForm></TicketDataForm>
+      <Swiper></Swiper>
+      <Autorization
+        {...{
+          autorization: (adata: TAutorizData): void => {
+            console.log("autorization :>> ", adata);
+          },
+        }}
+      ></Autorization>
+      <TicketDataForm
+        {...{
+          getTicketData: (ticketData: TTicketData): void => {
+            console.log("ticketData :>> ", ticketData);
+          },
+        }}
+      ></TicketDataForm>
       <br></br>
       <br></br>
       <br></br>
-      <CertificateForm></CertificateForm>
-      <br></br>
-      <br></br>
-      <br></br>      
-      <OrderConfirmation></OrderConfirmation>
-      <br></br>
-      <br></br>
-      <br></br>   
-      <SuccessfulComplet></SuccessfulComplet>
-      <br></br>
-      <br></br>
-      <br></br>   
-      <PhoneConfirmationForm></PhoneConfirmationForm>
+      <CertificateForm
+        {...{
+          getCertificate: (certificate: TCertificate): void => {
+            console.log("certificate :>> ", certificate);
+          },
+        }}
+      ></CertificateForm>
       <br></br>
       <br></br>
       <br></br>
-      <BonusesForm></BonusesForm>
-      {/* {state && <CircularSpinner {...{ spinner: state.spinner }} />}
-      {state && state.adventure ? (
-        <AdventureEditMenu {...{ state, setState }}></AdventureEditMenu>
-      ) : (
-        state && <AdventureList {...{ state, setState }}></AdventureList>
-      )}      */}
+      <PhoneConfirmationForm
+        {...{
+          getPhoneConfirmation: (
+            phoneConfirmation: TPhoneConfirmation
+          ): void => {
+            console.log("phoneConfirmation :>> ", phoneConfirmation);
+          },
+        }}
+      ></PhoneConfirmationForm>
+      <br></br>
+      <br></br>
+      <br></br>
+      <BonusesForm
+        {...{
+          getBonus: (bonus: TBonusesConfirmation): void => {
+            console.log("bonus :>> ", bonus);
+          },
+        }}
+      ></BonusesForm>
+      <br></br>
+      <br></br>
+      <br></br>
+      <OrderConfirmationForm
+        {...{ order, goPayment: () => console.log("order :>> ", order) }}
+      ></OrderConfirmationForm>
+      <br></br>
+      <br></br>
+      <br></br>
+      <SuccessfulCompletForm {...{ order }}></SuccessfulCompletForm>
+      {/* <Adventures></Adventures> */}
     </>
   );
 }
 
 export default App;
-
-// Получаем из бд список приключений (скорее всего, массив объектов);
-const providerId = "51b1096a-3cd5-11ec-8122-001999b9620c";
-let _adventures: TAdventure[] = [
-  {
-    id: "0001",
-    providerId,
-    characteristics: [
-      {
-        id: "",
-        name: "",
-        description: "",
-        slotQuantity: 0,
-        //duration: "",
-        price: 0,
-        priceDate: "",
-      },
-    ],
-    name: "Катание на квадроцикле",
-    status: true,
-    description: {
-      duration: "",
-      autofill: false,
-      possibilitySellingCertificate: false,
-      address: "",
-      info: "",
-      limitations: "",
-      phone: "",
-      preRegistration: false,
-      program: "",
-      connectedСalendar: false,
-      indivisibleVolume: true,
-      participantsQuantity: 1,
-      seasonality: "",
-      slotSize: 2,
-      slotVolume: 3,
-    },
-  },
-  {
-    id: "0002",
-    providerId,
-    characteristics: [
-      {
-        id: "",
-        name: "",
-        description: "",
-        slotQuantity: 0,
-        //duration: "",
-        price: 0,
-        priceDate: "",
-      },
-    ],
-    name: "Страйкбол",
-    status: true,
-    description: {
-      duration: "",
-      autofill: false,
-      possibilitySellingCertificate: false,
-      address: "",
-      info: "",
-      limitations: "",
-      phone: "",
-      preRegistration: false,
-      program: "",
-      connectedСalendar: false,
-      indivisibleVolume: true,
-      participantsQuantity: 1,
-      seasonality: "",
-      slotSize: 2,
-      slotVolume: 3,
-    },
-  },
-  {
-    id: "0003",
-    providerId,
-    characteristics: [
-      {
-        id: "",
-        name: "",
-        description: "",
-        slotQuantity: 0,
-        //duration: "",
-        price: 0,
-        priceDate: "",
-      },
-    ],
-    name: "Полёт в аэротрубе",
-    status: false,
-    description: {
-      duration: "",
-      autofill: false,
-      possibilitySellingCertificate: false,
-      address: "",
-      info: "",
-      limitations: "",
-      phone: "",
-      preRegistration: false,
-      program: "",
-      connectedСalendar: false,
-      indivisibleVolume: true,
-      participantsQuantity: 1,
-      seasonality: "",
-      slotSize: 2,
-      slotVolume: 3,
-    },
-  },
-  {
-    id: "0004",
-    providerId,
-    characteristics: [
-      {
-        id: "",
-        name: "",
-        description: "",
-        slotQuantity: 0,
-        //duration: "",
-        price: 0,
-        priceDate: "",
-      },
-    ],
-    name: "Свидание на крыше",
-    status: true,
-    description: {
-      duration: "",
-      autofill: false,
-      possibilitySellingCertificate: false,
-      address: "",
-      info: "",
-      limitations: "",
-      phone: "",
-      preRegistration: false,
-      program: "",
-      connectedСalendar: false,
-      indivisibleVolume: true,
-      participantsQuantity: 1,
-      seasonality: "",
-      slotSize: 2,
-      slotVolume: 3,
-    },
-  },
-];
-
-const images = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    checked: false,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
-    title: "Sea star",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
-    title: "Bike",
-  },
-];
-const videos = [
-  {
-    video: "https://www.youtube.com/watch?v=a2DkRBnp4ns",
-    title: "",
-    checked: false,
-  },
-  {
-    video: "https://www.youtube.com/watch?v=5VK3fZsQtQE",
-    title: "",
-  },
-  {
-    video: "https://www.youtube.com/watch?v=FgvJH91a5K0",
-    title: "",
-  },
-];

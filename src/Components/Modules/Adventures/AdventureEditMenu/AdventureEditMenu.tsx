@@ -1,34 +1,23 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
-import { RowTextInput } from "../../BaseComponents/Inputs/RowTextInput";
 import VideoListView from "./Components/VideoList";
 import ImageListView from "./Components/ImageList";
-import {
-  TAdventure,
-  TAdventureImage,
-  TAdventureVideo,
-  TCharacteristic,
-  TDescription,
-  TSetState,
-  TState,
-} from "../../../Model/types";
 import Description from "./Components/Description";
 import Characteristics from "./Components/Characteristics";
 import { Stack, Toolbar } from "@mui/material";
-import { BasicButton } from "../../BaseComponents/Inputs/Buttons/BasicButton";
-import {
-  createAdventure,
-  updateAdventure,
-  getAdventureList,
-} from "../../../REST/rest";
-export default function AdventureEditMenu({
+import { TState, TSetState, TAdventure, TDescription, TAdventureImage, TAdventureVideo, TCharacteristic } from "../../../../Model/types";
+import { createAdventure, updateAdventure, getAdventureList } from "../../../../REST/rest";
+import { Text, Variant } from "../../../BaseComponents/DisplayingComponents/Text";
+import { BasicButton } from "../../../BaseComponents/Inputs/Buttons/BasicButton";
+import { RowTextInput } from "../../../BaseComponents/Inputs/RowTextInput";
+
+export const  AdventureEditMenu=({
   state,
   setState,
 }: {
   state: TState;
   setState: TSetState;
-}) {
+})=> {
   const { adventure } = state;
   const setAdventure = (adv: TAdventure) => {
     setState((state) => ({ list: { ...state!.list }, adventure: adv }));

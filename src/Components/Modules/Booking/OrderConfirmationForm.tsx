@@ -1,13 +1,34 @@
-import { Text, Variant } from "../BaseComponents/DisplayingComponents/Text";
+import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import { BasicButton } from "../BaseComponents/Inputs/Buttons/BasicButton";
-import { DottedNameValue } from "../BaseComponents/DisplayingComponents/DottedNameValue";
+import { BasicButton } from "../../BaseComponents/Inputs/Buttons/BasicButton";
+import { DottedNameValue } from "../../BaseComponents/DisplayingComponents/DottedNameValue";
 
-export const OrderConfirmation = () => {
+export type TOrder = {
+  bookingName: string;
+  bookingTime: string;
+  ticketAmount: string;
+  price: string;
+  summ: string;
+  name: string;
+  phone: string;
+  email: string;
+  allBonuses: string;
+  remainingBonuses: string;
+  certificateDiscount: string;
+  bonusDiscount: string;
+  totalPay: string;
+};
+export const OrderConfirmationForm = ({
+  order,
+  goPayment,
+}: {
+  order: TOrder;
+  goPayment: () => void;
+}) => {
   return (
-    <Stack spacing={2} sx={{ width: "40%" }}>
+    <Stack spacing={2} >
       <Grid container justifyContent="center">
         <Text
           {...{
@@ -21,26 +42,26 @@ export const OrderConfirmation = () => {
           {...{
             fontWeight: 700,
             variant: Variant.h6,
-            text: 'Кино на крыше "Маленькая мисс Счастье"',
+            text: order.bookingName,
           }}
         />
         <Box sx={{ minHeight: "3rem" }} />
         {[
-          { name: "Время брони:", value: "20:00" },
-          { name: "Количество билетов:", value: "2 шт" },
-          { name: "Цена билета:", value: "800 руб" },
-          { name: "Сумма:", value: "1600 руб" },
-        ].map(({ name, value }) => (
-          <DottedNameValue {...{ name, value }} />
+          { name: "Время брони:", value: order.bookingTime },
+          { name: "Количество билетов:", value: order.ticketAmount },
+          { name: "Цена билета:", value: order.price },
+          { name: "Сумма:", value: order.summ },
+        ].map(({ name, value }, key) => (
+          <DottedNameValue {...{ key, name, value }} />
         ))}
 
         <Box sx={{ minHeight: "2rem" }} />
         {[
-          { name: "Имя:", value: "Иван" },
-          { name: "Номер телефона:", value: "+7 (911) 111-11-11" },
-          { name: "E-mail:", value: "info@hslon.ru" },
-        ].map(({ name, value }) => (
-          <DottedNameValue {...{ name, value }} />
+          { name: "Имя:", value: order.name },
+          { name: "Номер телефона:", value: order.phone },
+          { name: "E-mail:", value: order.email },
+        ].map(({ name, value }, key) => (
+          <DottedNameValue key={key} {...{ name, value }} />
         ))}
         <Box sx={{ minHeight: "2rem" }} />
 
@@ -70,7 +91,7 @@ export const OrderConfirmation = () => {
             />
           </Box>
           <Box sx={{ flexShrink: 0 }}>
-            <Text {...{ variant: Variant.subtitle1, text: "1000 бонусов" }} />
+            <Text {...{ variant: Variant.subtitle1, text: order.allBonuses }} />
           </Box>
           <Box sx={{ width: "100%" }} />
           <Box sx={{ flexShrink: 0, color: "#F6B700" }}>
@@ -90,16 +111,18 @@ export const OrderConfirmation = () => {
             />
           </Box>
           <Box sx={{ flexShrink: 0 }}>
-            <Text {...{ variant: Variant.subtitle1, text: "800" }} />
+            <Text
+              {...{ variant: Variant.subtitle1, text: order.remainingBonuses }}
+            />
           </Box>
           <Box sx={{ width: "100%" }} />
         </Box>
         <Box sx={{ minHeight: "3rem" }} />
         {[
-          { name: "Скидка за сертификат:", value: "1000 руб" },
-          { name: "Скидка за бонусы:", value: "200 руб" },
-        ].map(({ name, value }) => (
-          <DottedNameValue {...{ name, value }} />
+          { name: "Скидка за сертификат:", value: order.certificateDiscount },
+          { name: "Скидка за бонусы:", value: order.bonusDiscount },
+        ].map(({ name, value }, key) => (
+          <DottedNameValue {...{ key, name, value }} />
         ))}
         <Box sx={{ minHeight: "3rem" }} />
         <DottedNameValue
@@ -107,7 +130,7 @@ export const OrderConfirmation = () => {
             fontWeight: 700,
             variant: Variant.h5,
             name: "ИТОГО К ОПЛАТЕ",
-            value: "900 руб",
+            value: order.totalPay,
           }}
         />
         <Box sx={{ minHeight: "5rem" }} />
@@ -119,7 +142,7 @@ export const OrderConfirmation = () => {
           }}
         />
         <Box sx={{ minHeight: "16rem" }} />
-        <BasicButton {...{ onClick: () => {} }}>  
+        <BasicButton {...{ onClick: goPayment }}>
           <Box sx={{ display: "flex", width: "100%" }}>
             <Box sx={{ flexShrink: 0 }}>
               <Text
@@ -132,7 +155,13 @@ export const OrderConfirmation = () => {
             </Box>
             <Box sx={{ width: "100%" }} />
             <Box sx={{ flexShrink: 0 }}>
-              <Text {...{fontWeight:700, variant: Variant.h6, text: "900 руб" }} />
+              <Text
+                {...{
+                  fontWeight: 700,
+                  variant: Variant.h6,
+                  text: order.totalPay,
+                }}
+              />
             </Box>
           </Box>
         </BasicButton>

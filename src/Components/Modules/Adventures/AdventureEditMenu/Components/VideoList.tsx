@@ -4,17 +4,14 @@ import ImageListItem from "@mui/material/ImageListItem";
 import { AppBar, Grid, IconButton, Modal, Stack, Toolbar } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Box from "@mui/material/Box";
-import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
-import { TAdventureVideo } from "../../../../Model/types";
-import {
-  Text,
-  Variant,
-} from "../../../BaseComponents/DisplayingComponents/Text";
-import VideoCallIcon from "@mui/icons-material/VideoCall";
-import {BasicButton} from "../../../BaseComponents/Inputs/Buttons/BasicButton";
-import MultilineText from "../../../BaseComponents/Inputs/MultilineText";
-import { HiddenDelete } from "../../../BaseComponents/Inputs/Buttons/HiddenDelete";
-import BasicTooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
+import { TAdventureVideo } from "../../../../../Model/types";
+import { Text, Variant } from "../../../../BaseComponents/DisplayingComponents/Text";
+import { BasicTooltip } from "../../../../BaseComponents/DisplayingComponents/Tooltip";
+import { BasicButton } from "../../../../BaseComponents/Inputs/Buttons/BasicButton";
+import { HiddenDelete } from "../../../../BaseComponents/Inputs/Buttons/HiddenDelete";
+import { MultilineText } from "../../../../BaseComponents/Inputs/MultilineText";
+import CheckedComponentWrapper from "../../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
+import VideoCallIcon from '@mui/icons-material/VideoCall';
 export default function VideoListView({
   videos = [],
   setVideos,

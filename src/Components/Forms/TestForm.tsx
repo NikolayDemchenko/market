@@ -5,11 +5,11 @@ import {RowTextInput} from "../BaseComponents/Inputs/RowTextInput";
 import PhoneInput from "../BaseComponents/Inputs/MaskedInputs";
 import PasswordInput from "../BaseComponents/Inputs/Password";
 import Amount from "../BaseComponents/Inputs/Amount";
-import SelectInput from "../BaseComponents/Inputs/Select";
+import {SelectInput} from "../BaseComponents/Inputs/SelectInput";
 import {BasicButton} from "../BaseComponents/Inputs/Buttons/BasicButton";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import MultilineInput from "../BaseComponents/Inputs/MultilineText";
+import { MultilineText} from "../BaseComponents/Inputs/MultilineText";
 import TimeWithMinute from "../BaseComponents/Inputs/TimeWithMinute";
 // Запрос к бд -> Получить и передать массив данных;
 let options = ["5 минут", "10 минут", "15 минут", "20 минут"];
@@ -68,7 +68,7 @@ export default function TestForm() {
       />
       <SelectInput {...{ label: "Выберите характеристику",getSelect, options }} />
       <TimeWithMinute {...{getTime,label:"Продолжительность"}} />
-      <MultilineInput     
+      <MultilineText     
         {...{defaultValue:"", getText:getMultiText, label: "Введите текст" }}
       />
       <BasicButton {...{ btnText: "Подтвердить выбор", onClick:()=>{} }} />

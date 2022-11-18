@@ -9,42 +9,70 @@ import PhoneInput from "../BaseComponents/Inputs/MaskedInputs";
 import Stack from "@mui/material/Stack";
 import { BasicButton } from "../BaseComponents/Inputs/Buttons/BasicButton";
 
+export type TAutorizData = {
+  phone: string;
+  password: string;
+  checked: boolean;
+};
+export default function Autorization({autorization}:{autorization:(adata:TAutorizData)=>void}) {
+  const [state, setState] = React.useState<TAutorizData>({
+    checked: false,
+    password: "",
+    phone: "",
+  });
 
-export default function Autorization() {
-  const getPassword = (value: string) => {
-    console.log(value);
+  const getPassword = (password: string) => {
+    setState({ ...state, password });
+    console.log("password :>> ", password);
   };
-  const getCheck = (val: boolean) => {
-    console.log("val :>> ", val);
+  const getCheck = (checked: boolean) => {
+    setState({ ...state, checked });
+    console.log("checked :>> ", checked);
   };
-  function getPhoneNumber(value: string) {
-    console.log(value);
+  function getPhone(phone: string) {
+    setState({ ...state, phone });
+    console.log("phone :>> ", phone);
   }
-  return (  
-    <Stack spacing={1}>    
+  return (
+    <Stack spacing={1}>
       <HSlon />
       <Grid container justifyContent="center">
-
-      <Text {...{ variant: Variant.h5, text: "Вход для поставщиков" }} />
+        <Text {...{ variant: Variant.h5, text: "Вход для поставщиков" }} />
       </Grid>
       <PhoneInput
         {...{
           label: "Введите номер телефона",
           defaultValue: "",
-          getPhoneNumber,
+          getPhoneNumber: getPhone,
         }}
       />
       <PasswordInput {...{ label: "Введите пароль", getPassword }} />
       <SignedCheckBox
         {...{
           getCheck,
-          checked: false,
+          checked: state.checked,
           checkBoxText: "Запомнить меня",
         }}
       />
-      <BasicButton {...{ btnText: "Войти", onClick:()=>{} }} />
-      <BasicButton {...{ btnText: "Зарегистрироваться", onClick:()=>{} }} />
-      <BasicButton {...{ btnText: "Забыли пароль?", onClick:()=>{} }} />
+      <BasicButton
+        {...{
+          onClick: () => {
+            if (
+              state.password &&
+              state.phone &&
+              state.phone.replace(/[^0-9]/g, "").length === 11
+            ) {              
+              autorization(state)            
+            } else {
+              alert("Не все поля заполнены!");
+            }
+          },
+        }}
+      >
+        Войти
+      </BasicButton>
+      <BasicButton {...{ onClick: () => {} }}>Зарегистрироваться</BasicButton>
+      <BasicButton {...{ onClick: () => {} }}>Забыли пароль?</BasicButton>
     </Stack>
   );
 }

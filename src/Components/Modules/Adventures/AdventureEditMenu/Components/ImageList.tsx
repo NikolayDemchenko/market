@@ -6,16 +6,14 @@ import IconButton from "@mui/material/IconButton";
 import ImageListItem from "@mui/material/ImageListItem";
 import TableContainer from "@mui/material/TableContainer";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
-import CheckedComponentWrapper from "../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
-import { TAdventureImage, TImageRequestData } from "../../../../Model/types";
-import {
-  Text,
-  Variant,
-} from "../../../BaseComponents/DisplayingComponents/Text";
-import { HiddenDelete } from "../../../BaseComponents/Inputs/Buttons/HiddenDelete";
+
 import Grid from "@mui/material/Grid";
 import { toBase64 } from './imageToBase64';
-import BasicTooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
+import { TAdventureImage, TImageRequestData } from "../../../../../Model/types";
+import { Text, Variant } from "../../../../BaseComponents/DisplayingComponents/Text";
+import { BasicTooltip } from "../../../../BaseComponents/DisplayingComponents/Tooltip";
+import { HiddenDelete } from "../../../../BaseComponents/Inputs/Buttons/HiddenDelete";
+import CheckedComponentWrapper from "../../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
 
 export default function ImageListView({
   images = [],

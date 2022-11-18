@@ -5,7 +5,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Checkbox from '@mui/material/Checkbox';
 import Box from "@mui/material/Box";
-import { TAdventure } from '../../../Model/types';
+import { TAdventure } from '../../../../Model/types';
 import { styled } from '@mui/material';
 import Paper from '@mui/material/Paper';
 

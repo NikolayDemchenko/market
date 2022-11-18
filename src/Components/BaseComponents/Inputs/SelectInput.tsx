@@ -4,7 +4,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { InputLabel } from "@mui/material";
 
-export default function SelectInput({
+export  const SelectInput=({
   getSelect,
   options,
   label,
@@ -12,7 +12,7 @@ export default function SelectInput({
   getSelect: Function;
   options: string[];
   label: string;
-}) {
+})=> {
   const [charact, setCharact] = React.useState(options[0]);
   const handleChange = (event: SelectChangeEvent) => {
     setCharact(event.target.value);

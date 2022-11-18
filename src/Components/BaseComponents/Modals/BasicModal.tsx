@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import MultilineTextInput from "../Inputs/MultilineText";
+import {MultilineText} from "../Inputs/MultilineText";
 import { BasicButton } from "../Inputs/Buttons/BasicButton";
 import { Text, Variant } from "../DisplayingComponents/Text";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
@@ -43,7 +43,7 @@ export function VideoModal({ getVideoUrl }: { getVideoUrl: Function }) {
             <Text
               {...{ variant: Variant.body1, text: "Вставьте ссылку на видео" }}
             />
-            <MultilineTextInput
+            <MultilineText
               label={""}
               defaultValue={""}
               getText={setInputData}

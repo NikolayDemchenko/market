@@ -13,24 +13,19 @@ import {
   styled,
   Toolbar,
 } from "@mui/material";
-import { TCharacteristic } from "../../../../Model/types";
-import {
-  Text,
-  Variant,
-} from "../../../BaseComponents/DisplayingComponents/Text";
-import MultilineText from "../../../BaseComponents/Inputs/MultilineText";
-import Amount from "../../../BaseComponents/Inputs/Amount";
+
 import AppBar from "@mui/material/AppBar";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
-import { BasicButton } from "../../../BaseComponents/Inputs/Buttons/BasicButton";
-import { NamedText } from "../../../BaseComponents/DisplayingComponents/NamedText";
-import { HiddenDelete } from "../../../BaseComponents/Inputs/Buttons/HiddenDelete";
-import {
-  DateInput,
-  DurationInput,
-} from "../../../BaseComponents/Inputs/MaskedInputs";
-import Price from "../../../BaseComponents/Inputs/Price";
-import BasicTooltip from "../../../BaseComponents/DisplayingComponents/Tooltip";
+import { TCharacteristic } from "../../../../../Model/types";
+import { NamedText } from "../../../../BaseComponents/DisplayingComponents/NamedText";
+import { Text, Variant } from "../../../../BaseComponents/DisplayingComponents/Text";
+import {BasicTooltip} from "../../../../BaseComponents/DisplayingComponents/Tooltip";
+import Amount from "../../../../BaseComponents/Inputs/Amount";
+import { BasicButton } from "../../../../BaseComponents/Inputs/Buttons/BasicButton";
+import { HiddenDelete } from "../../../../BaseComponents/Inputs/Buttons/HiddenDelete";
+import {MultilineText} from "../../../../BaseComponents/Inputs/MultilineText";
+import Price from "../../../../BaseComponents/Inputs/Price";
+
 
 export default function Characteristics({
   characteristics = [],
