@@ -6,7 +6,7 @@ import Description from "./Components/Description";
 import Characteristics from "./Components/Characteristics";
 import { Stack, Toolbar } from "@mui/material";
 import { TState, TSetState, TAdventure, TDescription, TAdventureImage, TAdventureVideo, TCharacteristic } from "../../../../Model/types";
-import { createAdventure, updateAdventure, getAdventureList } from "../../../../REST/rest";
+import { createItem, updateItem,  getItemList } from "../../../../REST/rest";
 import { Text, Variant } from "../../../BaseComponents/DisplayingComponents/Text";
 import { BasicButton } from "../../../BaseComponents/Inputs/Buttons/BasicButton";
 import { RowTextInput } from "../../../BaseComponents/Inputs/RowTextInput";
@@ -24,11 +24,11 @@ export const  AdventureEditMenu=({
   };
   const createAdv = (adventure: TAdventure) => {
     console.log("adventure :>> ", adventure);
-    createAdventure(state, setState);
+    createItem(state, setState);
   };
   const updateAdv = (adventure: TAdventure) => {
     console.log("adventure :>> ", adventure);
-    updateAdventure(state, setState);
+    updateItem(state, setState);
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -80,7 +80,7 @@ export const  AdventureEditMenu=({
         <BasicButton
           {...{
             onClick: () => {
-              getAdventureList(setState);
+              getItemList(setState);
             },
           }}
         >

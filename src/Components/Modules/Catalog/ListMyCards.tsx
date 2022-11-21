@@ -1,17 +1,17 @@
 import * as React from "react";
 import List from "@mui/material/List";
-import {SmallCard} from "../../Catalog/SmallCard";
+import {SmallCard} from "./SmallCard";
 import {
   TAdventure,
   TCharacteristic,
   TDescription,
   TSetState,
   TState,
-} from "../../../../Model/types";
+} from "../../../Model/types";
 import {
   Text,
   Variant,
-} from "../../../BaseComponents/DisplayingComponents/Text";
+} from "../../BaseComponents/DisplayingComponents/Text";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import AddIcon from "@mui/icons-material/Add";
@@ -21,9 +21,9 @@ import { Grid, Stack, TableContainer, Toolbar } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 import Box from "@mui/material/Box";
-import {  getItemById } from "../../../../REST/rest";
+import {  getItemById } from "../../../REST/rest";
 
-export const AdventureList = ({
+export const ListMyCards = ({
   state: { list },
   setState,
 }: {
@@ -88,7 +88,7 @@ export const AdventureList = ({
         {/* <AppBar position="static" color="inherit"> */}
         <Toolbar sx={{ position: "static", color: "inherit" }}>
           <Box sx={{ minWidth: "100%" }}>
-            <Text {...{ variant: Variant.h4, text: "Приключения" }} />
+            <Text {...{ variant: Variant.h4, text: "Каталог" }} />
             <BottomNavigation
               showLabels
               onChange={(event: React.SyntheticEvent, value: Function) => {
@@ -134,7 +134,7 @@ export const AdventureList = ({
       </Grid>
       <Grid item xs={12}>
         {/* <TableContainer sx={{ height: 600 }}> */}
-        <Box component="main" sx={{ p: 0.5, bgcolor: "rgba(0, 0, 0, 0.12)" }}>
+        <Box component="main" sx={{     display: "flex",   justifyContent: 'center', p: 0.5, bgcolor: "rgba(0, 0, 0, 0.12)" }}>
           <Box
             sx={{
               display: "flex",
@@ -142,7 +142,7 @@ export const AdventureList = ({
               p: 1,
               m: 1,
               bgcolor: "background.paper",
-              // maxWidth: 300,
+              maxWidth: 1200,            
               borderRadius: 1,
             }}
           >

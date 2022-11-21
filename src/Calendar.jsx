@@ -8,10 +8,11 @@ import "./swiper-styles.css";
 // import required modules
 import { Text, Variant } from "./Components/BaseComponents/DisplayingComponents/Text";
 import { CalendarCard } from "./Components/Modules/Booking/CalendarCard";
+import React from "react";
 
 
 
-function dateRange(startDate, endDate, steps = 1) {
+export function dateRange(startDate, endDate, steps = 1) {
   const dateArray = [];
   let currentDate = new Date(startDate);
 
@@ -43,8 +44,13 @@ function getWeekDay(date) {
 }
 
 
-export default function App() {
-  const dates = dateRange(dateToISO.substr(0, 10), '2022-12-18');
+export  function Calendar() {
+
+  // Передать в качестве второго аргумента дату последнего доступного билета
+  const dates = dateRange(dateToISO.substr(0, 10), '2022-12-29');
+const [swiper,setSwiper]=React.useState()
+
+swiper&&console.log(swiper.activeIndex)
 
   // rest1c(
   //   'GET_SLOTS_CALENDAR', 
@@ -74,7 +80,7 @@ export default function App() {
         slidesPerView={12}
         spaceBetween={3}
         isBeginning={true}
-        onSlideChange={(swiper) => console.log(swiper.activeIndex)}
+        onSlideChange={(swiper) =>setSwiper(swiper) }
         // pagination={{
         //   clickable: true,
         // }}
@@ -101,8 +107,8 @@ export default function App() {
       >
         {
           dates.map((dateItem, index) => 
-            <SwiperSlide>        
-              <CalendarCard { ...{ date: dateItem.getDate(), weekDay: getWeekDay(dateItem.getDay()) } } ></CalendarCard>
+            <SwiperSlide key={index}>        
+              <CalendarCard { ...{index, date: dateItem.getDate(), weekDay: getWeekDay(dateItem.getDay()) } } ></CalendarCard>
             </SwiperSlide>
           )
         } 

@@ -1,13 +1,12 @@
 import React from "react";
 import { TAdventure, TState } from "../../../Model/types";
-import {  getItemList } from "../../../REST/rest";
+import { getItemList } from "../../../REST/rest";
 import { CircularSpinner } from "../../BaseComponents/StaticContentComponents/CircularSpinner";
+import {AdventureEditMenu, FullCard} from "./FullCard";
+import {ListMyCards} from "./ListMyCards";
 
-import {ListMyCards} from "../Catalog/ListMyCards";
-import { AdventureEditMenu } from "./AdventureEditMenu/AdventureEditMenu copy";
 
-
-export const Adventures=()=> {
+export const Catalog=()=> {
   // Форма редактирования приключения
   const [state, setState] = React.useState<TState>({ list: [] });
   React.useEffect(() => {
@@ -19,7 +18,7 @@ export const Adventures=()=> {
     <>   
       {state && <CircularSpinner {...{ spinner: state.spinner }} />}
       {state && state.adventure ? (
-        <AdventureEditMenu {...{ state, setState }}></AdventureEditMenu>
+        <FullCard {...{ fullCard:{...state.adventure,description:state.adventure.description.info}, setState }}></FullCard>
       ) : (
         state && <ListMyCards {...{ state, setState }}></ListMyCards>
       )}     

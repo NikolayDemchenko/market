@@ -1,5 +1,5 @@
 import { fromUnixTime } from "date-fns";
-import { IAdventureREST } from "../../Model/Interfaces";
+import { IItemREST } from "../../Model/Interfaces";
 import {
   TAdventure,
   TAdventureImage,
@@ -22,14 +22,14 @@ import {
 } from "./Converter";
 import { RestSelector } from "./rest1C";
 
-export class AdventureREST1C implements IAdventureREST {
+export class AdventureREST1C implements IItemREST {
   restSelector: RestSelector;
   private providerId;
   constructor(providerId: string, restTransfer: RestSelector) {
     this.providerId = providerId;
     this.restSelector = restTransfer;
   }
-  getAdventureList = (setState: TSetState) => {
+  getItemList = (setState: TSetState) => {
     setState((state) => ({ ...state, spinner: true }));
     this.restSelector.getAdventureList(
       ({ LIST_POSITION }: { LIST_POSITION: TPosition_1C[] }) => {
@@ -45,7 +45,7 @@ export class AdventureREST1C implements IAdventureREST {
     );
   };
   //   "51b1096a-3cd5-11ec-8122-001999b9620c"
-  getAdventureById = (id: string, setState: TSetState) => {
+  getItemById = (id: string, setState: TSetState) => {
     setState((state) => ({ ...state, spinner: true }));
     this.restSelector.getAdventure((adv: TAdventure_1C) => {
       this.restSelector.getImages((response: TImagesResponse1C) => {
@@ -76,7 +76,7 @@ export class AdventureREST1C implements IAdventureREST {
     }, id);
   };
 
-  createAdventure = (state: TState, setState: TSetState) => {
+  createItem = (state: TState, setState: TSetState) => {
     setState((state) => ({ ...state, spinner: true }));
     const { adventure } = state;
     this.restSelector.createAdventure(
@@ -86,7 +86,7 @@ export class AdventureREST1C implements IAdventureREST {
         this.sendImages(data, state, (response: object) => {
           console.log("response :>> ", response);
         });
-        this.getAdventureList(setState);
+        this.getItemList(setState);
       }
     );
   };
@@ -109,14 +109,14 @@ export class AdventureREST1C implements IAdventureREST {
     );
   };
 
-  updateAdventure = (state: TState, setState: TSetState) => {
+  updateItem = (state: TState, setState: TSetState) => {
     setState((state) => ({ ...state, spinner: true }));
     const { adventure } = state;
     this.restSelector.createAdventure(
       convertTo1C(adventure!),
       (data: { ADVENTURE_GUID: string }) => {
         this.sendImages(data, state, () => {
-          this.getAdventureList(setState); // Как здесь задействуется res?
+          this.getItemList(setState); // Как здесь задействуется res?
         });
       }
     );
@@ -128,7 +128,7 @@ export class AdventureREST1C implements IAdventureREST {
     // }, "ГУИД_ПРИКЛЮЧЕНИЯ");
   };
 
-  removeAdventureById = (id: string, setState: TSetState) => {
+  removeItemById = (id: string, setState: TSetState) => {
     // removeDocById(id).then(() => {
     //   this.getAdventureList(setState);
     // });

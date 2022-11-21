@@ -1,8 +1,8 @@
 import React from "react";
-import Swiper from "./Swiper";
+import {Calendar} from "./Calendar";
 import { OrderConfirmationForm } from "./Components/Modules/Booking/OrderConfirmationForm";
 import Autorization, { TAutorizData } from "./Components/Forms/Autorization";
-import { Adventures } from "./Components/Modules/Adventures/Adventures";
+import { Catalog } from "./Components/Modules/Catalog/Catalog";
 import {
   BonusesForm,
   TBonusesConfirmation,
@@ -19,6 +19,7 @@ import {
   TicketDataForm,
   TTicketData,
 } from "./Components/Modules/Booking/TicketDataForm";
+import { Booking } from "./Components/Modules/Booking/Booking";
 
 function App() {
   const order = {
@@ -39,64 +40,8 @@ function App() {
 
   return (
     <>
-      <Swiper></Swiper>
-      <Autorization
-        {...{
-          autorization: (adata: TAutorizData): void => {
-            console.log("autorization :>> ", adata);
-          },
-        }}
-      ></Autorization>
-      <TicketDataForm
-        {...{
-          getTicketData: (ticketData: TTicketData): void => {
-            console.log("ticketData :>> ", ticketData);
-          },
-        }}
-      ></TicketDataForm>
-      <br></br>
-      <br></br>
-      <br></br>
-      <CertificateForm
-        {...{
-          getCertificate: (certificate: TCertificate): void => {
-            console.log("certificate :>> ", certificate);
-          },
-        }}
-      ></CertificateForm>
-      <br></br>
-      <br></br>
-      <br></br>
-      <PhoneConfirmationForm
-        {...{
-          getPhoneConfirmation: (
-            phoneConfirmation: TPhoneConfirmation
-          ): void => {
-            console.log("phoneConfirmation :>> ", phoneConfirmation);
-          },
-        }}
-      ></PhoneConfirmationForm>
-      <br></br>
-      <br></br>
-      <br></br>
-      <BonusesForm
-        {...{
-          getBonus: (bonus: TBonusesConfirmation): void => {
-            console.log("bonus :>> ", bonus);
-          },
-        }}
-      ></BonusesForm>
-      <br></br>
-      <br></br>
-      <br></br>
-      <OrderConfirmationForm
-        {...{ order, goPayment: () => console.log("order :>> ", order) }}
-      ></OrderConfirmationForm>
-      <br></br>
-      <br></br>
-      <br></br>
-      <SuccessfulCompletForm {...{ order }}></SuccessfulCompletForm>
-      {/* <Adventures></Adventures> */}
+      {/* <Booking></Booking>      */}
+      <Catalog></Catalog>
     </>
   );
 }

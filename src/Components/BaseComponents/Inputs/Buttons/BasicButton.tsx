@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import { purple } from '@mui/material/colors';
 
 export  function BasicButton(props: {
 onClick:() => void
 }) {
   return (
-    <ColorButton  fullWidth variant="contained" size="large" {...props} onClick={()=>props.onClick()} /> 
+    <Button  fullWidth variant="contained" size="large" {...props} onClick={()=>props.onClick()} /> 
 
   );
 }

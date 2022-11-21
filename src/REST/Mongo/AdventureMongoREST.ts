@@ -1,17 +1,17 @@
-import { IAdventureREST } from "../../Model/Interfaces";
+import { IItemREST } from "../../Model/Interfaces";
 import { TAdventure, TAdventureMongoDB, TSetState, TState } from "../../Model/types";
 import { RESTManager } from "./RESTManager";
 
 const { getCollection, getDocById, createDoc, updateDoc, removeDocById } =
   RESTManager("adventures");
 
-export class AdventureMongoREST implements IAdventureREST {
+export class AdventureMongoREST implements IItemREST {
   private providerId;
   constructor(providerId: string) {
     this.providerId = providerId;
   }
 
-  getAdventureList = (setState: TSetState) =>{
+  getItemList = (setState: TSetState) =>{
     getCollection(this.providerId).then((list) => {
       setState({
         list: list.map((adv: TAdventureMongoDB) => {
@@ -24,7 +24,7 @@ export class AdventureMongoREST implements IAdventureREST {
     })
   };
 
-  getAdventureById = (id: string, setState: TSetState) => {
+  getItemById = (id: string, setState: TSetState) => {
     getDocById(id).then((adventure) => {
       setState((state) => {
         const { _id, ...adv } = adventure;
@@ -33,21 +33,21 @@ export class AdventureMongoREST implements IAdventureREST {
     });
   };
 
-  createAdventure = ({adventure}: TState, setState: TSetState) => {
+  createItem = ({adventure}: TState, setState: TSetState) => {
     createDoc(adventure).then((data) => {
-      this.getAdventureList(setState);
+      this.getItemList(setState);
     });
   };
 
-  updateAdventure = ({adventure}: TState, setState: TSetState) => {
+  updateItem = ({adventure}: TState, setState: TSetState) => {
     const { id, ..._adventure } = adventure!;
     updateDoc({ ..._adventure, _id: id }).then((adv) => {
-      this.getAdventureList(setState);
+      this.getItemList(setState);
     });
   };
-  removeAdventureById = (id: string, setState: TSetState) => {
+  removeItemById = (id: string, setState: TSetState) => {
     removeDocById(id).then(() => {
-      this.getAdventureList(setState);
+      this.getItemList(setState);
     });
   };
 }

@@ -20,8 +20,8 @@ export enum Variant {
   inherit = "inherit",
 }
 
-export function Text(props: { text: string; variant: Variant }) { 
-  return <BootstrapTypography {...props}>{props.text}</BootstrapTypography>;
+export function Text(props: { text?: string; variant: Variant,children?:React.ReactNode }) { 
+  return <BootstrapTypography {...props}>{props.children ?props.children:props.text}</BootstrapTypography>;
 }
 
 const BootstrapTypography = styled(Typography)(({ theme }) => ({
