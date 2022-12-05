@@ -6,8 +6,8 @@ import Sheet from "@mui/joy/Sheet";
 import Done from "@mui/icons-material/Done";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { BasicButton } from "./Buttons/BasicButton";
-import { Text, Variant } from "../DisplayingComponents/Text";
+import { BasicButton } from "./Buttons/Buttons";
+import { Text, Variant } from "../Outputs/Text";
 import { ListItemButton, Toolbar } from "@mui/material";
 
 export const MonthsSelect = ({

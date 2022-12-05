@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./swiper-styles.css";
 // import required modules
-import { Text, Variant } from "./Components/BaseComponents/DisplayingComponents/Text";
+import { Text, Variant } from "./Components/BaseComponents/Outputs/Text";
 import { CalendarCard } from "./Components/Modules/Booking/CalendarCard";
 import React from "react";
 

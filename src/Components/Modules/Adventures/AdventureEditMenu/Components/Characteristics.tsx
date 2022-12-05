@@ -17,11 +17,11 @@ import {
 import AppBar from "@mui/material/AppBar";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { TCharacteristic } from "../../../../../Model/types";
-import { NamedText } from "../../../../BaseComponents/DisplayingComponents/NamedText";
-import { Text, Variant } from "../../../../BaseComponents/DisplayingComponents/Text";
-import {BasicTooltip} from "../../../../BaseComponents/DisplayingComponents/Tooltip";
+import { NamedText } from "../../../../BaseComponents/Outputs/NamedText";
+import { Text, Variant } from "../../../../BaseComponents/Outputs/Text";
+import {BasicTooltip} from "../../../../BaseComponents/Outputs/Tooltip";
 import Amount from "../../../../BaseComponents/Inputs/Amount";
-import { BasicButton } from "../../../../BaseComponents/Inputs/Buttons/BasicButton";
+import { BasicButton } from "../../../../BaseComponents/Inputs/Buttons/Buttons";
 import { HiddenDelete } from "../../../../BaseComponents/Inputs/Buttons/HiddenDelete";
 import {MultilineText} from "../../../../BaseComponents/Inputs/MultilineText";
 import Price from "../../../../BaseComponents/Inputs/Price";

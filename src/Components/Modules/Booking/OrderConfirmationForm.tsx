@@ -1,9 +1,9 @@
-import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
+import { Text, Variant } from "../../BaseComponents/Outputs/Text";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import { BasicButton } from "../../BaseComponents/Inputs/Buttons/BasicButton";
-import { DottedNameValue } from "../../BaseComponents/DisplayingComponents/DottedNameValue";
+import { BasicButton } from "../../BaseComponents/Inputs/Buttons/Buttons";
+import { DottedNameValue } from "../../BaseComponents/Outputs/DottedNameValue";
 
 export type TOrder = {
   bookingName: string;

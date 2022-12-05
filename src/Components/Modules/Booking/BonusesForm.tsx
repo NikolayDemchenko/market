@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
-import { BasicButton } from "../../BaseComponents/Inputs/Buttons/BasicButton";
+import { Text, Variant } from "../../BaseComponents/Outputs/Text";
+import { BasicButton } from "../../BaseComponents/Inputs/Buttons/Buttons";
 import { RowTextInput } from "../../BaseComponents/Inputs/RowTextInput";
 import React from "react";
 export type TBonusesConfirmation = {

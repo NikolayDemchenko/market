@@ -1,10 +1,10 @@
 import { Stack, Toolbar, Box } from "@mui/material";
 import React from "react";
 import { TDescription } from "../../../../../Model/types";
-import { Text, Variant } from "../../../../BaseComponents/DisplayingComponents/Text";
-import { BasicTooltip } from "../../../../BaseComponents/DisplayingComponents/Tooltip";
+import { Text, Variant } from "../../../../BaseComponents/Outputs/Text";
+import { BasicTooltip } from "../../../../BaseComponents/Outputs/Tooltip";
 import Amount from "../../../../BaseComponents/Inputs/Amount";
-import PhoneInput, { DurationInput } from "../../../../BaseComponents/Inputs/MaskedInputs";
+import  { DurationInput, PhoneInput } from "../../../../BaseComponents/Inputs/MaskedInputs";
 import { MonthsSelect } from "../../../../BaseComponents/Inputs/MonthsSelect";
 import { MultilineText } from "../../../../BaseComponents/Inputs/MultilineText";
 import { SelectInput } from "../../../../BaseComponents/Inputs/SelectInput";
@@ -117,7 +117,7 @@ export default function Description({
         {...{
           label: "Телефон",
           defaultValue: description?.phone,
-          getPhoneNumber: (phone: string) =>
+          getPhone: (phone: string) =>
             setDescription({ ...description, phone }),
         }}
       />

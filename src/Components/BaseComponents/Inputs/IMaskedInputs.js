@@ -2,11 +2,11 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import InputMask from "react-input-mask";
 
-export function PhoneMask({ label, defaultValue, getPhoneNumber }) {
+export function PhoneMask({ label, defaultValue, getPhone }) {
   return (
     <InputMask
       mask="+7 (999) 999-99-99"
-      onChange={(el) => getPhoneNumber(el.target.value)}
+      onChange={(el) => getPhone(el.target.value)}
       defaultValue={defaultValue}
     >
       {() => <TextField label={label} />}
@@ -26,7 +26,7 @@ export function DurationMask({ label, defaultValue, getData }) {
       onChange={(el) => getData(el.target.value)}
       defaultValue={defaultValue}
     >
-      {() => <TextField label={label} />}
+      {() => <TextField label={label} />} 
     </InputMask>
   );
 }

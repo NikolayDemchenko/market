@@ -1,19 +1,18 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
+import { TFCButton } from '../../../Modules/Catalog/Interfaces';
 
-export  function BasicButton(props: {
-onClick:() => void
-}) {
-  return (
-    <Button  fullWidth variant="contained" size="large" {...props} onClick={()=>props.onClick()} /> 
+export  const BasicButton:TFCButton=(props)=> <Button  fullWidth variant="contained" size="large" {...props} onClick={()=>props.onClick()} /> 
 
-  );
-}
+export  const BootstrapButton:TFCButton=(props)=><BootstrapBtn  fullWidth variant="contained" size="large" {...props} onClick={()=>props.onClick()} /> 
 
 
+export  const ColorButton:TFCButton=(props)=><ColorBtn  fullWidth variant="contained" size="large" {...props} onClick={()=>props.onClick()} /> 
 
-export const BootstrapButton = styled(Button)({
+
+
+ const BootstrapBtn = styled(Button)({
   boxShadow: 'none',
   textTransform: 'none',
   fontSize: 16,
@@ -49,7 +48,7 @@ export const BootstrapButton = styled(Button)({
   },
 });
 
-export const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+ const ColorBtn = styled(Button)<ButtonProps>(({ theme }) => ({
   // color: theme.palette.getContrastText(purple[500]),
   // backgroundColor: purple[500],
   // '&:hover': {

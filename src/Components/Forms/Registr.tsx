@@ -1,9 +1,9 @@
-import { Text, Variant } from "../BaseComponents/DisplayingComponents/Text";
+import { Text, Variant } from "../BaseComponents/Outputs/Text";
 import HSlon from "../BaseComponents/StaticContentComponents/HSlon";
 import {RowTextInput} from "../BaseComponents/Inputs/RowTextInput";
-import PhoneInput from "../BaseComponents/Inputs/MaskedInputs";
-import PasswordInput from "../BaseComponents/Inputs/Password";
-import {BasicButton} from "../BaseComponents/Inputs/Buttons/BasicButton";
+import {PhoneInput} from "../BaseComponents/Inputs/MaskedInputs";
+import {PasswordInput} from "../BaseComponents/Inputs/Password";
+import {BasicButton} from "../BaseComponents/Inputs/Buttons/Buttons";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 export default function Registr() {
@@ -29,7 +29,7 @@ export default function Registr() {
         {...{
           label: "Введите номер телефона",
           defaultValue: "",
-          getPhoneNumber,
+          getPhone: getPhoneNumber,
         }}
       />
       <PasswordInput {...{ label: "Введите пароль", getPassword }} />

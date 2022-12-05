@@ -1,13 +1,13 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import { Text, Variant } from "../BaseComponents/DisplayingComponents/Text";
+import { Text, Variant } from "../BaseComponents/Outputs/Text";
 import SignedCheckBox from "../BaseComponents/Inputs/SignedCheckBox";
 
 import HSlon from "../BaseComponents/StaticContentComponents/HSlon";
-import PasswordInput from "../BaseComponents/Inputs/Password";
-import PhoneInput from "../BaseComponents/Inputs/MaskedInputs";
+import {PasswordInput} from "../BaseComponents/Inputs/Password";
+import {PhoneInput} from "../BaseComponents/Inputs/MaskedInputs";
 import Stack from "@mui/material/Stack";
-import { BasicButton } from "../BaseComponents/Inputs/Buttons/BasicButton";
+import { BasicButton } from "../BaseComponents/Inputs/Buttons/Buttons";
 
 export type TAutorizData = {
   phone: string;
@@ -43,7 +43,7 @@ export default function Autorization({autorization}:{autorization:(adata:TAutori
         {...{
           label: "Введите номер телефона",
           defaultValue: "",
-          getPhoneNumber: getPhone,
+          getPhone: getPhone,
         }}
       />
       <PasswordInput {...{ label: "Введите пароль", getPassword }} />

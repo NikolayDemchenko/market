@@ -7,8 +7,8 @@ import Characteristics from "../Adventures/AdventureEditMenu/Components/Characte
 import { Stack, Toolbar } from "@mui/material";
 import { TState, TSetState, TAdventure, TDescription, TAdventureImage, TAdventureVideo, TCharacteristic } from "../../../Model/types";
 import { createItem, updateItem, getItemList } from "../../../REST/rest";
-import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
-import { BasicButton } from "../../BaseComponents/Inputs/Buttons/BasicButton";
+import { Text, Variant } from "../../BaseComponents/Outputs/Text";
+import { BasicButton } from "../../BaseComponents/Inputs/Buttons/Buttons";
 import { RowTextInput } from "../../BaseComponents/Inputs/RowTextInput";
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';

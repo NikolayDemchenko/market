@@ -1,9 +1,9 @@
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import React from "react";
-import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
-import { BasicButton } from "../../BaseComponents/Inputs/Buttons/BasicButton";
-import PhoneInput from "../../BaseComponents/Inputs/MaskedInputs";
+import { Text, Variant } from "../../BaseComponents/Outputs/Text";
+import { BasicButton } from "../../BaseComponents/Inputs/Buttons/Buttons";
+import {PhoneInput} from "../../BaseComponents/Inputs/MaskedInputs";
 import { RowTextInput } from "../../BaseComponents/Inputs/RowTextInput";
 
 export const validateEmail = (email: string) => {
@@ -57,7 +57,7 @@ export function TicketDataForm({
         {...{
           label: "Номер телефона",
           defaultValue: "",
-          getPhoneNumber: getPhone,
+          getPhone: getPhone,
         }}
       />
       <RowTextInput

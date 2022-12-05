@@ -7,18 +7,16 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-interface State {
-  password: string;
-  showPassword: boolean;
-}
-
-export default function InputAdornments({
-  label,
-  getPassword,
-}: {
+export type TFCPasswordInput = (props: {
   label: string;
   getPassword: Function;
-}) {
+}) => JSX.Element;
+type State = {
+  password: string;
+  showPassword: boolean;
+};
+
+export const PasswordInput: TFCPasswordInput = ({ label, getPassword }) => {
   const [values, setValues] = React.useState<State>({
     password: "",
     showPassword: false,
@@ -46,7 +44,7 @@ export default function InputAdornments({
   return (
     <FormControl variant="outlined">
       <InputLabel>{label}</InputLabel>
-      <OutlinedInput  
+      <OutlinedInput
         type={values.showPassword ? "text" : "password"}
         value={values.password}
         onChange={handleChange("password")}
@@ -66,4 +64,4 @@ export default function InputAdornments({
       />
     </FormControl>
   );
-}
+};

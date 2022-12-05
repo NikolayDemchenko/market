@@ -10,8 +10,8 @@ import AddAPhoto from "@mui/icons-material/AddAPhoto";
 import Grid from "@mui/material/Grid";
 import { toBase64 } from './imageToBase64';
 import { TAdventureImage, TImageRequestData } from "../../../../../Model/types";
-import { Text, Variant } from "../../../../BaseComponents/DisplayingComponents/Text";
-import { BasicTooltip } from "../../../../BaseComponents/DisplayingComponents/Tooltip";
+import { Text, Variant } from "../../../../BaseComponents/Outputs/Text";
+import { BasicTooltip } from "../../../../BaseComponents/Outputs/Tooltip";
 import { HiddenDelete } from "../../../../BaseComponents/Inputs/Buttons/HiddenDelete";
 import CheckedComponentWrapper from "../../../../BaseComponents/StaticContentComponents/CheckedComponentWrapper";
 

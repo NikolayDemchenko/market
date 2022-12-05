@@ -11,7 +11,7 @@ import {
 import {
   Text,
   Variant,
-} from "../../BaseComponents/DisplayingComponents/Text";
+} from "../../BaseComponents/Outputs/Text";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import AddIcon from "@mui/icons-material/Add";

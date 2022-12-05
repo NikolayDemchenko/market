@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import { Text, Variant } from "../../BaseComponents/DisplayingComponents/Text";
-import { DottedNameValue } from "../../BaseComponents/DisplayingComponents/DottedNameValue";
+import { Text, Variant } from "../../BaseComponents/Outputs/Text";
+import { DottedNameValue } from "../../BaseComponents/Outputs/DottedNameValue";
 import { TOrder } from "./OrderConfirmationForm";
 export const SuccessfulCompletForm = ({order}:{order:TOrder}) => {
   return (

@@ -8,10 +8,6 @@ import { SuccessfulCompletForm } from "./SuccessfulCompletForm";
 import { TicketDataForm, TTicketData } from "./TicketDataForm";
 
 
-
-
-
-
 export function Booking() {
   const order = {
     bookingName: `Кино на крыше "Маленькая мисс Счастье"`,

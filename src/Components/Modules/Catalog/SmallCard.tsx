@@ -20,7 +20,7 @@ import { CardActionArea } from "@mui/material";
 import {
   Text,
   Variant,
-} from "../../BaseComponents/DisplayingComponents/Text";
+} from "../../BaseComponents/Outputs/Text";
 
 export type TImage = {
   img: string;

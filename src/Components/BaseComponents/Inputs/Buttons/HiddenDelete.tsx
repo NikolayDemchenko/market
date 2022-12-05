@@ -1,6 +1,6 @@
 import { Grid, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Text, Variant } from "../../DisplayingComponents/Text";
+import { Text, Variant } from "../../Outputs/Text";
 export function HiddenDelete({
   items,
   setItems,

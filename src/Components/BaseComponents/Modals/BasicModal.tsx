@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import {MultilineText} from "../Inputs/MultilineText";
-import { BasicButton } from "../Inputs/Buttons/BasicButton";
-import { Text, Variant } from "../DisplayingComponents/Text";
+import { BasicButton } from "../Inputs/Buttons/Buttons";
+import { Text, Variant } from "../Outputs/Text";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import { Stack } from "@mui/material";
 

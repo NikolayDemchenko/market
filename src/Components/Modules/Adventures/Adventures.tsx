@@ -4,7 +4,7 @@ import {  getItemList } from "../../../REST/rest";
 import { CircularSpinner } from "../../BaseComponents/StaticContentComponents/CircularSpinner";
 
 import {ListMyCards} from "../Catalog/ListMyCards";
-import { AdventureEditMenu } from "./AdventureEditMenu/AdventureEditMenu copy";
+import { AdventureEditMenu } from "./AdventureEditMenu/AdventureEditMenu";
 
 
 export const Adventures=()=> {

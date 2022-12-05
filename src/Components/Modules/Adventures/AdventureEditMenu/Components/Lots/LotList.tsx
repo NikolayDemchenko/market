@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
 import { List, Paper, styled } from "@mui/material";
 import { TAdventureLot } from "../../../../../../Model/types";
-import { Text, Variant } from "../../../../../BaseComponents/DisplayingComponents/Text";
+import { Text, Variant } from "../../../../../BaseComponents/Outputs/Text";
 import Amount from "../../../../../BaseComponents/Inputs/Amount";
 import { RowTextInput } from "../../../../../BaseComponents/Inputs/RowTextInput";
 import { MultilineText } from "../../../../../BaseComponents/Inputs/MultilineText";

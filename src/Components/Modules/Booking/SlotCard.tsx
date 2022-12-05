@@ -1,7 +1,7 @@
 import { Select } from '@mui/material';
 import Box from '@mui/material/Box';
-import { Text, Variant } from '../../BaseComponents/DisplayingComponents/Text';
-import { BasicButton } from '../../BaseComponents/Inputs/Buttons/BasicButton';
+import { Text, Variant } from '../../BaseComponents/Outputs/Text';
+import { BasicButton } from '../../BaseComponents/Inputs/Buttons/Buttons';
 
 
 export default function BasicCard() {

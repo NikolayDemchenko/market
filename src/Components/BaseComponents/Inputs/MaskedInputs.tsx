@@ -1,22 +1,20 @@
+
 import { DateMask, DurationMask, PhoneMask } from "./IMaskedInputs";
-
-
-export default function PhoneInput({label,
-  defaultValue,
-  getPhoneNumber,
-}: {
+export type TFCPhoneInput = (props: {
   label: string;
   defaultValue?: string;
-  getPhoneNumber: Function;
-}) {
+  getPhone: Function;
+}) => JSX.Element;
+export const PhoneInput: TFCPhoneInput = ({
+  label,
+  defaultValue,
+  getPhone,
+}) => {
+  return <PhoneMask {...{ label, defaultValue, getPhone }} />;
+};
 
-  return (
-    <PhoneMask {...{label,defaultValue, getPhoneNumber}} />
-  );
-}
-
-
-export  function DurationInput({label,
+export function DurationInput({
+  label,
   defaultValue,
   getData,
 }: {
@@ -24,12 +22,10 @@ export  function DurationInput({label,
   defaultValue?: string;
   getData: Function;
 }) {
-
-  return (   
-    <DurationMask {...{label,defaultValue, getData}} />
-  );
+  return <DurationMask {...{ label, defaultValue, getData }} />;
 }
-export  function DateInput({label,
+export function DateInput({
+  label,
   defaultValue,
   getData,
 }: {
@@ -37,8 +33,5 @@ export  function DateInput({label,
   defaultValue?: string;
   getData: Function;
 }) {
-
-  return (   
-    <DateMask {...{label,defaultValue, getData}} />
-  );
+  return <DateMask {...{ label, defaultValue, getData }} />;
 }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { Text, Variant } from "../DisplayingComponents/Text";
+import { Text, Variant } from "../Outputs/Text";
 
 export default function SignedCheckBox({
   getCheck,
