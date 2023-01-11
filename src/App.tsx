@@ -9,7 +9,7 @@ import {
 import { Grid } from "@mui/material";
 
 function App() {
-  // console.log('check() :>> ', check());
+  console.log('check() :>> ', check());
 
   return (
   <>
@@ -18,7 +18,7 @@ function App() {
       {/* <Booking></Booking>      */}
       {/* <Catalog></Catalog> */}
    </Grid>
-  </>
+   </>
   );
 }
 
