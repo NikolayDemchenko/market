@@ -6,8 +6,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./swiper-styles.css";
 // import required modules
-import { Text, Variant } from "./Components/BaseComponents/Outputs/Text";
-import { CalendarCard } from "./Components/Modules/Booking/CalendarCard";
+import { Text, Variant } from "../../BaseComponents/Outputs/Text";
+import { CalendarCard } from "./CalendarCard";
 import React from "react";
 
 
@@ -47,7 +47,7 @@ function getWeekDay(date) {
 export  function Calendar() {
 
   // Передать в качестве второго аргумента дату последнего доступного билета
-  const dates = dateRange(dateToISO.substr(0, 10), '2022-12-29');
+  const dates = dateRange(dateToISO.substr(0, 10), '2023-12-29');
 const [swiper,setSwiper]=React.useState()
 
 swiper&&console.log(swiper.activeIndex)
@@ -103,11 +103,11 @@ swiper&&console.log(swiper.activeIndex)
         //     spaceBetween: 50,
         //   },
         // }}
-        className="mySwiper"
+        // className="mySwiper"
       >
         {
           dates.map((dateItem, index) => 
-            <SwiperSlide key={index}>        
+            <SwiperSlide key={index}>   
               <CalendarCard { ...{index, date: dateItem.getDate(), weekDay: getWeekDay(dateItem.getDay()) } } ></CalendarCard>
             </SwiperSlide>
           )

@@ -5,7 +5,7 @@ import { check } from "./test";
 import {
   MyRegistration,
   RegForm,
-} from "./Components/Modules/Catalog/Interfaces";
+} from "./Components/Modules/Catalog/RegForm";
 import { Grid } from "@mui/material";
 
 function App() {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Calendar } from "../../../Calendar";
+import { Calendar } from "./Calendar";
 import { BonusesForm, TBonusesConfirmation } from "./BonusesForm";
 import { CertificateForm, TCertificate } from "./CertificateForm";
 import { OrderConfirmationForm } from "./OrderConfirmationForm";

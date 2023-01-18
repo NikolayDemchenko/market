@@ -1,29 +1,19 @@
 import { Stack } from "@mui/joy";
-import { Box, Grid } from "@mui/material";
-import React, { ButtonHTMLAttributes } from "react";
+import React from "react";
 import {
   BasicButton,
-  ColorButton,
+  TFCButton,
 } from "../../BaseComponents/Inputs/Buttons/Buttons";
 import { PhoneInput, TFCPhoneInput } from "../../BaseComponents/Inputs/MaskedInputs";
 import { PasswordInput, TFCPasswordInput } from "../../BaseComponents/Inputs/Password";
-import { RowTextInput } from "../../BaseComponents/Inputs/RowTextInput";
 
-// type TRowTextInput = ({
-//   label,
-//   defaultValue,
-//   getText,
-// }: {
-//   label: string;
-//   defaultValue: string;
-//   getText: Function;
-// }) => JSX.Element;
 
 type TRegistration = {
   phone: string;
   password: string;
   confirmPassword: string;
 };
+
 
 interface IRegistration {
   phoneInput: TFCPhoneInput;
@@ -32,13 +22,11 @@ interface IRegistration {
   render: () => JSX.Element;
 }
 
-export type TFCButton = (props:{ onClick: () => void }) => JSX.Element;
 
 export class MyRegistration implements IRegistration {
   phoneInput: TFCPhoneInput;
   passwordInput: TFCPasswordInput;
   confirmButton: TFCButton;
-
   constructor(
     phoneInput: TFCPhoneInput,
     passwordInput: TFCPasswordInput,
@@ -48,6 +36,7 @@ export class MyRegistration implements IRegistration {
     this.passwordInput = passwordInput;
     this.confirmButton = confirmButton;
   }
+
   render = () => {
     const [state, setState] = React.useState<TRegistration>({
       phone: "",
@@ -65,7 +54,6 @@ export class MyRegistration implements IRegistration {
             // console.log("phone :>> ", phone),
           }}
         />
-
         <this.passwordInput
           {...{
             label: "Введите пароль",
@@ -90,6 +78,8 @@ export class MyRegistration implements IRegistration {
     );
   };
 }
+
+
 export const RegForm = new MyRegistration(
   PhoneInput,
   PasswordInput,

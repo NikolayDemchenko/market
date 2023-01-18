@@ -16,7 +16,7 @@ export const CalendarCard = ({
   index: number;
 }) => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", pt: 2, pb: 1 }}>
+    <Box sx={{display: "flex", flexDirection: "column", pt: 2, pb: 1 }}>
       <Typography sx={{ mb: 1 }} variant="h5" component="div">
         {date}
       </Typography>

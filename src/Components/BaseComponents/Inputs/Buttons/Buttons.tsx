@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
-import { TFCButton } from '../../../Modules/Catalog/Interfaces';
 
+export type TFCButton = (props:{ onClick: () => void }) => JSX.Element;
 export  const BasicButton:TFCButton=(props)=> <Button  fullWidth variant="contained" size="large" {...props} onClick={()=>props.onClick()} /> 
 
 export  const BootstrapButton:TFCButton=(props)=><BootstrapBtn  fullWidth variant="contained" size="large" {...props} onClick={()=>props.onClick()} /> 
 
 
 export  const ColorButton:TFCButton=(props)=><ColorBtn  fullWidth variant="contained" size="large" {...props} onClick={()=>props.onClick()} /> 
-
 
 
  const BootstrapBtn = styled(Button)({
