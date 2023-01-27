@@ -1,12 +1,13 @@
 import React from "react";
-import { Catalog } from "./Components/Modules/Catalog/Catalog";
-import { Booking } from "./Components/Modules/Booking/Booking";
+import { Catalog } from "./Modules/Catalog/Catalog";
+import { Booking } from "./Modules/Booking/Booking";
 import { check } from "./test";
 import {
   MyRegistration,
   RegForm,
-} from "./Components/Modules/Catalog/RegForm";
+} from "./Modules/Catalog/RegForm";
 import { Grid } from "@mui/material";
+import { Adventures } from "./Modules/Adventures/Adventures";
 
 function App() {
   console.log('check() :>> ', check());
@@ -14,9 +15,9 @@ function App() {
   return (
   <>
    <Grid container justifyContent="center">
-      <RegForm />
+      <RegForm />    
       {/* <Booking></Booking>      */}
-      {/* <Catalog></Catalog> */}
+      <Catalog></Catalog>
    </Grid>
    </>
   );

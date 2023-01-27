@@ -1,6 +1,6 @@
 import React from "react";
-import { Text, Variant } from "../BaseComponents/Outputs/Text";
-import HSlon from "../BaseComponents/StaticContentComponents/HSlon";
+import { BaseText, Variant } from "../BaseComponents/Outputs/BaseText";
+import HSlon from "../../Modules/Adventures/Content/HSlon";
 import {RowTextInput} from "../BaseComponents/Inputs/RowTextInput";
 import {PhoneInput} from "../BaseComponents/Inputs/MaskedInputs";
 import {PasswordInput} from "../BaseComponents/Inputs/Password";
@@ -41,10 +41,10 @@ export default function TestForm() {
     <Stack spacing={1}>
       <HSlon />
       <Grid container justifyContent="center">
-        <Text {...{ variant: Variant.h5, text: "Вход для поставщиков" }} />
+        <BaseText {...{ variant: Variant.h5, text: "Вход для поставщиков" }} />
       </Grid>
       <Grid container justifyContent="center">
-        <Text {...{ variant: Variant.body1, text: "Имя клиента" }} />
+        <BaseText {...{ variant: Variant.body1, text: "Имя клиента" }} />
       </Grid>
       <RowTextInput
         {...{ label: "Введите Ваше имя", defaultValue: "", getText }}

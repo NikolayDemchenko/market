@@ -1,9 +1,9 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import { Text, Variant } from "../BaseComponents/Outputs/Text";
-import SignedCheckBox from "../BaseComponents/Inputs/SignedCheckBox";
+import { BaseText, Variant } from "../BaseComponents/Outputs/BaseText";
+import {SignedCheckBox} from "../BaseComponents/Inputs/SignedCheckBox";
 
-import HSlon from "../BaseComponents/StaticContentComponents/HSlon";
+import HSlon from "../../Modules/Adventures/Content/HSlon";
 import {PasswordInput} from "../BaseComponents/Inputs/Password";
 import {PhoneInput} from "../BaseComponents/Inputs/MaskedInputs";
 import Stack from "@mui/material/Stack";
@@ -37,7 +37,7 @@ export default function Autorization({autorization}:{autorization:(adata:TAutori
     <Stack spacing={1}>
       <HSlon />
       <Grid container justifyContent="center">
-        <Text {...{ variant: Variant.h5, text: "Вход для поставщиков" }} />
+        <BaseText {...{ variant: Variant.h5, text: "Вход для поставщиков" }} />
       </Grid>
       <PhoneInput
         {...{

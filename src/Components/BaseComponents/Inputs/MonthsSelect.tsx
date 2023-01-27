@@ -7,7 +7,7 @@ import Done from "@mui/icons-material/Done";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { BasicButton } from "./Buttons/Buttons";
-import { Text, Variant } from "../Outputs/Text";
+import { BaseText, Variant } from "../Outputs/BaseText";
 import { ListItemButton, Toolbar } from "@mui/material";
 
 export const MonthsSelect = ({
@@ -59,10 +59,10 @@ export const MonthsSelect = ({
         >
           {/* <Box sx={{ mr: 2 }}> */}
           <Toolbar>
-            <Text {...{ text: "Сезонность", variant: Variant.h6 }} />
+            <BaseText {...{ text: "Сезонность", variant: Variant.h6 }} />
           </Toolbar>
           {/* </Box> */}
-          <Text {...{ text: months, variant: Variant.body1 }} />
+          <BaseText {...{ text: months, variant: Variant.body1 }} />
         </Box>
       </ListItemButton>
       <Modal
@@ -84,9 +84,9 @@ export const MonthsSelect = ({
         >
           <Sheet sx={{ width: "320px", mb: 2, borderRadius: "sm" }}>
             <Toolbar>
-              <Text
+              <BaseText
                 {...{ text: "Выберите месяцы", variant: Variant.h6 }}
-              ></Text>
+              ></BaseText>
             </Toolbar>
             <List
               row

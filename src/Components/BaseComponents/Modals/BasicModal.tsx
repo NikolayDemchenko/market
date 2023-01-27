@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import {MultilineText} from "../Inputs/MultilineText";
 import { BasicButton } from "../Inputs/Buttons/Buttons";
-import { Text, Variant } from "../Outputs/Text";
+import { BaseText, Variant } from "../Outputs/BaseText";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import { Stack } from "@mui/material";
 
@@ -40,7 +40,7 @@ export function VideoModal({ getVideoUrl }: { getVideoUrl: Function }) {
           }}
         >
           <Stack spacing={1}>
-            <Text
+            <BaseText
               {...{ variant: Variant.body1, text: "Вставьте ссылку на видео" }}
             />
             <MultilineText

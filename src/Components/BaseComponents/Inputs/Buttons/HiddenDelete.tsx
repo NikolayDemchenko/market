@@ -1,6 +1,6 @@
 import { Grid, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Text, Variant } from "../../Outputs/Text";
+import { BaseText, Variant } from "../../Outputs/BaseText";
 export function HiddenDelete({
   items,
   setItems,
@@ -16,7 +16,7 @@ export function HiddenDelete({
       >
         <Grid container direction="column" alignItems="center">
           <DeleteIcon />
-          <Text {...{ variant: Variant.caption, text: "Удалить" }} />
+          <BaseText {...{ variant: Variant.caption, text: "Удалить" }} />
         </Grid>
       </IconButton>
     )) || <></>

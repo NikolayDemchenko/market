@@ -1,9 +1,9 @@
 import * as React from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { Text, Variant } from "../Outputs/Text";
+import { BaseText, Variant } from "../Outputs/BaseText";
 
-export default function SignedCheckBox({
+export function SignedCheckBox({
   getCheck,
   checkBoxText,
   checked,
@@ -19,7 +19,7 @@ export default function SignedCheckBox({
     <FormControlLabel
       sx={{ pl: 1 }}
       control={<Checkbox {...{ checked,value:checked, onChange }} />}
-      label={<Text {...{ variant: Variant.body1, text: checkBoxText }} />}
+      label={<BaseText {...{ variant: Variant.body1, text: checkBoxText }} />}
     />
   );
 }

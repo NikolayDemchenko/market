@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Stack } from "@mui/material";
-import { Text, Variant } from "./Text";
+import { BaseText, Variant } from "./BaseText";
 export function NamedText({
   name,
   nameVariant,
@@ -14,8 +14,8 @@ export function NamedText({
 }) {
   return (
     <Stack direction="row" spacing={1}>
-      <Text {...{ variant: nameVariant, text: name }} />
-      <Text {...{ variant: textVariant, text }} />
+      <BaseText {...{ variant: nameVariant, text: name }} />
+      <BaseText {...{ variant: textVariant, text }} />
     </Stack>
   );
 }
